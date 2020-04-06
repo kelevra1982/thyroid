@@ -11,141 +11,35 @@
 		<meta name="format-detection" content="telephone=no">
 		<title></title>
 		<link rel="manifest" href="/manifest.json">
-		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-		<link rel="icon" type="image/x-icon" href="/favicon.ico">
-		<link rel="icon" type="image/gif" href="/favicon.gif">
-		<link rel="icon" type="image/png" href="/favicon.png">
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-57x57.png" sizes="57x57">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-60x60.png" sizes="60x60">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-72x72.png" sizes="72x72">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-76x76.png" sizes="76x76">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-114x114.png" sizes="114x114">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-120x120.png" sizes="120x120">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-128x128.png" sizes="128x128">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-144x144.png" sizes="144x144">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-152x152.png" sizes="152x152">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" sizes="180x180">
-		<link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
-		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
-		<link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
-		<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
-		<link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196">
+		<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+		<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+		<link rel="icon" type="image/gif" href="/img/favicon.gif">
+		<link rel="icon" type="image/png" href="/img/favicon.png">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-57x57.png" sizes="57x57">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-60x60.png" sizes="60x60">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-72x72.png" sizes="72x72">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-76x76.png" sizes="76x76">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-114x114.png" sizes="114x114">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-120x120.png" sizes="120x120">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-128x128.png" sizes="128x128">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-144x144.png" sizes="144x144">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-152x152.png" sizes="152x152">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-180x180.png" sizes="180x180">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon-precomposed.png">
+		<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+		<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/img/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/img/favicon-160x160.png" sizes="160x160">
+		<link rel="icon" type="image/png" href="/img/favicon-192x192.png" sizes="192x192">
+		<link rel="icon" type="image/png" href="/img/favicon-196x196.png" sizes="196x196">
 		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 		<link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap" rel="stylesheet">
-		<style>
-			@media (orientation: portrait) {
-				html[onsflag-iphonex-portrait] .toolbar {
-					padding-top: 22px;
-				}
-
-				html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content {
-					top: 66px;
-				}
-
-				html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content {
-					top: 66px;
-				}
-			}
-
-			.toolbar__title {
-				font-family: 'Oleo Script', cursive;
-				font-size: 1.6rem;
-			}
-		</style>
+		<link rel="stylesheet" href="/css/thyroid.css">
 		<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 		<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
-		<script>
-			if ('serviceWorker' in navigator)
-			{
-				navigator.serviceWorker.register('/sw.js').then(registration =>
-				{
-					if (registration.active)
-					{
-						registration.addEventListener('updatefound', () =>
-						{
-							const installingWorker = registration.installing;
-
-							installingWorker.addEventListener('statechange', () =>
-							{
-								if (installingWorker.state === 'installed')
-								{
-									onUpdateFound();
-								}
-							});
-						});
-					}
-				}).catch(e => console.log(e));
-			}
-
-			function onUpdateFound()
-			{
-				ons.openActionSheet(
-				{
-					title 		:	'Es ist ein Update verfügbar. Möchten Sie es installieren?',
-					cancelable	:	true,
-					buttons		:	[
-										'Installieren',
-										{
-											label 	:	'Abbrechen',
-											icon	:	'md-close'
-										}
-									]
-				}).then(function (index)
-				{
-					if (index === 0)
-					{
-						location.reload();
-					}
-				});
-			}
-
-			if (ons.platform.isIPhoneX())
-			{
-  				document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
-			}
-
-			if (ons.platform.isIPhoneX())
-			{
-  				document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
-			}
-
-			function loadPage(page, data)
-			{
-				document.querySelector('#myNavigator').pushPage(page, {data});
-			}
-
-			document.addEventListener('init', function(event)
-			{
-				var page = event.target;
-
-				if (page.id === 'ft3')
-				{
-					console.log(page.data);
-				}
-			});
-		</script>
-		<script>
-			$.noConflict();
-			jQuery(document).ready(function($)
-			{
-
-			});
-		</script>
-		<script>
-			window.addEventListener('online',  updateOnlineStatus);
-  			window.addEventListener('offline', updateOnlineStatus);
-
-			function updateOnlineStatus(event)
-			{
-    			var condition = navigator.onLine ? 'online' : 'offline';
-
-				ons.notification.toast('<p style="text-align:center;margin:0;">Sie sind jetzt ' + condition + '.</p>', { timeout: 2000 });
-  			}
-		</script>
+		<script src="/js/thyroid.js"></script>
 	</head>
 	<body>
 		<ons-navigator swipeable id="myNavigator" page="home.html"></ons-navigator>
@@ -168,8 +62,7 @@
 					<ons-list-header>Sonstiges</ons-list-header>
 					<ons-list-item modifier="chevron" tappable onclick="loadPage('beschwerden.html', {});">Beschwerden</ons-list-item>
 					<ons-list-item modifier="chevron" tappable onclick="loadPage('medikation.html', {});">Medikation</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('tagebuch.html', {});">Tagebuch</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('verlauf.html', {});">Verlauf</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('statistik.html', {});">Statistik</ons-list-item>
 				</ons-list>
 			</ons-page>
 		</template>
@@ -277,19 +170,11 @@
 				</ons-toolbar>
 			</ons-page>
 		</template>
-		<template id="tagebuch.html">
-			<ons-page id="tagebuch">
+		<template id="statistik.html">
+			<ons-page id="statistik">
 				<ons-toolbar>
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
-					<div class="center">Tagebuch</div>
-				</ons-toolbar>
-			</ons-page>
-		</template>
-		<template id="verlauf.html">
-			<ons-page id="verlauf">
-				<ons-toolbar>
-					<div class="left"><ons-back-button>zurück</ons-back-button></div>
-					<div class="center">Verlauf</div>
+					<div class="center">Statistik</div>
 				</ons-toolbar>
 			</ons-page>
 		</template>

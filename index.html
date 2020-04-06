@@ -129,6 +129,17 @@
 					<ons-list-item modifier="chevron" tappable onclick="loadPage('ft4.html');">FT4</ons-list-item>
 					<ons-list-item modifier="chevron" tappable onclick="loadPage('tsh.html');">TSH</ons-list-item>
 				</ons-list>
+				<ons-list>
+					<ons-list-header>Vitamine</ons-list-header>
+    				<ons-list-item modifier="chevron" tappable onclick="loadPage('vitamind.html');">Vitamin D</ons-list-item>
+				</ons-list>
+				<ons-list>
+					<ons-list-header>Sonstiges</ons-list-header>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('beschwerden.html');">Beschwerden</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('medikation.html');">Medikation</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('tagebuch.html');">Tagebuch</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('verlauf.html');">Verlauf</ons-list-item>
+				</ons-list>
 			</ons-page>
 		</template>
 		<template id="ft3.html">
@@ -152,6 +163,46 @@
 				<ons-toolbar>
 				<div class="left"><ons-back-button>zurück</ons-back-button></div>
 				<div class="center">TSH</div>
+				</ons-toolbar>
+			</ons-page>
+		</template>
+		<template id="vitamind.html">
+			<ons-page id="vitamind">
+				<ons-toolbar>
+				<div class="left"><ons-back-button>zurück</ons-back-button></div>
+				<div class="center">Vitamin D</div>
+				</ons-toolbar>
+			</ons-page>
+		</template>
+		<template id="beschwerden.html">
+			<ons-page id="beschwerden">
+				<ons-toolbar>
+				<div class="left"><ons-back-button>zurück</ons-back-button></div>
+				<div class="center">Beschwerden</div>
+				</ons-toolbar>
+			</ons-page>
+		</template>
+		<template id="medikation.html">
+			<ons-page id="medikation">
+				<ons-toolbar>
+				<div class="left"><ons-back-button>zurück</ons-back-button></div>
+				<div class="center">Medikation</div>
+				</ons-toolbar>
+			</ons-page>
+		</template>
+		<template id="tagebuch.html">
+			<ons-page id="tagebuch">
+				<ons-toolbar>
+				<div class="left"><ons-back-button>zurück</ons-back-button></div>
+				<div class="center">Tagebuch</div>
+				</ons-toolbar>
+			</ons-page>
+		</template>
+		<template id="verlauf.html">
+			<ons-page id="verlauf">
+				<ons-toolbar>
+				<div class="left"><ons-back-button>zurück</ons-back-button></div>
+				<div class="center">Verlauf</div>
 				</ons-toolbar>
 			</ons-page>
 		</template>

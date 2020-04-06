@@ -81,5 +81,17 @@ $.noConflict();
 
 jQuery(document).ready(function($)
 {
-
+	$('#test').on('click', function()
+	{
+		$.getJSON('/api/test.php', function(data)
+		{
+			$.each(data, function(index, value)
+			{
+				ons.notification.toast(value.text, { timeout: 2000 });
+			});
+		}).fail(function(err)
+		{
+			console.log(err);
+		});
+	});
 });

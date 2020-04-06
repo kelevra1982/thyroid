@@ -52,20 +52,10 @@ if (ons.platform.isIPhoneX())
 	document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
 }
 
-function loadPage(page, data)
+function loadPage(page)
 {
-	document.querySelector('#myNavigator').pushPage(page, {data});
+	document.querySelector('#myNavigator').pushPage(page);
 }
-
-document.addEventListener('init', function(event)
-{
-	var page = event.target;
-
-	if (page.id === 'ft3')
-	{
-		console.log(page.data);
-	}
-});
 
 window.addEventListener('online',  updateOnlineStatus);
 window.addEventListener('offline', updateOnlineStatus);
@@ -81,17 +71,22 @@ $.noConflict();
 
 jQuery(document).ready(function($)
 {
-	$('#test').on('click', function()
+	document.addEventListener('init', function(event)
 	{
-		$.getJSON('/api/test.php', function(data)
+		var page = event.target;
+
+		if (page.id === 'ft3')
 		{
-			$.each(data, function(index, value)
+			$.getJSON('/api/test.php', function(data)
 			{
-				ons.notification.toast(value.text, { timeout: 2000 });
+				$.each(data, function(index, value)
+				{
+					$('#text' + index).text(value.text);
+				});
+			}).fail(function(err)
+			{
+				console.log(err);
 			});
-		}).fail(function(err)
-		{
-			console.log(err);
-		});
+		}
 	});
 });

@@ -50,21 +50,20 @@
 				</ons-toolbar>
 				<ons-list>
 					<ons-list-header>Blutwerte</ons-list-header>
-    				<ons-list-item modifier="chevron" tappable onclick="loadPage('ft3.html', {title: 'FT3'});">FT3</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('ft4.html', {});">FT4</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('tsh.html', {});">TSH</ons-list-item>
+    				<ons-list-item modifier="chevron" tappable onclick="loadPage('ft3.html');">FT3</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('ft4.html');">FT4</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('tsh.html');">TSH</ons-list-item>
 				</ons-list>
 				<ons-list>
 					<ons-list-header>Vitamine</ons-list-header>
-    				<ons-list-item modifier="chevron" tappable onclick="loadPage('vitamind.html', {});">Vitamin D</ons-list-item>
+    				<ons-list-item modifier="chevron" tappable onclick="loadPage('vitamind.html');">Vitamin D</ons-list-item>
 				</ons-list>
 				<ons-list>
 					<ons-list-header>Sonstiges</ons-list-header>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('beschwerden.html', {});">Beschwerden</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('medikation.html', {});">Medikation</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('statistik.html', {});">Statistik</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('beschwerden.html');">Beschwerden</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('medikation.html');">Medikation</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('statistik.html');">Statistik</ons-list-item>
 				</ons-list>
-				<ons-button id="test">TEST</ons-button>
 			</ons-page>
 		</template>
 		<template id="ft3.html">
@@ -82,6 +81,8 @@
 		<template id="ft3-tab1.html">
 			<ons-page id="ft3-tab1">
 				<p>Verlauf</p>
+				<p id="text0"></p>
+				<p id="text1"></p>
 			</ons-page>
 		</template>
 		<template id="ft3-tab2.html">

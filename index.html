@@ -2,11 +2,41 @@
 <html lang="de" dir="ltr">
 	<head>
 		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-title" content="Thyroid">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<meta name="format-detection" content="telephone=no">
 		<title></title>
 		<link rel="manifest" href="/manifest.json">
+		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico">
+		<link rel="icon" type="image/gif" href="/favicon.gif">
+		<link rel="icon" type="image/png" href="/favicon.png">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-57x57.png" sizes="57x57">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-60x60.png" sizes="60x60">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-72x72.png" sizes="72x72">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-76x76.png" sizes="76x76">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-114x114.png" sizes="114x114">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-120x120.png" sizes="120x120">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-128x128.png" sizes="128x128">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-144x144.png" sizes="144x144">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-152x152.png" sizes="152x152">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" sizes="180x180">
+		<link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+		<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+		<link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196">
 		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 		<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+		<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
 		<script>
 			if ('serviceWorker' in navigator)
 			{
@@ -61,9 +91,58 @@
 			{
   				document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
 			}
+
+			function loadPage(page)
+			{
+				document.querySelector('#myNavigator').pushPage(page);
+			}
+		</script>
+		<script>
+			$.noConflict();
+			jQuery(document).ready(function($)
+			{
+
+			});
 		</script>
 	</head>
 	<body>
-
+		<ons-navigator swipeable id="myNavigator" page="home.html"></ons-navigator>
+		<template id="home.html">
+			<ons-page id="home">
+				<ons-toolbar>
+					<div class="center">Thyroid</div>
+				</ons-toolbar>
+				<ons-list>
+					<ons-list-header>Blutwerte</ons-list-header>
+    				<ons-list-item modifier="chevron" tappable onclick="loadPage('ft3.html');">FT3</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('ft4.html');">FT4</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('tsh.html');">TSH</ons-list-item>
+				</ons-list>
+			</ons-page>
+		</template>
+		<template id="ft3.html">
+			<ons-page id="ft3">
+				<ons-toolbar>
+				<div class="left"><ons-back-button>zurück</ons-back-button></div>
+				<div class="center">FT3</div>
+				</ons-toolbar>
+			</ons-page>
+		</template>
+		<template id="ft4.html">
+			<ons-page id="ft4">
+				<ons-toolbar>
+				<div class="left"><ons-back-button>zurück</ons-back-button></div>
+				<div class="center">FT4</div>
+				</ons-toolbar>
+			</ons-page>
+		</template>
+		<template id="tsh.html">
+			<ons-page id="tsh">
+				<ons-toolbar>
+				<div class="left"><ons-back-button>zurück</ons-back-button></div>
+				<div class="center">TSH</div>
+				</ons-toolbar>
+			</ons-page>
+		</template>
 	</body>
 </html>

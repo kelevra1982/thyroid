@@ -92,10 +92,20 @@
   				document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
 			}
 
-			function loadPage(page)
+			function loadPage(page, data)
 			{
-				document.querySelector('#myNavigator').pushPage(page);
+				document.querySelector('#myNavigator').pushPage(page, {data});
 			}
+
+			document.addEventListener('init', function(event)
+			{
+				var page = event.target;
+
+				if (page.id === 'ft3')
+				{
+					console.log(page.data);
+				}
+			});
 		</script>
 		<script>
 			$.noConflict();
@@ -125,20 +135,20 @@
 				</ons-toolbar>
 				<ons-list>
 					<ons-list-header>Blutwerte</ons-list-header>
-    				<ons-list-item modifier="chevron" tappable onclick="loadPage('ft3.html');">FT3</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('ft4.html');">FT4</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('tsh.html');">TSH</ons-list-item>
+    				<ons-list-item modifier="chevron" tappable onclick="loadPage('ft3.html', {title: 'FT3'});">FT3</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('ft4.html', {});">FT4</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('tsh.html', {});">TSH</ons-list-item>
 				</ons-list>
 				<ons-list>
 					<ons-list-header>Vitamine</ons-list-header>
-    				<ons-list-item modifier="chevron" tappable onclick="loadPage('vitamind.html');">Vitamin D</ons-list-item>
+    				<ons-list-item modifier="chevron" tappable onclick="loadPage('vitamind.html', {});">Vitamin D</ons-list-item>
 				</ons-list>
 				<ons-list>
 					<ons-list-header>Sonstiges</ons-list-header>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('beschwerden.html');">Beschwerden</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('medikation.html');">Medikation</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('tagebuch.html');">Tagebuch</ons-list-item>
-					<ons-list-item modifier="chevron" tappable onclick="loadPage('verlauf.html');">Verlauf</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('beschwerden.html', {});">Beschwerden</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('medikation.html', {});">Medikation</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('tagebuch.html', {});">Tagebuch</ons-list-item>
+					<ons-list-item modifier="chevron" tappable onclick="loadPage('verlauf.html', {});">Verlauf</ons-list-item>
 				</ons-list>
 			</ons-page>
 		</template>

@@ -35,6 +35,27 @@
 		<link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196">
 		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap" rel="stylesheet">
+		<style>
+			@media (orientation: portrait) {
+				html[onsflag-iphonex-portrait] .toolbar {
+					padding-top: 22px;
+				}
+
+				html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content {
+					top: 66px;
+				}
+
+				html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content {
+					top: 66px;
+				}
+			}
+
+			.toolbar__title {
+				font-family: 'Oleo Script', cursive;
+				font-size: 1.6rem;
+			}
+		</style>
 		<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 		<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
 		<script>

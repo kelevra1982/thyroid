@@ -73,8 +73,8 @@
 					<div class="center">FT3</div>
 				</ons-toolbar>
 				<ons-tabbar swipeable position="auto">
-					<ons-tab page="ft3-tab1.html" label="Verlauf" icon="md-time" active-icon="md-time" active></ons-tab>
-					<ons-tab page="ft3-tab2.html" label="Wert angeben" icon="md-plus" active-icon="md-plus"></ons-tab>
+					<ons-tab id="ft3-tab1-link" page="ft3-tab1.html" label="Verlauf" icon="md-time" active-icon="md-time" active></ons-tab>
+					<ons-tab id="ft3-tab2-link" page="ft3-tab2.html" label="Wert angeben" icon="md-plus" active-icon="md-plus"></ons-tab>
   				</ons-tabbar>
 			</ons-page>
 		</template>
@@ -90,7 +90,7 @@
 					<div style="text-align: center; margin-top: 30px;">
 						<p>
 							<ons-input
-							input-id="ft3-value"
+							input-id="ft3-form-value"
 								type="number"
 					  			placeholder="Wert"
 					  			min="0"
@@ -98,14 +98,8 @@
 								modifier="material underbar" style="width:80%;">
 							</ons-input>
 						</p>
-						<p>
-							<ons-input
-					  			type="date"
-								modifier="material underbar" style="width:80%;">
-							</ons-input>
-						</p>
 						<p style="margin-top: 30px;">
-							<ons-button onclick="ons.notification.alert('Speichern');">Speichern</ons-button>
+							<ons-button id="ft3-form-save">Speichern</ons-button>
 						</p>
 					</div>
 				</div>

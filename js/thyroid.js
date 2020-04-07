@@ -73,19 +73,16 @@ jQuery(document).ready(function($)
 {
 	document.addEventListener('init', function(event)
 	{
-		var page = event.target;
-
-		if (page.id === 'ft3')
+		if (event.target.id === 'ft3')
 		{
 			$.getJSON('/api/ft3get.php', function(data)
 			{
 				$.each(data, function(index, value)
 				{
-					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.text + '</p>')
+					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.text + '</p>');
 
 					if (index == (data.length - 1))
 					{
-						$('#ft3-tab1-content').show();
 						$('.spinner').hide();
 					}
 				});
@@ -95,9 +92,45 @@ jQuery(document).ready(function($)
 			});
 		}
 
-		if (page.id === 'ft4')
+		if (event.target.id === 'ft4')
 		{
 
 		}
+	});
+
+	document.addEventListener('prechange', function(event)
+	{
+  		if (event.tabItem.id === 'ft3-tab1-link')
+		{
+			$('#ft3-tab1-content').empty();
+			$('.spinner').show();
+
+			$.getJSON('/api/ft3get.php', function(data)
+			{
+				$.each(data, function(index, value)
+				{
+					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.text + '</p>');
+
+					if (index == (data.length - 1))
+					{
+						$('.spinner').hide();
+					}
+				});
+			}).fail(function(err)
+			{
+				console.log(err);
+			});
+		}
+	});
+
+	$(document).on('click', '#ft3-form-save',function()
+	{
+		$.post('/api/ft3post.php', { text:$('#ft3-form-value').val() }, function(data)
+		{
+			$('#ft3-form-value').val('');
+		}).fail(function(err)
+		{
+			console.log(err);
+		});
 	});
 });

@@ -16,3 +16,14 @@
 	font-family: 'Oleo Script', cursive;
 	font-size: 1.6rem;
 }
+
+.spinner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.tab-content {
+	display: none;
+}

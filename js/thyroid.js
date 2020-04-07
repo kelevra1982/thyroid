@@ -82,11 +82,22 @@ jQuery(document).ready(function($)
 				$.each(data, function(index, value)
 				{
 					$('#text' + index).text(value.text);
+
+					if (index == (data.length - 1))
+					{
+						$('.spinner').hide();
+						$('#ft3-tab1-content').show();
+					}
 				});
 			}).fail(function(err)
 			{
 				console.log(err);
 			});
+		}
+
+		if (page.id === 'ft4')
+		{
+
 		}
 	});
 });

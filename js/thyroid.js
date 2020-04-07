@@ -76,6 +76,8 @@ jQuery(document).ready(function($)
 	{
 		if (event.target.id === 'ft3')
 		{
+			$('.spinner').show();
+
 			$.getJSON('/api/ft3get.php', function(data)
 			{
 				$.each(data, function(index, value)
@@ -141,6 +143,7 @@ jQuery(document).ready(function($)
 			{
 				$('#ft3-form-value').val('');
 				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Daten erflogreich gespeichert.</p>', { timeout: 2000 });
 			}
 		}).fail(function(err)
 		{

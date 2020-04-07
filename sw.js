@@ -7,6 +7,7 @@ self.addEventListener('install', function(e)
 			'/',
 			'/index.html',
 			'/manifest.json',
+			'/img/header.jpg',
 			'https://unpkg.com/onsenui/css/onsenui.min.css',
 			'https://unpkg.com/onsenui/css/onsen-css-components.min.css',
 			'https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap',
@@ -23,4 +24,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 07.04.2020 14:24
+// last Update: 07.04.2020 16:20

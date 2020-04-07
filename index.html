@@ -81,15 +81,34 @@
 		<template id="ft3-tab1.html">
 			<ons-page id="ft3-tab1">
 				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<div id="ft3-tab1-content" class="tab-content">
-					<p id="text0"></p>
-					<p id="text1"></p>
-				</div>
+				<div id="ft3-tab1-content" class="tab-content"></div>
 			</ons-page>
 		</template>
 		<template id="ft3-tab2.html">
 			<ons-page id="ft3-tab2">
-				<p>Wert angeben</p>
+				<div id="ft3-tab2-content" class="tab-content">
+					<div style="text-align: center; margin-top: 30px;">
+						<p>
+							<ons-input
+							input-id="ft3-value"
+								type="number"
+					  			placeholder="Wert"
+					  			min="0"
+					  			max="200"
+								modifier="material underbar" style="width:80%;">
+							</ons-input>
+						</p>
+						<p>
+							<ons-input
+					  			type="date"
+								modifier="material underbar" style="width:80%;">
+							</ons-input>
+						</p>
+						<p style="margin-top: 30px;">
+							<ons-button onclick="ons.notification.alert('Speichern');">Speichern</ons-button>
+						</p>
+					</div>
+				</div>
 			</ons-page>
 		</template>
 		<template id="ft4.html">

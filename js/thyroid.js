@@ -77,16 +77,16 @@ jQuery(document).ready(function($)
 
 		if (page.id === 'ft3')
 		{
-			$.getJSON('/api/test.php', function(data)
+			$.getJSON('/api/ft3get.php', function(data)
 			{
 				$.each(data, function(index, value)
 				{
-					$('#text' + index).text(value.text);
+					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.text + '</p>')
 
 					if (index == (data.length - 1))
 					{
-						$('.spinner').hide();
 						$('#ft3-tab1-content').show();
+						$('.spinner').hide();
 					}
 				});
 			}).fail(function(err)

@@ -29,8 +29,9 @@ function onUpdateFound()
 		buttons		:	[
 							'Installieren',
 							{
-								label 	:	'Abbrechen',
-								icon	:	'md-close'
+								label 		:	'Abbrechen',
+								icon		:	'md-close',
+								modifier	:	'destructive'
 							}
 						]
 	}).then(function (index)
@@ -88,7 +89,8 @@ jQuery(document).ready(function($)
 				});
 			}).fail(function(err)
 			{
-				console.log(err);
+				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
 			});
 		}
 
@@ -118,19 +120,32 @@ jQuery(document).ready(function($)
 				});
 			}).fail(function(err)
 			{
-				console.log(err);
+				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
 			});
 		}
 	});
 
 	$(document).on('click', '#ft3-form-save',function()
 	{
+		$('.spinner').show();
+
 		$.post('/api/ft3post.php', { text:$('#ft3-form-value').val() }, function(data)
 		{
-			$('#ft3-form-value').val('');
+			if (data == 'false')
+			{
+				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
+			}
+			else
+			{
+				$('#ft3-form-value').val('');
+				$('.spinner').hide();
+			}
 		}).fail(function(err)
 		{
-			console.log(err);
+			$('.spinner').hide();
+			ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
 		});
 	});
 });

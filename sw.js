@@ -22,7 +22,10 @@ self.addEventListener('install', function(e)
 			'/img/vitamind.png',
 			'/img/beschwerden.png',
 			'/img/medikation.png',
-			'/img/statistik.png'
+			'/img/statistik.png',
+			'/splashscreens/iphonex_splash.png',
+			'/splashscreens/iphonexr_splash.png',
+			'/splashscreens/iphonexsmax_splash.png'
 		]);
 	}));
 });

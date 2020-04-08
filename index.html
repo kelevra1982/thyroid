@@ -49,10 +49,11 @@
 		<link rel="stylesheet" href="/css/thyroid.css">
 		<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 		<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.js"></script>
 		<script src="/js/thyroid.js"></script>
 	</head>
 	<body>
-		<ons-navigator swipeable id="myNavigator" page="home.html"></ons-navigator>
+		<ons-navigator id="myNavigator" page="home.html"></ons-navigator>
 		<template id="home.html">
 			<ons-page id="home">
 				<ons-toolbar>
@@ -60,13 +61,13 @@
 				</ons-toolbar>
 				<ons-list>
 					<ons-list-header>Blutwerte</ons-list-header>
-    				<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('ft3.html');">FT3</ons-list-item>
+					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('ft3.html');">FT3</ons-list-item>
 					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('ft4.html');">FT4</ons-list-item>
 					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('tsh.html');">TSH</ons-list-item>
 				</ons-list>
 				<ons-list>
 					<ons-list-header>Vitamine</ons-list-header>
-    				<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('vitamind.html');">Vitamin D</ons-list-item>
+					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('vitamind.html');">Vitamin D</ons-list-item>
 				</ons-list>
 				<ons-list>
 					<ons-list-header>Sonstiges</ons-list-header>
@@ -83,10 +84,10 @@
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">FT3</div>
 				</ons-toolbar>
-				<ons-tabbar swipeable position="auto">
+				<ons-tabbar position="auto">
 					<ons-tab id="ft3-tab1-link" page="ft3-tab1.html" label="Verlauf" icon="md-time" active-icon="md-time" active></ons-tab>
 					<ons-tab id="ft3-tab2-link" page="ft3-tab2.html" label="Wert angeben" icon="md-plus" active-icon="md-plus"></ons-tab>
-  				</ons-tabbar>
+				</ons-tabbar>
 			</ons-page>
 		</template>
 		<template id="ft3-tab1.html">
@@ -110,14 +111,14 @@
 					<ons-card>
 						<img src="/img/header.jpg" alt="" style="width: 100%">
 						<div class="title">
-					    	FT3 Wert
-					    </div>
+							FT3 Wert
+						</div>
 						<div class="content">
 							<ons-input
 								input-id="ft3-form-value"
 								type="number"
-					  			min="0"
-					  			max="200"
+								min="0"
+								max="200"
 								modifier="material underbar" style="width:40%;">
 							</ons-input>
 							<ons-button id="ft3-form-save">Speichern</ons-button>
@@ -132,10 +133,10 @@
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">FT4</div>
 				</ons-toolbar>
-				<ons-tabbar swipeable position="auto">
+				<ons-tabbar position="auto">
 					<ons-tab page="ft4-tab1.html" label="Verlauf" icon="md-time" active-icon="md-time" active></ons-tab>
 					<ons-tab page="ft4-tab2.html" label="Wert angeben" icon="md-plus" active-icon="md-plus"></ons-tab>
-  				</ons-tabbar>
+				</ons-tabbar>
 			</ons-page>
 		</template>
 		<template id="ft4-tab1.html">
@@ -154,10 +155,10 @@
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">TSH</div>
 				</ons-toolbar>
-				<ons-tabbar swipeable position="auto">
+				<ons-tabbar position="auto">
 					<ons-tab page="tsh-tab1.html" label="Verlauf" icon="md-time" active-icon="md-time" active></ons-tab>
 					<ons-tab page="tsh-tab2.html" label="Wert angeben" icon="md-plus" active-icon="md-plus"></ons-tab>
-  				</ons-tabbar>
+				</ons-tabbar>
 			</ons-page>
 		</template>
 		<template id="tsh-tab1.html">
@@ -176,10 +177,10 @@
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">Vitamin D</div>
 				</ons-toolbar>
-				<ons-tabbar swipeable position="auto">
+				<ons-tabbar position="auto">
 					<ons-tab page="vitamind-tab1.html" label="Verlauf" icon="md-time" active-icon="md-time" active></ons-tab>
 					<ons-tab page="vitamind-tab2.html" label="Wert angeben" icon="md-plus" active-icon="md-plus"></ons-tab>
-  				</ons-tabbar>
+				</ons-tabbar>
 			</ons-page>
 		</template>
 		<template id="vitamind-tab1.html">

@@ -14,6 +14,7 @@ self.addEventListener('install', function(e)
 			'/css/thyroid.css',
 			'https://unpkg.com/onsenui/js/onsenui.min.js',
 			'https://unpkg.com/jquery/dist/jquery.min.js',
+			'https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.js',
 			'/js/thyroid.js'
 		]);
 	}));
@@ -24,4 +25,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 07.04.2020 16:20
+// last Update: 08.04.2020 10:28

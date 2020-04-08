@@ -1,7 +1,8 @@
 <?php
 
-//$db = mysqli_connect('localhost', 'd031def3', 'L7ant9QRBZW4bKzM', 'd031def3');
-$db = mysqli_connect('localhost', 'root', '', 'my-thyroid');
+include('config.php');
+
+$db = @mysqli_connect(HOST, USER, PASSWORD, DB);
 
 $sql = 'SELECT * FROM test;';
 $result = $db->query($sql);

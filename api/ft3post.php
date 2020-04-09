@@ -9,7 +9,10 @@ if (!$db)
 	echo 'false';
 	exit;
 }
-$sql = 'INSERT INTO test (text) VALUES ("' . $_POST['text'] .'");';
+
+$value = explode(',', $_POST['value']);
+
+$sql = 'INSERT INTO ft3 (before_comma, after_comma, date) VALUES (' . $value[0] . ',' . $value[1] . ', "' . $_POST['date'] . '");';
 $db->query($sql);
 
 mysqli_close($db);

@@ -74,8 +74,6 @@ jQuery(document).ready(function($)
 {
 	document.addEventListener('init', function(event)
 	{
-		ons.fastClick.destroy();
-
 		if (event.target.id === 'ft3')
 		{
 			$('.spinner').show();
@@ -84,7 +82,7 @@ jQuery(document).ready(function($)
 			{
 				$.each(data, function(index, value)
 				{
-					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.text + '</p>');
+					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.before_comma + ',' + value.after_comma + '</p>');
 
 					if (index == (data.length - 1))
 					{
@@ -130,7 +128,7 @@ jQuery(document).ready(function($)
 			{
 				$.each(data, function(index, value)
 				{
-					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.text + '</p>');
+					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.before_comma + ',' + value.after_comma + '</p>');
 
 					if (index == (data.length - 1))
 					{
@@ -149,7 +147,7 @@ jQuery(document).ready(function($)
 	{
 		$('.spinner').show();
 
-		$.post('/api/ft3post.php', { text:$('#ft3-form-value').val() }, function(data)
+		$.post('/api/ft3post.php', { value : $('#ft3-form-value').val(), date : new Date().toJSON().slice(0,10).replace(/-/g,'-') }, function(data)
 		{
 			if (data == 'false')
 			{
@@ -158,7 +156,7 @@ jQuery(document).ready(function($)
 			}
 			else
 			{
-				$('#ft3-form-value').val('');
+				$('#ft3-form-value').val('0,0');
 				$('.spinner').hide();
 				ons.notification.toast('<p style="text-align:center;margin:0;">Daten erfolgreich gespeichert.</p>', { timeout: 2000 });
 			}

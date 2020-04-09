@@ -4,7 +4,7 @@ include('config.php');
 
 $db = @mysqli_connect(HOST, USER, PASSWORD, DB);
 
-$sql = 'SELECT * FROM test;';
+$sql = 'SELECT * FROM ft3;';
 $result = $db->query($sql);
 $return = [];
 while ($row = $result->fetch_assoc())

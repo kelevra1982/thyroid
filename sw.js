@@ -15,7 +15,7 @@ self.addEventListener('install', function(e)
 			'https://unpkg.com/jquery/dist/jquery.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.js',
 			'/js/thyroid.js',
-			'/img/header.gif',
+			'/img/header.png',
 			'/img/ft3.png',
 			'/img/ft4.png',
 			'/img/tsh.png',

@@ -16,10 +16,13 @@ self.addEventListener('install', function(e)
 			'https://unpkg.com/browse/onsenui/css/material-design-iconic-font/fonts/Material-Design-Iconic-Font.woff',
 			'https://unpkg.com/browse/onsenui/css/material-design-iconic-font/fonts/Material-Design-Iconic-Font.woff2',
 			'https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap',
+			'/css/jquery.jqplot.min.css',
 			'/css/thyroid.css',
 			'https://unpkg.com/onsenui/js/onsenui.min.js',
 			'https://unpkg.com/jquery/dist/jquery.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.js',
+			'/js/jquery.jqplot.min.js',
+			'/js/jqplot.dateAxisRenderer.js',
 			'/js/thyroid.js',
 			'/img/header.png',
 			'/img/ft3.png',
@@ -42,4 +45,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 09.04.2020 11:43
+// last Update: 09.04.2020 12:43

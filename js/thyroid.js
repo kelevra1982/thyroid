@@ -30,7 +30,6 @@ function onUpdateFound()
 							'Installieren',
 							{
 								label 		:	'Abbrechen',
-								icon		:	'md-close',
 								modifier	:	'destructive'
 							}
 						]
@@ -80,15 +79,37 @@ jQuery(document).ready(function($)
 
 			$.getJSON('/api/ft3get.php', function(data)
 			{
+				$('#ft3-tab1-content').append('<div id="chart1"></div>');
+				var line = [];
+
 				$.each(data, function(index, value)
 				{
-					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.before_comma + ',' + value.after_comma + '</p>');
+					line.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
 
 					if (index == (data.length - 1))
 					{
 						$('.spinner').hide();
 					}
 				});
+
+				var plot1 = $.jqplot('chart1', [line],
+				{
+					title		:	'',
+					axes		:	{
+										xaxis		:	{
+															renderer	:	$.jqplot.DateAxisRenderer,
+															tickOptions	:	{
+																				formatString:'%d.%m.%Y'
+																			},
+														}
+					},
+					series		:	[{
+										lineWidth		:	2,
+										markerOptions	:	{
+																style	:	'dot'
+															}
+									}]
+			   });
 			}).fail(function(err)
 			{
 				$('.spinner').hide();
@@ -126,15 +147,37 @@ jQuery(document).ready(function($)
 
 			$.getJSON('/api/ft3get.php', function(data)
 			{
+				$('#ft3-tab1-content').append('<div id="chart1"></div>');
+				var line = [];
+
 				$.each(data, function(index, value)
 				{
-					$('#ft3-tab1-content').append('<p id="text' + index + '">' + value.before_comma + ',' + value.after_comma + '</p>');
+					line.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
 
 					if (index == (data.length - 1))
 					{
 						$('.spinner').hide();
 					}
 				});
+
+				var plot1 = $.jqplot('chart1', [line],
+				{
+					title		:	'',
+					axes		:	{
+										xaxis		:	{
+															renderer	:	$.jqplot.DateAxisRenderer,
+															tickOptions	:	{
+																				formatString:'%d.%m.%Y'
+																			},
+														}
+					},
+					series		:	[{
+										lineWidth		:	2,
+										markerOptions	:	{
+																style	:	'dot'
+															}
+									}]
+			   });
 			}).fail(function(err)
 			{
 				$('.spinner').hide();

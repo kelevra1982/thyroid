@@ -162,20 +162,52 @@
 				<div id="ft3-tab2-content" class="tab-content">
 					<ons-card>
 						<img src="/img/header.png" alt="" style="width: 100%">
-						<div class="title">
-							FT3 Wert
-						</div>
+						<div class="title">&nbsp;</div>
 						<div class="content">
-							<ons-input
-								input-id="ft3-form-value"
-								inputmode="decimal"
-								type="text"
-								pattern="[-+]?[0-9]*[.,]?[0-9]+"
-								step="0.01"
-								value="0,0"
-								modifier="material underbar" style="width:40%;">
-							</ons-input>
-							<ons-button id="ft3-form-save">Speichern</ons-button>
+							<ons-list>
+								<ons-list-header>Bitte tragen Sie hier neue FT3 Werte ein.</ons-list-header>
+								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+									<div class="left">
+										<img class="list-item__thumbnail" src="/img/ft3.png">
+									</div>
+									<div class="center">
+										<span class="list-item__title">
+											<label for="ft3-form-value">FT3 Wert</label>
+										</span>
+										<span class="list-item__subtitle">
+											<ons-input
+												input-id="ft3-form-value"
+												inputmode="decimal"
+												type="text"
+												pattern="[-+]?[0-9]*[.,]?[0-9]+"
+												step="0.01"
+												value="0,0"
+												style="width: 100%;">
+											</ons-input>
+										</span>
+									</div>
+								</ons-list-item>
+								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+									<div class="left">
+										<img class="list-item__thumbnail" src="/img/date.png">
+									</div>
+									<div class="center">
+										<span class="list-item__title">
+											<label for="ft3-form-date">Datum</label>
+										</span>
+										<span class="list-item__subtitle">
+											<ons-input
+												input-id="ft3-form-date"
+												inputmode="date"
+												type="date"
+												value=""
+												style="width: 100%;">
+											</ons-input>
+										</span>
+									</div>
+								</ons-list-item>
+							</ons-list>
+							<ons-button id="ft3-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
 						</div>
 					</ons-card>
 				</div>

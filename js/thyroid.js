@@ -141,13 +141,18 @@ jQuery(document).ready(function($)
 				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
 			});
 		}
+
+		if (event.tabItem.id === 'ft3-tab2-link')
+		{
+			$('#ft3-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
+		}
 	}, false);
 
 	$(document).on('click', '#ft3-form-save',function()
 	{
 		$('.spinner').show();
 
-		$.post('/api/ft3post.php', { value : $('#ft3-form-value').val(), date : new Date().toJSON().slice(0,10).replace(/-/g,'-') }, function(data)
+		$.post('/api/ft3post.php', { value : $('#ft3-form-value').val(), date : $('#ft3-form-date').val() }, function(data)
 		{
 			if (data == 'false')
 			{
@@ -157,6 +162,7 @@ jQuery(document).ready(function($)
 			else
 			{
 				$('#ft3-form-value').val('0,0');
+				$('#ft3-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
 				$('.spinner').hide();
 				ons.notification.toast('<p style="text-align:center;margin:0;">Daten erfolgreich gespeichert.</p>', { timeout: 2000 });
 			}

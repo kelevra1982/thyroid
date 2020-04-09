@@ -74,6 +74,8 @@ jQuery(document).ready(function($)
 {
 	document.addEventListener('init', function(event)
 	{
+		ons.fastClick.destroy();
+
 		if (event.target.id === 'ft3')
 		{
 			$('.spinner').show();
@@ -100,7 +102,22 @@ jQuery(document).ready(function($)
 		{
 
 		}
-	});
+	}, false);
+
+	document.addEventListener('show', function(event)
+	{
+
+	}, false);
+
+	document.addEventListener('hide', function(event)
+	{
+
+	}, false);
+
+	document.addEventListener('destroy', function(event)
+	{
+
+	}, false);
 
 	document.addEventListener('prechange', function(event)
 	{
@@ -126,7 +143,7 @@ jQuery(document).ready(function($)
 				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
 			});
 		}
-	});
+	}, false);
 
 	$(document).on('click', '#ft3-form-save',function()
 	{

@@ -94,21 +94,22 @@ jQuery(document).ready(function($)
 
 				var plot1 = $.jqplot('chart1', [line],
 				{
-					title		:	'',
-					axes		:	{
-										xaxis		:	{
-															renderer	:	$.jqplot.DateAxisRenderer,
-															tickOptions	:	{
-																				formatString:'%d.%m.%Y'
-																			},
-														}
+					title			:	'',
+					axes			:	{
+											xaxis		:	{
+																renderer	:	$.jqplot.DateAxisRenderer,
+																tickOptions	:	{
+																					formatString:'%d.%m.%Y'
+																				},
+																			}
 					},
-					series		:	[{
-										lineWidth		:	2,
-										markerOptions	:	{
-																style	:	'dot'
-															}
-									}]
+					series			:	[{
+											lineWidth		:	2,
+											color			:	'#a4a4a4',
+											markerOptions	:	{
+																	style	:	'x'
+																}
+										}]
 			   });
 			}).fail(function(err)
 			{
@@ -162,21 +163,23 @@ jQuery(document).ready(function($)
 
 				var plot1 = $.jqplot('chart1', [line],
 				{
-					title		:	'',
-					axes		:	{
-										xaxis		:	{
-															renderer	:	$.jqplot.DateAxisRenderer,
-															tickOptions	:	{
-																				formatString:'%d.%m.%Y'
-																			},
-														}
+					seriesColors	: ['#85802b'],
+					title			:	'',
+					axes			:	{
+											xaxis		:	{
+																renderer	:	$.jqplot.DateAxisRenderer,
+																tickOptions	:	{
+																					formatString:'%d.%m.%Y'
+																				},
+																			}
 					},
-					series		:	[{
-										lineWidth		:	2,
-										markerOptions	:	{
-																style	:	'dot'
-															}
-									}]
+					series			:	[{
+											lineWidth		:	2,
+											color			:	'#a4a4a4',
+											markerOptions	:	{
+																	style	:	'x'
+																}
+										}]
 			   });
 			}).fail(function(err)
 			{

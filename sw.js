@@ -43,4 +43,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 14.04.2020 10:02
+// last Update: 14.04.2020 10:07

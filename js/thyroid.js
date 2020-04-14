@@ -117,10 +117,49 @@ jQuery(document).ready(function($)
 				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
 			});
 		}
-
-		if (event.target.id === 'ft4')
+		else if (event.target.id === 'ft4')
 		{
+			$('.spinner').show();
 
+			$.getJSON('/api/ft4get.php', function(data)
+			{
+				$('#ft4-tab1-content').append('<div id="chart2"></div>');
+				var line2 = [];
+
+				$.each(data, function(index, value)
+				{
+					line2.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
+
+					if (index == (data.length - 1))
+					{
+						$('.spinner').hide();
+					}
+				});
+
+				var plot2 = $.jqplot('chart2', [line2],
+				{
+					title			:	'',
+					axes			:	{
+											xaxis		:	{
+																renderer	:	$.jqplot.DateAxisRenderer,
+																tickOptions	:	{
+																					formatString:'%d.%m.%Y'
+																				},
+																			}
+					},
+					series			:	[{
+											lineWidth		:	2,
+											color			:	'#a4a4a4',
+											markerOptions	:	{
+																	style	:	'x'
+																}
+										}]
+			   });
+			}).fail(function(err)
+			{
+				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
+			});
 		}
 	}, false);
 
@@ -187,10 +226,59 @@ jQuery(document).ready(function($)
 				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
 			});
 		}
-
-		if (event.tabItem.id === 'ft3-tab2-link')
+		else if (event.tabItem.id === 'ft3-tab2-link')
 		{
 			$('#ft3-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
+		}
+		else if (event.tabItem.id === 'ft4-tab1-link')
+		{
+			$('#ft4-tab1-content').empty();
+			$('.spinner').show();
+
+			$.getJSON('/api/ft4get.php', function(data)
+			{
+				$('#ft4-tab1-content').append('<div id="chart2"></div>');
+				var line2 = [];
+
+				$.each(data, function(index, value)
+				{
+					line2.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
+
+					if (index == (data.length - 1))
+					{
+						$('.spinner').hide();
+					}
+				});
+
+				var plot2 = $.jqplot('chart2', [line2],
+				{
+					seriesColors	: ['#85802b'],
+					title			:	'',
+					axes			:	{
+											xaxis		:	{
+																renderer	:	$.jqplot.DateAxisRenderer,
+																tickOptions	:	{
+																					formatString:'%d.%m.%Y'
+																				},
+																			}
+					},
+					series			:	[{
+											lineWidth		:	2,
+											color			:	'#a4a4a4',
+											markerOptions	:	{
+																	style	:	'x'
+																}
+										}]
+			   });
+			}).fail(function(err)
+			{
+				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
+			});
+		}
+		else if (event.tabItem.id === 'ft4-tab2-link')
+		{
+			$('#ft4-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
 		}
 	}, false);
 
@@ -198,7 +286,14 @@ jQuery(document).ready(function($)
 	{
 		$('.spinner').show();
 
-		$.post('/api/ft3post.php', { value : $('#ft3-form-value').val(), date : $('#ft3-form-date').val() }, function(data)
+		var value = $('#ft3-form-value').val();
+
+		if (value.indexOf(',') == -1)
+		{
+			value = value + ',0';
+		}
+
+		$.post('/api/ft3post.php', { value : value, date : $('#ft3-form-date').val() }, function(data)
 		{
 			if (data == 'false')
 			{
@@ -209,6 +304,38 @@ jQuery(document).ready(function($)
 			{
 				$('#ft3-form-value').val('0,0');
 				$('#ft3-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
+				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Daten erfolgreich gespeichert.</p>', { timeout: 2000 });
+			}
+		}).fail(function(err)
+		{
+			$('.spinner').hide();
+			ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
+		});
+	});
+
+	$(document).on('click', '#ft4-form-save',function()
+	{
+		$('.spinner').show();
+
+		var value = $('#ft4-form-value').val();
+
+		if (value.indexOf(',') == -1)
+		{
+			value = value + ',0';
+		}
+
+		$.post('/api/ft4post.php', { value : value, date : $('#ft4-form-date').val() }, function(data)
+		{
+			if (data == 'false')
+			{
+				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
+			}
+			else
+			{
+				$('#ft4-form-value').val('0,0');
+				$('#ft4-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
 				$('.spinner').hide();
 				ons.notification.toast('<p style="text-align:center;margin:0;">Daten erfolgreich gespeichert.</p>', { timeout: 2000 });
 			}

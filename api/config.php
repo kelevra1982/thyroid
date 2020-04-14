@@ -2,7 +2,7 @@
 
 	define('HOST', 'localhost');
 	define('USER', 'root');
-	define('PASSWORD', 'root');
+	define('PASSWORD', '');
 	define('DB', 'my-thyroid');
 
 	/*define('HOST', 'localhost');

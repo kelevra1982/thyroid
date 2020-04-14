@@ -27,6 +27,7 @@ self.addEventListener('install', function(e)
 			'/img/medikation.png',
 			'/img/statistik.png',
 			'/img/date.png',
+			'/img/date_ft4.png',
 			'/splashscreens/iphonex_splash.png',
 			'/splashscreens/iphonexr_splash.png',
 			'/splashscreens/iphonexsmax_splash.png',

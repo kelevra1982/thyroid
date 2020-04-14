@@ -81,10 +81,14 @@ jQuery(document).ready(function($)
 			{
 				$('#ft3-tab1-content').append('<div id="chart1"></div>');
 				var line = [];
+				var lineupper = [];
+				var lineunder = [];
 
 				$.each(data, function(index, value)
 				{
 					line.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
+					lineupper.push([value.date, 4.1]);
+					lineunder.push([value.date, 2.3]);
 
 					if (index == (data.length - 1))
 					{
@@ -92,7 +96,7 @@ jQuery(document).ready(function($)
 					}
 				});
 
-				var plot1 = $.jqplot('chart1', [line],
+				var plot1 = $.jqplot('chart1', [line, lineupper, lineunder],
 				{
 					title			:	'',
 					axes			:	{
@@ -103,13 +107,39 @@ jQuery(document).ready(function($)
 																				},
 																			}
 					},
-					series			:	[{
-											lineWidth		:	2,
-											color			:	'#a4a4a4',
-											markerOptions	:	{
-																	style	:	'x'
-																}
-										}]
+					fillBetween		:
+										{
+            								series1				:	1,
+            								series2				:	2,
+            								color				:	'rgba(58, 219, 118, 0.7)',
+            								baseSeries			:	0,
+            								fill				:	true
+        								},
+					series			:	[
+											{
+												lineWidth		:	2,
+												color			:	'#a4a4a4',
+												markerOptions	:	{
+																		style	:	'filledSquare'
+																	}
+											},
+											{
+												lineWidth		:	2,
+												color			:	'#3adb76',
+												markerOptions	:	{
+																		size	:	0,
+																		style	:	'filledSquare'
+																	}
+											},
+											{
+												lineWidth		:	2,
+												color			:	'#3adb76',
+												markerOptions	:	{
+																		size	:	0,
+																		style	:	'filledSquare'
+																	}
+											}
+										]
 			   });
 			}).fail(function(err)
 			{
@@ -125,10 +155,14 @@ jQuery(document).ready(function($)
 			{
 				$('#ft4-tab1-content').append('<div id="chart2"></div>');
 				var line2 = [];
+				var lineupper = [];
+				var lineunder = [];
 
 				$.each(data, function(index, value)
 				{
 					line2.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
+					lineupper.push([value.date, 1.29]);
+					lineunder.push([value.date, 0.62]);
 
 					if (index == (data.length - 1))
 					{
@@ -136,7 +170,7 @@ jQuery(document).ready(function($)
 					}
 				});
 
-				var plot2 = $.jqplot('chart2', [line2],
+				var plot2 = $.jqplot('chart2', [line2, lineupper, lineunder],
 				{
 					title			:	'',
 					axes			:	{
@@ -147,13 +181,39 @@ jQuery(document).ready(function($)
 																				},
 																			}
 					},
-					series			:	[{
-											lineWidth		:	2,
-											color			:	'#a4a4a4',
-											markerOptions	:	{
-																	style	:	'x'
-																}
-										}]
+					fillBetween		:
+										{
+            								series1				:	1,
+            								series2				:	2,
+            								color				:	'rgba(58, 219, 118, 0.7)',
+            								baseSeries			:	0,
+            								fill				:	true
+        								},
+					series			:	[
+											{
+												lineWidth		:	2,
+												color			:	'#a4a4a4',
+												markerOptions	:	{
+																		style	:	'filledSquare'
+																	}
+											},
+											{
+												lineWidth		:	2,
+												color			:	'#3adb76',
+												markerOptions	:	{
+																		size	:	0,
+																		style	:	'filledSquare'
+																	}
+											},
+											{
+												lineWidth		:	2,
+												color			:	'#3adb76',
+												markerOptions	:	{
+																		size	:	0,
+																		style	:	'filledSquare'
+																	}
+											}
+										]
 			   });
 			}).fail(function(err)
 			{
@@ -189,10 +249,14 @@ jQuery(document).ready(function($)
 			{
 				$('#ft3-tab1-content').append('<div id="chart1"></div>');
 				var line = [];
+				var lineupper = [];
+				var lineunder = [];
 
 				$.each(data, function(index, value)
 				{
 					line.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
+					lineupper.push([value.date, 4.1]);
+					lineunder.push([value.date, 2.3]);
 
 					if (index == (data.length - 1))
 					{
@@ -200,9 +264,8 @@ jQuery(document).ready(function($)
 					}
 				});
 
-				var plot1 = $.jqplot('chart1', [line],
+				var plot1 = $.jqplot('chart1', [line, lineupper, lineunder],
 				{
-					seriesColors	: ['#85802b'],
 					title			:	'',
 					axes			:	{
 											xaxis		:	{
@@ -212,13 +275,39 @@ jQuery(document).ready(function($)
 																				},
 																			}
 					},
-					series			:	[{
-											lineWidth		:	2,
-											color			:	'#a4a4a4',
-											markerOptions	:	{
-																	style	:	'x'
-																}
-										}]
+					fillBetween		:
+										{
+            								series1				:	1,
+            								series2				:	2,
+            								color				:	'rgba(58, 219, 118, 0.7)',
+            								baseSeries			:	0,
+            								fill				:	true
+        								},
+					series			:	[
+											{
+												lineWidth		:	2,
+												color			:	'#a4a4a4',
+												markerOptions	:	{
+																		style	:	'filledSquare'
+																	}
+											},
+											{
+												lineWidth		:	2,
+												color			:	'#3adb76',
+												markerOptions	:	{
+																		size	:	0,
+																		style	:	'filledSquare'
+																	}
+											},
+											{
+												lineWidth		:	2,
+												color			:	'#3adb76',
+												markerOptions	:	{
+																		size	:	0,
+																		style	:	'filledSquare'
+																	}
+											}
+										]
 			   });
 			}).fail(function(err)
 			{
@@ -239,10 +328,14 @@ jQuery(document).ready(function($)
 			{
 				$('#ft4-tab1-content').append('<div id="chart2"></div>');
 				var line2 = [];
+				var lineupper = [];
+				var lineunder = [];
 
 				$.each(data, function(index, value)
 				{
 					line2.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
+					lineupper.push([value.date, 1.29]);
+					lineunder.push([value.date, 0.62]);
 
 					if (index == (data.length - 1))
 					{
@@ -250,9 +343,8 @@ jQuery(document).ready(function($)
 					}
 				});
 
-				var plot2 = $.jqplot('chart2', [line2],
+				var plot2 = $.jqplot('chart2', [line2, lineupper, lineunder],
 				{
-					seriesColors	: ['#85802b'],
 					title			:	'',
 					axes			:	{
 											xaxis		:	{
@@ -262,13 +354,39 @@ jQuery(document).ready(function($)
 																				},
 																			}
 					},
-					series			:	[{
-											lineWidth		:	2,
-											color			:	'#a4a4a4',
-											markerOptions	:	{
-																	style	:	'x'
-																}
-										}]
+					fillBetween		:
+										{
+            								series1				:	1,
+            								series2				:	2,
+            								color				:	'rgba(58, 219, 118, 0.7)',
+            								baseSeries			:	0,
+            								fill				:	true
+        								},
+					series			:	[
+											{
+												lineWidth		:	2,
+												color			:	'#a4a4a4',
+												markerOptions	:	{
+																		style	:	'filledSquare'
+																	}
+											},
+											{
+												lineWidth		:	2,
+												color			:	'#3adb76',
+												markerOptions	:	{
+																		size	:	0,
+																		style	:	'filledSquare'
+																	}
+											},
+											{
+												lineWidth		:	2,
+												color			:	'#3adb76',
+												markerOptions	:	{
+																		size	:	0,
+																		style	:	'filledSquare'
+																	}
+											}
+										]
 			   });
 			}).fail(function(err)
 			{

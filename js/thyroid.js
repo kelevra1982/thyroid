@@ -240,7 +240,9 @@ jQuery(document).ready(function($)
 
 	document.addEventListener('prechange', function(event)
 	{
-  		if (event.tabItem.id === 'ft3-tab1-link')
+		$('.spinner').hide();
+
+		if (event.tabItem.id === 'ft3-tab1-link')
 		{
 			$('#ft3-tab1-content').empty();
 			$('.spinner').show();

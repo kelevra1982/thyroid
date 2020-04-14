@@ -35,13 +35,13 @@ body {
 	height: 24px;
 }
 
-.tabicon.verlauf {
+.tabicon.history {
 	background-image: url('../img/time_grey.png');
 	background-size: contain;
 	background-repeat: no-repeat;
 }
 
-.tabbar__item.active .tabicon.verlauf {
+.tabbar__item.active .tabicon.history {
 	background-image: url('../img/time_blue.png');
 	background-size: contain;
 	background-repeat: no-repeat;

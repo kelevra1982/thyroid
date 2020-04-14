@@ -29,7 +29,11 @@ self.addEventListener('install', function(e)
 			'/img/date.png',
 			'/splashscreens/iphonex_splash.png',
 			'/splashscreens/iphonexr_splash.png',
-			'/splashscreens/iphonexsmax_splash.png'
+			'/splashscreens/iphonexsmax_splash.png',
+			'/img/plus_blue.png',
+			'/img/plus_grey.png',
+			'/img/time_blue.png',
+			'/img/time_grey.png'
 		]);
 	}));
 });
@@ -39,4 +43,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 09.04.2020 12:43
+// last Update: 14.04.2020 10:02

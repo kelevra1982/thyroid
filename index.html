@@ -223,8 +223,24 @@
 					<div class="center">FT4</div>
 				</ons-toolbar>
 				<ons-tabbar position="auto">
-					<ons-tab page="ft4-tab1.html" label="Verlauf" icon="md-time" active-icon="md-time" active></ons-tab>
-					<ons-tab page="ft4-tab2.html" label="Wert angeben" icon="md-plus" active-icon="md-plus"></ons-tab>
+					<ons-tab page="ft4-tab1.html">
+						<input type="radio" style="display: none;">
+						<button class="tabbar__button">
+							<div class="tabbar__icon">
+								<ons-icon icon="my-icon" class="tabicon verlauf"></ons-icon>
+							</div>
+							<div class="tabbar__label">Verlauf</div>
+						</button>
+					</ons-tab>
+					<ons-tab page="ft4-tab2.html">
+						<input type="radio" style="display: none;">
+						<button class="tabbar__button">
+							<div class="tabbar__icon">
+								<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
+							</div>
+							<div class="tabbar__label">Wert angeben</div>
+						</button>
+					</ons-tab>
 				</ons-tabbar>
 			</ons-page>
 		</template>

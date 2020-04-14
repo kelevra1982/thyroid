@@ -30,6 +30,31 @@ body {
 	display: none;
 }
 
-.tab-content {
+.tabicon {
+	width: 24px;
+	height: 24px;
+}
 
+.tabicon.verlauf {
+	background-image: url('../img/time_grey.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.tabbar__item.active .tabicon.verlauf {
+	background-image: url('../img/time_blue.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.tabicon.newvalue {
+	background-image: url('../img/plus_grey.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.tabbar__item.active .tabicon.newvalue {
+	background-image: url('../img/plus_blue.png');
+	background-size: contain;
+	background-repeat: no-repeat;
 }

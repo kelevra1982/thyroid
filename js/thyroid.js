@@ -100,7 +100,7 @@ jQuery(document).ready(function($)
 					$('.spinner').hide();
 				}
 			});
-console.log(line);
+
 			var plot = $.jqplot('chart', [lineupper, lineunder, line],
 			{
 				title			:	'',

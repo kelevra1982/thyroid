@@ -71,203 +71,103 @@ $.noConflict();
 
 jQuery(document).ready(function($)
 {
+	//drawPlot('/api/ft3get.php', 'ft3-tab1-content', 4.1, 2.3);
+
+	function drawPlot(apiTarget, contentTarget, upperLimit, lowerLimit)
+	{
+		$(window).off('resize');
+		$('#' + contentTarget).empty();
+		$('.spinner').show();
+
+		$.getJSON(apiTarget, function(data)
+		{
+			$('#' + contentTarget).append('<div id="chart"></div>');
+			var line = [];
+			var lineupper = [];
+			var lineunder = [];
+
+			$.each(data, function(index, value)
+			{
+				line.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
+				lineupper.push([value.date, upperLimit]);
+				lineunder.push([value.date, lowerLimit]);
+
+				if (index == (data.length - 1))
+				{
+					$('.spinner').hide();
+				}
+			});
+
+			var plot = $.jqplot('chart', [line, lineupper, lineunder],
+			{
+				title			:	'',
+				axes			:	{
+										xaxis		:	{
+															renderer	:	$.jqplot.DateAxisRenderer,
+															tickOptions	:	{
+																				formatString:'%d.%m.%Y',
+																			},
+																		}
+				},
+				fillBetween		:
+									{
+										series1				:	1,
+										series2				:	2,
+										color				:	'rgba(58, 219, 118, 0.7)',
+										baseSeries			:	0,
+										fill				:	true
+									},
+				series			:	[
+										{
+											lineWidth		:	2,
+											color			:	'#a4a4a4',
+											markerOptions	:	{
+																	style	:	'filledSquare'
+																}
+										},
+										{
+											lineWidth		:	2,
+											color			:	'#3adb76',
+											markerOptions	:	{
+																	size	:	0,
+																	style	:	'filledSquare'
+																}
+										},
+										{
+											lineWidth		:	2,
+											color			:	'#3adb76',
+											markerOptions	:	{
+																	size	:	0,
+																	style	:	'filledSquare'
+																}
+										}
+									]
+			});
+
+			$(window).on('resize', function(event)
+			{
+				plot.destroy();
+				plot.replot();
+			});
+
+		}).fail(function(err)
+		{
+			$('.spinner').hide();
+			ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
+		});
+	}
+
 	document.addEventListener('init', function(event)
 	{
 		if (event.target.id === 'ft3')
 		{
-			$(window).off('resize');
-			$('.spinner').show();
-
-			$.getJSON('/api/ft3get.php', function(data)
-			{
-				$('#ft3-tab1-content').append('<div id="chart1"></div>');
-				var line = [];
-				var lineupper = [];
-				var lineunder = [];
-
-				$.each(data, function(index, value)
-				{
-					line.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
-					lineupper.push([value.date, 4.1]);
-					lineunder.push([value.date, 2.3]);
-
-					if (index == (data.length - 1))
-					{
-						$('.spinner').hide();
-					}
-				});
-
-				var plot1 = $.jqplot('chart1', [line, lineupper, lineunder],
-				{
-					title			:	'',
-					axes			:	{
-											xaxis		:	{
-																renderer	:	$.jqplot.DateAxisRenderer,
-																tickOptions	:	{
-																					formatString:'%d.%m.%Y',
-																				},
-																			}
-					},
-					fillBetween		:
-										{
-            								series1				:	1,
-            								series2				:	2,
-            								color				:	'rgba(58, 219, 118, 0.7)',
-            								baseSeries			:	0,
-            								fill				:	true
-        								},
-					series			:	[
-											{
-												lineWidth		:	2,
-												color			:	'#a4a4a4',
-												markerOptions	:	{
-																		style	:	'filledSquare'
-																	}
-											},
-											{
-												lineWidth		:	2,
-												color			:	'#3adb76',
-												markerOptions	:	{
-																		size	:	0,
-																		style	:	'filledSquare'
-																	}
-											},
-											{
-												lineWidth		:	2,
-												color			:	'#3adb76',
-												markerOptions	:	{
-																		size	:	0,
-																		style	:	'filledSquare'
-																	}
-											}
-										]
-			   	});
-
-				$(window).on('resize', function(event)
-				{
-					plot1.destroy();
-					plot1.replot();
-				});
-
-			}).fail(function(err)
-			{
-				$('.spinner').hide();
-				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
-			});
+			drawPlot('/api/ft3get.php', 'ft3-tab1-content', 4.1, 2.3);
 		}
 		else if (event.target.id === 'ft4')
 		{
-			$(window).off('resize');
-			$('.spinner').show();
-
-			$.getJSON('/api/ft4get.php', function(data)
-			{
-				$('#ft4-tab1-content').append('<div id="chart2"></div>');
-				var line2 = [];
-				var lineupper = [];
-				var lineunder = [];
-
-				$.each(data, function(index, value)
-				{
-					line2.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
-					lineupper.push([value.date, 1.29]);
-					lineunder.push([value.date, 0.62]);
-
-					if (index == (data.length - 1))
-					{
-						$('.spinner').hide();
-					}
-				});
-
-				var plot2 = $.jqplot('chart2', [line2, lineupper, lineunder],
-				{
-					title			:	'',
-					axes			:	{
-											xaxis		:	{
-																renderer	:	$.jqplot.DateAxisRenderer,
-																tickOptions	:	{
-																					formatString:'%d.%m.%Y'
-																				},
-																			}
-					},
-					fillBetween		:
-										{
-            								series1				:	1,
-            								series2				:	2,
-            								color				:	'rgba(58, 219, 118, 0.7)',
-            								baseSeries			:	0,
-            								fill				:	true
-        								},
-					series			:	[
-											{
-												lineWidth		:	2,
-												color			:	'#a4a4a4',
-												markerOptions	:	{
-																		style	:	'filledSquare'
-																	}
-											},
-											{
-												lineWidth		:	2,
-												color			:	'#3adb76',
-												markerOptions	:	{
-																		size	:	0,
-																		style	:	'filledSquare'
-																	}
-											},
-											{
-												lineWidth		:	2,
-												color			:	'#3adb76',
-												markerOptions	:	{
-																		size	:	0,
-																		style	:	'filledSquare'
-																	}
-											}
-										]
-			   	});
-
-				$(window).on('resize', function(event)
-				{
-					plot2.destroy();
-					plot2.replot();
-				});
-
-			}).fail(function(err)
-			{
-				$('.spinner').hide();
-				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
-			});
+			drawPlot('/api/ft4get.php', 'ft4-tab1-content', 1.29, 0.62);
 		}
 	}, false);
-
-	document.addEventListener('show', function(event)
-	{
-
-	}, false);
-
-	document.addEventListener('hide', function(event)
-	{
-
-	}, false);
-
-	document.addEventListener('destroy', function(event)
-	{
-
-	}, false);
-
-	ons.orientation.on('change', function(event)
-	{
-		$('body').removeClass('landscape');
-		$('body').removeClass('portrait');
-
-		if (!event.isPortrait)
-		{
-			$('body').addClass('landscape');
-		}
-		else if (!event.isLandscape)
-		{
-			$('body').addClass('portrait');
-		}
-	});
 
 	document.addEventListener('prechange', function(event)
 	{
@@ -275,86 +175,7 @@ jQuery(document).ready(function($)
 
 		if (event.tabItem.id === 'ft3-tab1-link')
 		{
-			$(window).off('resize');
-			$('#ft3-tab1-content').empty();
-			$('.spinner').show();
-
-			$.getJSON('/api/ft3get.php', function(data)
-			{
-				$('#ft3-tab1-content').append('<div id="chart1"></div>');
-				var line = [];
-				var lineupper = [];
-				var lineunder = [];
-
-				$.each(data, function(index, value)
-				{
-					line.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
-					lineupper.push([value.date, 4.1]);
-					lineunder.push([value.date, 2.3]);
-
-					if (index == (data.length - 1))
-					{
-						$('.spinner').hide();
-					}
-				});
-
-				var plot1 = $.jqplot('chart1', [line, lineupper, lineunder],
-				{
-					title			:	'',
-					axes			:	{
-											xaxis		:	{
-																renderer	:	$.jqplot.DateAxisRenderer,
-																tickOptions	:	{
-																					formatString:'%d.%m.%Y'
-																				},
-																			}
-					},
-					fillBetween		:
-										{
-            								series1				:	1,
-            								series2				:	2,
-            								color				:	'rgba(58, 219, 118, 0.7)',
-            								baseSeries			:	0,
-            								fill				:	true
-        								},
-					series			:	[
-											{
-												lineWidth		:	2,
-												color			:	'#a4a4a4',
-												markerOptions	:	{
-																		style	:	'filledSquare'
-																	}
-											},
-											{
-												lineWidth		:	2,
-												color			:	'#3adb76',
-												markerOptions	:	{
-																		size	:	0,
-																		style	:	'filledSquare'
-																	}
-											},
-											{
-												lineWidth		:	2,
-												color			:	'#3adb76',
-												markerOptions	:	{
-																		size	:	0,
-																		style	:	'filledSquare'
-																	}
-											}
-										]
-			   	});
-
-				$(window).on('resize', function(event)
-				{
-					plot1.destroy();
-					plot1.replot();
-				});
-
-			}).fail(function(err)
-			{
-				$('.spinner').hide();
-				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
-			});
+			drawPlot('/api/ft3get.php', 'ft3-tab1-content', 4.1, 2.3);
 		}
 		else if (event.tabItem.id === 'ft3-tab2-link')
 		{
@@ -362,86 +183,7 @@ jQuery(document).ready(function($)
 		}
 		else if (event.tabItem.id === 'ft4-tab1-link')
 		{
-			$(window).off('resize');
-			$('#ft4-tab1-content').empty();
-			$('.spinner').show();
-
-			$.getJSON('/api/ft4get.php', function(data)
-			{
-				$('#ft4-tab1-content').append('<div id="chart2"></div>');
-				var line2 = [];
-				var lineupper = [];
-				var lineunder = [];
-
-				$.each(data, function(index, value)
-				{
-					line2.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
-					lineupper.push([value.date, 1.29]);
-					lineunder.push([value.date, 0.62]);
-
-					if (index == (data.length - 1))
-					{
-						$('.spinner').hide();
-					}
-				});
-
-				var plot2 = $.jqplot('chart2', [line2, lineupper, lineunder],
-				{
-					title			:	'',
-					axes			:	{
-											xaxis		:	{
-																renderer	:	$.jqplot.DateAxisRenderer,
-																tickOptions	:	{
-																					formatString:'%d.%m.%Y'
-																				},
-																			}
-					},
-					fillBetween		:
-										{
-            								series1				:	1,
-            								series2				:	2,
-            								color				:	'rgba(58, 219, 118, 0.7)',
-            								baseSeries			:	0,
-            								fill				:	true
-        								},
-					series			:	[
-											{
-												lineWidth		:	2,
-												color			:	'#a4a4a4',
-												markerOptions	:	{
-																		style	:	'filledSquare'
-																	}
-											},
-											{
-												lineWidth		:	2,
-												color			:	'#3adb76',
-												markerOptions	:	{
-																		size	:	0,
-																		style	:	'filledSquare'
-																	}
-											},
-											{
-												lineWidth		:	2,
-												color			:	'#3adb76',
-												markerOptions	:	{
-																		size	:	0,
-																		style	:	'filledSquare'
-																	}
-											}
-										]
-			   	});
-
-			   	$(window).on('resize', function(event)
-			   	{
-				   plot2.destroy();
-				   plot2.replot();
-			   	});
-
-			}).fail(function(err)
-			{
-				$('.spinner').hide();
-				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
-			});
+			drawPlot('/api/ft4get.php', 'ft4-tab1-content', 1.29, 0.62);
 		}
 		else if (event.tabItem.id === 'ft4-tab2-link')
 		{

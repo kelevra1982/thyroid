@@ -2,7 +2,7 @@
 
 include('config.php');
 
-$db = @mysqli_connect(HOST, USER, PASSWORD, DB);
+$db		=	@mysqli_connect(HOST, USER, PASSWORD, DB);
 
 if (!$db)
 {
@@ -10,11 +10,10 @@ if (!$db)
 	exit;
 }
 
-$value = explode(',', $_POST['value']);
+$value	=	explode(',', $_POST['value']);
+$sql	=	'INSERT INTO ft3 (before_comma, after_comma, date) VALUES (' . $value[0] . ',' . $value[1] . ', "' . $_POST['date'] . '");';
 
-$sql = 'INSERT INTO ft3 (before_comma, after_comma, date) VALUES (' . $value[0] . ',' . $value[1] . ', "' . $_POST['date'] . '");';
 $db->query($sql);
-
 mysqli_close($db);
 
 ?>

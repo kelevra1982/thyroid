@@ -21,6 +21,14 @@ body {
 	font-size: 1.6rem;
 }
 
+.card__title {
+	font-family: 'Oleo Script', cursive;
+	font-size: 1.6rem;
+	text-align: center;
+	padding-top: 1rem;
+	padding-bottom: 0.1rem;
+}
+
 .spinner {
 	position: absolute;
 	top: 50%;

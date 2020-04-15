@@ -17,6 +17,7 @@ self.addEventListener('install', function(e)
 			'https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.js',
 			'/js/jquery.jqplot.min.js',
 			'/js/jqplot.dateAxisRenderer.js',
+			'/js/jqplot.highlighter.js',
 			'/js/thyroid.js',
 			'/img/header.png',
 			'/img/ft3.png',

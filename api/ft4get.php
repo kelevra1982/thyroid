@@ -4,7 +4,7 @@ include('config.php');
 
 $db = @mysqli_connect(HOST, USER, PASSWORD, DB);
 
-$sql = 'SELECT * FROM ft4;';
+$sql = 'SELECT * FROM ft4 ORDER BY date ASC;';
 $result = $db->query($sql);
 $return = [];
 while ($row = $result->fetch_assoc())

@@ -71,8 +71,6 @@ $.noConflict();
 
 jQuery(document).ready(function($)
 {
-	//drawPlot('/api/ft3get.php', 'ft3-tab1-content', 4.1, 2.3);
-
 	function drawPlot(apiTarget, contentTarget, upperLimit, lowerLimit)
 	{
 		$(window).off('resize');
@@ -81,13 +79,18 @@ jQuery(document).ready(function($)
 
 		$.getJSON(apiTarget, function(data)
 		{
-			$('#' + contentTarget).append('<div id="chart"></div>');
-			var line = [];
-			var lineupper = [];
-			var lineunder = [];
+			$('#' + contentTarget).append('<div id="chart"></div><div id="table"></div>');
+
+			var line 		=	[];
+			var lineupper 	=	[];
+			var lineunder 	=	[];
+			var table		=	'<ons-row vertical-align="center" style="margin-top:2rem;border:1px solid #4a4a4a;"><ons-col style="text-align:center;position:relative;left:-1rem;">Datum</ons-col><ons-col>&nbsp;</ons-col><ons-col style="position:relative;left:-1rem;">Wert</ons-col></ons-row>';
 
 			$.each(data, function(index, value)
 			{
+				var mydate	=	new Date(value.date).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' });
+				table		=	table + '<ons-row vertical-align="center" style="border-bottom:1px solid #4a4a4a;border-left:1px solid #4a4a4a;border-right:1px solid #4a4a4a;"><ons-col style="text-align:center;">' + mydate + '</ons-col><ons-col style="text-align:right;">' + value.before_comma + '.</ons-col><ons-col style="text-align:left;">' + value.after_comma + '</ons-col></ons-row>';
+
 				line.push([value.date, parseFloat(value.before_comma + '.' + value.after_comma)]);
 				lineupper.push([value.date, upperLimit]);
 				lineunder.push([value.date, lowerLimit]);
@@ -97,22 +100,33 @@ jQuery(document).ready(function($)
 					$('.spinner').hide();
 				}
 			});
-
-			var plot = $.jqplot('chart', [line, lineupper, lineunder],
+console.log(line);
+			var plot = $.jqplot('chart', [lineupper, lineunder, line],
 			{
 				title			:	'',
 				axes			:	{
 										xaxis		:	{
 															renderer	:	$.jqplot.DateAxisRenderer,
 															tickOptions	:	{
-																				formatString:'%d.%m.%Y',
+																				formatString	:	'%d.%m.%Y',
 																			},
-																		}
-				},
+														},
+										yaxis		:	{
+				          									tickOptions	:	{
+				            													formatString	:	'%.2f',
+				            												}
+				        								}
+									},
+				highlighter		:	{
+        								show				: 	true,
+        								sizeAdjust			: 	7.5,
+										tooltipLocation		: 'n',
+										tooltipAxes			: 'both'
+      								},
 				fillBetween		:
 									{
-										series1				:	1,
-										series2				:	2,
+										series1				:	0,
+										series2				:	1,
 										color				:	'rgba(58, 219, 118, 0.7)',
 										baseSeries			:	0,
 										fill				:	true
@@ -120,24 +134,24 @@ jQuery(document).ready(function($)
 				series			:	[
 										{
 											lineWidth		:	2,
+											color			:	'#3adb76',
+											markerOptions	:	{
+																	size	:	0,
+																	style	:	'filledSquare'
+																}
+										},
+										{
+											lineWidth		:	2,
+											color			:	'#3adb76',
+											markerOptions	:	{
+																	size	:	0,
+																	style	:	'filledSquare'
+																}
+										},
+										{
+											lineWidth		:	2,
 											color			:	'#a4a4a4',
 											markerOptions	:	{
-																	style	:	'filledSquare'
-																}
-										},
-										{
-											lineWidth		:	2,
-											color			:	'#3adb76',
-											markerOptions	:	{
-																	size	:	0,
-																	style	:	'filledSquare'
-																}
-										},
-										{
-											lineWidth		:	2,
-											color			:	'#3adb76',
-											markerOptions	:	{
-																	size	:	0,
 																	style	:	'filledSquare'
 																}
 										}
@@ -150,10 +164,49 @@ jQuery(document).ready(function($)
 				plot.replot();
 			});
 
+			$('#table').html(table);
+
 		}).fail(function(err)
 		{
 			$('.spinner').hide();
 			ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Laden der Daten.</p>', { timeout: 2000 });
+		});
+	}
+
+	function resetDate(contentTarget)
+	{
+		$('#' + contentTarget).val(new Date().toJSON().slice(0, 10).replace(/-/g, '-'));
+	}
+
+	function builtSaveHandler(formValue, apiTarget, formDateValue)
+	{
+		$('.spinner').show();
+
+		var value = $('#' + formValue).val();
+
+		if (value.indexOf(',') == -1)
+		{
+			value = value + ',0';
+		}
+
+		$.post(apiTarget, { value : value, date : $('#' + formDateValue).val() }, function(data)
+		{
+			if (data == 'false')
+			{
+				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
+			}
+			else
+			{
+				$('#' + formValue).val('0,0');
+				resetDate(formDateValue);
+				$('.spinner').hide();
+				ons.notification.toast('<p style="text-align:center;margin:0;">Daten erfolgreich gespeichert.</p>', { timeout: 2000 });
+			}
+		}).fail(function(err)
+		{
+			$('.spinner').hide();
+			ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
 		});
 	}
 
@@ -179,7 +232,7 @@ jQuery(document).ready(function($)
 		}
 		else if (event.tabItem.id === 'ft3-tab2-link')
 		{
-			$('#ft3-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
+			resetDate('ft3-form-date');
 		}
 		else if (event.tabItem.id === 'ft4-tab1-link')
 		{
@@ -187,71 +240,17 @@ jQuery(document).ready(function($)
 		}
 		else if (event.tabItem.id === 'ft4-tab2-link')
 		{
-			$('#ft4-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
+			resetDate('ft4-form-date');
 		}
 	}, false);
 
 	$(document).on('click', '#ft3-form-save',function()
 	{
-		$('.spinner').show();
-
-		var value = $('#ft3-form-value').val();
-
-		if (value.indexOf(',') == -1)
-		{
-			value = value + ',0';
-		}
-
-		$.post('/api/ft3post.php', { value : value, date : $('#ft3-form-date').val() }, function(data)
-		{
-			if (data == 'false')
-			{
-				$('.spinner').hide();
-				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
-			}
-			else
-			{
-				$('#ft3-form-value').val('0,0');
-				$('#ft3-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
-				$('.spinner').hide();
-				ons.notification.toast('<p style="text-align:center;margin:0;">Daten erfolgreich gespeichert.</p>', { timeout: 2000 });
-			}
-		}).fail(function(err)
-		{
-			$('.spinner').hide();
-			ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
-		});
+		builtSaveHandler('ft3-form-value', '/api/ft3post.php', 'ft3-form-date');
 	});
 
 	$(document).on('click', '#ft4-form-save',function()
 	{
-		$('.spinner').show();
-
-		var value = $('#ft4-form-value').val();
-
-		if (value.indexOf(',') == -1)
-		{
-			value = value + ',0';
-		}
-
-		$.post('/api/ft4post.php', { value : value, date : $('#ft4-form-date').val() }, function(data)
-		{
-			if (data == 'false')
-			{
-				$('.spinner').hide();
-				ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
-			}
-			else
-			{
-				$('#ft4-form-value').val('0,0');
-				$('#ft4-form-date').val(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
-				$('.spinner').hide();
-				ons.notification.toast('<p style="text-align:center;margin:0;">Daten erfolgreich gespeichert.</p>', { timeout: 2000 });
-			}
-		}).fail(function(err)
-		{
-			$('.spinner').hide();
-			ons.notification.toast('<p style="text-align:center;margin:0;">Fehler beim Speichern der Daten.</p>', { timeout: 2000 });
-		});
+		builtSaveHandler('ft4-form-value', '/api/ft4post.php', 'ft4-form-date');
 	});
 });

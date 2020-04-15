@@ -103,7 +103,7 @@ jQuery(document).ready(function($)
 											xaxis		:	{
 																renderer	:	$.jqplot.DateAxisRenderer,
 																tickOptions	:	{
-																					formatString:'%d.%m.%Y'
+																					formatString:'%d.%m.%Y',
 																				},
 																			}
 					},

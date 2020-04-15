@@ -75,6 +75,7 @@ jQuery(document).ready(function($)
 	{
 		if (event.target.id === 'ft3')
 		{
+			$(window).off('resize');
 			$('.spinner').show();
 
 			$.getJSON('/api/ft3get.php', function(data)
@@ -140,7 +141,14 @@ jQuery(document).ready(function($)
 																	}
 											}
 										]
-			   });
+			   	});
+
+				$(window).on('resize', function(event)
+				{
+					plot1.destroy();
+					plot1.replot();
+				});
+
 			}).fail(function(err)
 			{
 				$('.spinner').hide();
@@ -149,6 +157,7 @@ jQuery(document).ready(function($)
 		}
 		else if (event.target.id === 'ft4')
 		{
+			$(window).off('resize');
 			$('.spinner').show();
 
 			$.getJSON('/api/ft4get.php', function(data)
@@ -214,7 +223,14 @@ jQuery(document).ready(function($)
 																	}
 											}
 										]
-			   });
+			   	});
+
+				$(window).on('resize', function(event)
+				{
+					plot2.destroy();
+					plot2.replot();
+				});
+
 			}).fail(function(err)
 			{
 				$('.spinner').hide();
@@ -238,12 +254,28 @@ jQuery(document).ready(function($)
 
 	}, false);
 
+	ons.orientation.on('change', function(event)
+	{
+		$('body').removeClass('landscape');
+		$('body').removeClass('portrait');
+
+		if (!event.isPortrait)
+		{
+			$('body').addClass('landscape');
+		}
+		else if (!event.isLandscape)
+		{
+			$('body').addClass('portrait');
+		}
+	});
+
 	document.addEventListener('prechange', function(event)
 	{
 		$('.spinner').hide();
 
 		if (event.tabItem.id === 'ft3-tab1-link')
 		{
+			$(window).off('resize');
 			$('#ft3-tab1-content').empty();
 			$('.spinner').show();
 
@@ -310,7 +342,14 @@ jQuery(document).ready(function($)
 																	}
 											}
 										]
-			   });
+			   	});
+
+				$(window).on('resize', function(event)
+				{
+					plot1.destroy();
+					plot1.replot();
+				});
+
 			}).fail(function(err)
 			{
 				$('.spinner').hide();
@@ -323,6 +362,7 @@ jQuery(document).ready(function($)
 		}
 		else if (event.tabItem.id === 'ft4-tab1-link')
 		{
+			$(window).off('resize');
 			$('#ft4-tab1-content').empty();
 			$('.spinner').show();
 
@@ -389,7 +429,14 @@ jQuery(document).ready(function($)
 																	}
 											}
 										]
-			   });
+			   	});
+
+			   	$(window).on('resize', function(event)
+			   	{
+				   plot2.destroy();
+				   plot2.replot();
+			   	});
+
 			}).fail(function(err)
 			{
 				$('.spinner').hide();

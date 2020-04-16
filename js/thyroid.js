@@ -79,12 +79,12 @@ jQuery(document).ready(function($)
 
 		$.getJSON(apiTarget, function(data)
 		{
-			$('#' + contentTarget).append('<div id="chart"></div><div id="table"></div>');
+			$('#' + contentTarget).append('<p style="color:#1f1f21;font-size:0.75rem;text-align:center;padding-left:2%;padding-right:2%;padding-top:2%;padding-bottom:2%;position:relative;left:-5%;margin:0;margin-block-start:0;margin-block-end:0;margin-top:1rem;margin-bottom:1rem;width:106%;background-color:#efeff4;">Darstellung als Diagramm.</p><div id="chart"></div><div id="table"></div>');
 
 			var line 		=	[];
 			var lineupper 	=	[];
 			var lineunder 	=	[];
-			var table		=	'<ons-row vertical-align="center" style="margin-top:2rem;border:1px solid #4a4a4a;"><ons-col style="text-align:center;position:relative;left:-1rem;">Datum</ons-col><ons-col>&nbsp;</ons-col><ons-col style="position:relative;left:-1rem;">Wert</ons-col></ons-row>';
+			var table		=	'<p style="color:#1f1f21;font-size:0.75rem;text-align:center;padding-left:2%;padding-right:2%;padding-top:2%;padding-bottom:2%;position:relative;left:-5%;margin:0;margin-block-start:0;margin-block-end:0;margin-top:1rem;margin-bottom:1rem;width:106%;background-color:#efeff4;">Darstellung als Tabelle.</p><ons-row vertical-align="center" style="margin-top:1rem;border:1px solid #4a4a4a;"><ons-col style="text-align:center;position:relative;left:-1rem;">Datum</ons-col><ons-col>&nbsp;</ons-col><ons-col style="position:relative;left:-1rem;">Wert</ons-col></ons-row>';
 
 			$.each(data, function(index, value)
 			{

@@ -79,12 +79,29 @@ jQuery(document).ready(function($)
 
 		$.getJSON(apiTarget, function(data)
 		{
-			$('#' + contentTarget).append('<p style="color:#1f1f21;font-size:0.75rem;text-align:center;padding-left:2%;padding-right:2%;padding-top:2%;padding-bottom:2%;position:relative;left:-5%;margin:0;margin-block-start:0;margin-block-end:0;margin-top:1rem;margin-bottom:1rem;width:106%;background-color:#efeff4;">Darstellung als Diagramm.</p><div id="chart"></div><div id="table"></div>');
+			if (data.length == 0)
+			{
+				console.log('hier');
+				$('.spinner').hide();
+				return false;
+			}
+			else if (data.length == 1)
+			{
+				var arrowClass		=	'none';
+			}
+			else
+			{
+				var lastValue		=	parseFloat(data[data.length - 1].before_comma + '.' + data[data.length - 1].after_comma);
+				var beforeLastValue	=	parseFloat(data[data.length - 2].before_comma + '.' + data[data.length - 2].after_comma);
+				var arrowClass		=	(lastValue > beforeLastValue) ? 'up' : (lastValue == beforeLastValue) ? 'none' : 'down';
+			}
+
+			$('#' + contentTarget).append('<p class="value-header">' + new Date(data[data.length - 1].date).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' }) + '<br><span><i class="arrow-' + arrowClass + '"></i>' + data[data.length - 1].before_comma + '.' + data[data.length - 1].after_comma + '</span> ng/l</p><p class="value-divider">Darstellung als Diagramm.</p><div id="chart"></div><div id="table"></div>');
 
 			var line 		=	[];
 			var lineupper 	=	[];
 			var lineunder 	=	[];
-			var table		=	'<p style="color:#1f1f21;font-size:0.75rem;text-align:center;padding-left:2%;padding-right:2%;padding-top:2%;padding-bottom:2%;position:relative;left:-5%;margin:0;margin-block-start:0;margin-block-end:0;margin-top:1rem;margin-bottom:1rem;width:106%;background-color:#efeff4;">Darstellung als Tabelle.</p><ons-row vertical-align="center" style="margin-top:1rem;border:1px solid #4a4a4a;"><ons-col style="text-align:center;position:relative;left:-1rem;">Datum</ons-col><ons-col>&nbsp;</ons-col><ons-col style="position:relative;left:-1rem;">Wert</ons-col></ons-row>';
+			var table		=	'<p class="value-divider">Darstellung als Tabelle.</p><ons-row vertical-align="center" style="margin-top:1rem;border:1px solid #4a4a4a;"><ons-col style="text-align:center;position:relative;left:-1rem;">Datum</ons-col><ons-col>&nbsp;</ons-col><ons-col style="position:relative;left:-1rem;">Wert in ng/l</ons-col></ons-row>';
 
 			$.each(data, function(index, value)
 			{
@@ -113,7 +130,7 @@ jQuery(document).ready(function($)
 														},
 										yaxis		:	{
 				          									tickOptions	:	{
-				            													formatString	:	'%.2f',
+				            													formatString	:	'%.2f ng/l',
 				            												}
 				        								}
 									},
@@ -133,7 +150,7 @@ jQuery(document).ready(function($)
 									},
 				series			:	[
 										{
-											lineWidth		:	2,
+											lineWidth		:	1,
 											color			:	'#3adb76',
 											markerOptions	:	{
 																	size	:	0,
@@ -141,7 +158,7 @@ jQuery(document).ready(function($)
 																}
 										},
 										{
-											lineWidth		:	2,
+											lineWidth		:	1,
 											color			:	'#3adb76',
 											markerOptions	:	{
 																	size	:	0,
@@ -149,7 +166,7 @@ jQuery(document).ready(function($)
 																}
 										},
 										{
-											lineWidth		:	2,
+											lineWidth		:	1,
 											color			:	'#a4a4a4',
 											markerOptions	:	{
 																	style	:	'filledSquare'

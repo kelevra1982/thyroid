@@ -81,7 +81,6 @@ jQuery(document).ready(function($)
 		{
 			if (data.length == 0)
 			{
-				console.log('hier');
 				$('.spinner').hide();
 				return false;
 			}

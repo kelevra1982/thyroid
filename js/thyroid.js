@@ -95,7 +95,7 @@ jQuery(document).ready(function($)
 				var arrowClass		=	(lastValue > beforeLastValue) ? 'up' : (lastValue == beforeLastValue) ? 'none' : 'down';
 			}
 
-			$('#' + contentTarget).append('<p class="value-divider">letzter Wert</p><p class="value-header">' + new Date(data[data.length - 1].date).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' }) + '<br><span><i class="arrow-' + arrowClass + '"></i>' + data[data.length - 1].before_comma + '.' + data[data.length - 1].after_comma + '</span> ng/l</p><p class="value-divider">Darstellung als Diagramm.</p><div id="chart"></div><div id="table"></div>');
+			$('#' + contentTarget).append('<p class="value-divider">Letzter Wert.</p><p class="value-header ' + arrowClass + '">' + new Date(data[data.length - 1].date).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' }) + '<br><span><i class="arrow-' + arrowClass + '"></i>' + data[data.length - 1].before_comma + '.' + data[data.length - 1].after_comma + '</span> ng/l</p><p class="value-divider">Darstellung als Diagramm.</p><div id="chart"></div><div id="table"></div>');
 
 			var line 		=	[];
 			var lineupper 	=	[];

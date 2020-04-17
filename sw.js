@@ -9,9 +9,11 @@ self.addEventListener('install', function(e)
 			'/manifest.json',
 			'https://unpkg.com/onsenui/css/onsenui.min.css',
 			'https://unpkg.com/onsenui/css/onsen-css-components.min.css',
+			'https://unpkg.com/onsenui/css/dark-onsen-css-components.min.css',
 			'https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap',
 			'/css/jquery.jqplot.min.css',
 			'/css/thyroid.css',
+			'/css/dark-thyroid.css',
 			'https://unpkg.com/onsenui/js/onsenui.min.js',
 			'https://unpkg.com/jquery/dist/jquery.min.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.js',
@@ -45,4 +47,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 14.04.2020 10:07
+// last Update: 17.04.2020 07:39

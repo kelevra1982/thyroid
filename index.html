@@ -161,7 +161,24 @@
 					<div class="center">FT3</div>
 					<div class="right">
 						<ons-toolbar-button id="ft3-reload" class="reload-button">
-							<img width="21" height="21" src="/img/reload.png" alt="">
+							<img id="ft3-reload-img" width="21" height="21" src="/img/reload.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+						    			document.querySelector('#ft3-reload-img').setAttribute('src', '/img/dark-reload.png');
+						  			}
+									else
+									{
+						    			document.querySelector('#ft3-reload-img').setAttribute('href', '/img/reload.png');
+						  			}
+								}
+								else
+								{
+						  			document.querySelector('#ft3-reload-img').setAttribute('href', '/img/reload.png');
+								}
+							</script>
 						</ons-toolbar-button>
 					</div>
 				</ons-toolbar>

@@ -35,10 +35,13 @@ self.addEventListener('install', function(e)
 			'/splashscreens/iphonexr_splash.png',
 			'/splashscreens/iphonexsmax_splash.png',
 			'/img/plus_blue.png',
+			'/img/plus_dark.png',
 			'/img/plus_grey.png',
 			'/img/time_blue.png',
+			'/img/time_dark.png',
 			'/img/time_grey.png',
-			'/img/reload.png'
+			'/img/reload.png',
+			'/img/dark-reload.png'
 		]);
 	}));
 });

@@ -37,7 +37,8 @@ self.addEventListener('install', function(e)
 			'/img/plus_blue.png',
 			'/img/plus_grey.png',
 			'/img/time_blue.png',
-			'/img/time_grey.png'
+			'/img/time_grey.png',
+			'/img/reload.png'
 		]);
 	}));
 });

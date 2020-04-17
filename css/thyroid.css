@@ -176,3 +176,13 @@ i.arrow-none {
 #table ons-row:nth-child(even) {
 	background-color: #efeff4;
 }
+
+.reload-button {
+	position: relative;
+	top: 5px;
+	left: 0;
+}
+
+.toast {
+	top: 0px !important;
+}

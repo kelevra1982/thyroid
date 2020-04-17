@@ -155,7 +155,7 @@ i.arrow-none {
 }
 
 .value-divider {
-	color: #1f1f21;
+	color: #fefefe;
 	font-size: 0.75rem;
 	text-align: center;
 	padding-left: 2%;
@@ -170,11 +170,11 @@ i.arrow-none {
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 	width: 106%;
-	background-color: #efeff4;
+	background-color: #0a0a0a;
 }
 
 #table ons-row:nth-child(even) {
-	background-color: #efeff4;
+	background-color: #4a4a4a;
 }
 
 .reload-button {
@@ -185,4 +185,16 @@ i.arrow-none {
 
 .toast {
 	top: 0px !important;
+}
+
+.jqplot-target {
+	background-color: #fefefe;
+	padding-right: 4%;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	border-radius: 3px;
+}
+
+.jqplot-yaxis {
+	padding-left: 2%;
 }

@@ -77,6 +77,20 @@ jQuery(document).ready(function($)
 				drawPlot('/api/ft3get.php', 'ft3-tab1-content', 4.1, 2.3);
 			}
 		}
+		else if (document.querySelector('#myNavigator').topPage.id == 'ft4' && condition == 'online')
+		{
+			if (document.querySelector('ons-tabbar').getActiveTabIndex() == 0)
+			{
+				drawPlot('/api/ft4get.php', 'ft4-tab1-content', 1.29, 0.62);
+			}
+		}
+		else if (document.querySelector('#myNavigator').topPage.id == 'tsh' && condition == 'online')
+		{
+			if (document.querySelector('ons-tabbar').getActiveTabIndex() == 0)
+			{
+				drawPlot('/api/tshget.php', 'tsh-tab1-content', 0.4, 4.0);
+			}
+		}
 	}
 
 	function drawPlot(apiTarget, contentTarget, upperLimit, lowerLimit)
@@ -103,12 +117,12 @@ jQuery(document).ready(function($)
 				var arrowClass		=	(lastValue > beforeLastValue) ? 'up' : (lastValue == beforeLastValue) ? 'none' : 'down';
 			}
 
-			$('#' + contentTarget).append('<p class="value-divider">Letzter Wert.</p><p class="value-header ' + arrowClass + '">' + new Date(data[data.length - 1].date).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' }) + '<br><span><i class="arrow-' + arrowClass + '"></i>' + data[data.length - 1].before_comma + '.' + data[data.length - 1].after_comma + '</span> ng/l</p><p class="value-divider">Darstellung als Diagramm.</p><div id="chart"></div><div id="table"></div>');
+			$('#' + contentTarget).append('<p class="value-divider">Letzter Wert.</p><p class="value-header ' + arrowClass + '">' + new Date(data[data.length - 1].date).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' }) + '<br><span><i class="arrow-' + arrowClass + '"></i>' + data[data.length - 1].before_comma + '.' + data[data.length - 1].after_comma + '</span> mU/l</p><p class="value-divider">Darstellung als Diagramm.</p><div id="chart"></div><div id="table"></div>');
 
 			var line 		=	[];
 			var lineupper 	=	[];
 			var lineunder 	=	[];
-			var table		=	'<p class="value-divider">Darstellung als Tabelle.</p><ons-row vertical-align="center" style="margin-top:1rem;border:1px solid #4a4a4a;"><ons-col style="text-align:center;position:relative;left:-1rem;">Datum</ons-col><ons-col>&nbsp;</ons-col><ons-col style="position:relative;left:-1rem;">Wert in ng/l</ons-col></ons-row>';
+			var table		=	'<p class="value-divider">Darstellung als Tabelle.</p><ons-row vertical-align="center" style="margin-top:1rem;border:1px solid #4a4a4a;"><ons-col style="text-align:center;position:relative;left:-1rem;">Datum</ons-col><ons-col>&nbsp;</ons-col><ons-col style="position:relative;left:-1rem;">Wert in mU/l</ons-col></ons-row>';
 
 			$.each(data, function(index, value)
 			{
@@ -137,7 +151,7 @@ jQuery(document).ready(function($)
 														},
 										yaxis		:	{
 				          									tickOptions	:	{
-				            													formatString	:	'%.2f ng/l',
+				            													formatString	:	'%.2f mU/l',
 				            												}
 				        								}
 									},
@@ -244,6 +258,10 @@ jQuery(document).ready(function($)
 		{
 			drawPlot('/api/ft4get.php', 'ft4-tab1-content', 1.29, 0.62);
 		}
+		else if (event.target.id == 'tsh')
+		{
+			drawPlot('/api/tshget.php', 'tsh-tab1-content', 0.4, 4.0);
+		}
 	}, false);
 
 	document.addEventListener('prechange', function(event)
@@ -270,6 +288,16 @@ jQuery(document).ready(function($)
 			$('#ft4-reload').hide();
 			resetDate('ft4-form-date');
 		}
+		else if (event.tabItem.id === 'tsh-tab1-link')
+		{
+			$('#tsh-reload').show();
+			drawPlot('/api/tshget.php', 'tsh-tab1-content', 0.4, 4.0);
+		}
+		else if (event.tabItem.id === 'tsh-tab2-link')
+		{
+			$('#tsh-reload').hide();
+			resetDate('tsh-form-date');
+		}
 	}, false);
 
 	$(document).on('click', '#ft3-reload',function()
@@ -282,6 +310,11 @@ jQuery(document).ready(function($)
 		drawPlot('/api/ft4get.php', 'ft4-tab1-content', 1.29, 0.62);
 	});
 
+	$(document).on('click', '#tsh-reload',function()
+	{
+		drawPlot('/api/tshget.php', 'tsh-tab1-content', 0.4, 4.0);
+	});
+
 	$(document).on('click', '#ft3-form-save',function()
 	{
 		builtSaveHandler('ft3-form-value', '/api/ft3post.php', 'ft3-form-date');
@@ -290,6 +323,11 @@ jQuery(document).ready(function($)
 	$(document).on('click', '#ft4-form-save',function()
 	{
 		builtSaveHandler('ft4-form-value', '/api/ft4post.php', 'ft4-form-date');
+	});
+
+	$(document).on('click', '#tsh-form-save',function()
+	{
+		builtSaveHandler('tsh-form-value', '/api/tshpost.php', 'tsh-form-date');
 	});
 
 	$(document).on('focus', '#ft3-form-value', function()
@@ -321,6 +359,22 @@ jQuery(document).ready(function($)
 		if ($('#ft4-form-value').val() == '')
 		{
 			$('#ft4-form-value').val('0,0');
+		}
+	});
+
+	$(document).on('focus', '#tsh-form-value', function()
+	{
+		if ($('#tsh-form-value').val() == '0,0')
+		{
+			$('#tsh-form-value').val('');
+		}
+	});
+
+	$(document).on('blur', '#tsh-form-value', function()
+	{
+		if ($('#tsh-form-value').val() == '')
+		{
+			$('#tsh-form-value').val('0,0');
 		}
 	});
 });

@@ -280,6 +280,28 @@
 				<ons-toolbar>
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">FT4</div>
+					<div class="right">
+						<ons-toolbar-button id="ft4-reload" class="reload-button">
+							<img id="ft4-reload-img" width="21" height="21" src="/img/reload.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+						    			document.querySelector('#ft4-reload-img').setAttribute('src', '/img/dark-reload.png');
+						  			}
+									else
+									{
+						    			document.querySelector('#ft4-reload-img').setAttribute('href', '/img/reload.png');
+						  			}
+								}
+								else
+								{
+						  			document.querySelector('#ft4-reload-img').setAttribute('href', '/img/reload.png');
+								}
+							</script>
+						</ons-toolbar-button>
+					</div>
 				</ons-toolbar>
 				<ons-tabbar position="auto">
 					<ons-tab page="ft4-tab1.html" id="ft4-tab1-link">

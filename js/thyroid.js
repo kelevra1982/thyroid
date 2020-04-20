@@ -147,8 +147,7 @@ jQuery(document).ready(function($)
 										tooltipLocation		: 'n',
 										tooltipAxes			: 'both'
       								},
-				fillBetween		:
-									{
+				fillBetween		:	{
 										series1				:	0,
 										series2				:	1,
 										color				:	'rgba(58, 219, 118, 0.7)',
@@ -176,6 +175,7 @@ jQuery(document).ready(function($)
 											lineWidth		:	1,
 											color			:	'#a4a4a4',
 											markerOptions	:	{
+																	size	:	5,
 																	style	:	'filledSquare'
 																}
 										}
@@ -262,10 +262,12 @@ jQuery(document).ready(function($)
 		}
 		else if (event.tabItem.id === 'ft4-tab1-link')
 		{
+			$('#ft4-reload').show();
 			drawPlot('/api/ft4get.php', 'ft4-tab1-content', 1.29, 0.62);
 		}
 		else if (event.tabItem.id === 'ft4-tab2-link')
 		{
+			$('#ft4-reload').hide();
 			resetDate('ft4-form-date');
 		}
 	}, false);
@@ -273,6 +275,11 @@ jQuery(document).ready(function($)
 	$(document).on('click', '#ft3-reload',function()
 	{
 		drawPlot('/api/ft3get.php', 'ft3-tab1-content', 4.1, 2.3);
+	});
+
+	$(document).on('click', '#ft4-reload',function()
+	{
+		drawPlot('/api/ft4get.php', 'ft4-tab1-content', 1.29, 0.62);
 	});
 
 	$(document).on('click', '#ft3-form-save',function()
@@ -283,5 +290,37 @@ jQuery(document).ready(function($)
 	$(document).on('click', '#ft4-form-save',function()
 	{
 		builtSaveHandler('ft4-form-value', '/api/ft4post.php', 'ft4-form-date');
+	});
+
+	$(document).on('focus', '#ft3-form-value', function()
+	{
+		if ($('#ft3-form-value').val() == '0,0')
+		{
+			$('#ft3-form-value').val('');
+		}
+	});
+
+	$(document).on('blur', '#ft3-form-value', function()
+	{
+		if ($('#ft3-form-value').val() == '')
+		{
+			$('#ft3-form-value').val('0,0');
+		}
+	});
+
+	$(document).on('focus', '#ft4-form-value', function()
+	{
+		if ($('#ft4-form-value').val() == '0,0')
+		{
+			$('#ft4-form-value').val('');
+		}
+	});
+
+	$(document).on('blur', '#ft4-form-value', function()
+	{
+		if ($('#ft4-form-value').val() == '')
+		{
+			$('#ft4-form-value').val('0,0');
+		}
 	});
 });

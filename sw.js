@@ -31,6 +31,7 @@ self.addEventListener('install', function(e)
 			'/img/statistik.png',
 			'/img/date.png',
 			'/img/date_ft4.png',
+			'/img/date_tsh.png',
 			'/splashscreens/iphonex_splash.png',
 			'/splashscreens/iphonexr_splash.png',
 			'/splashscreens/iphonexsmax_splash.png',

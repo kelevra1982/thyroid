@@ -1,20 +1,31 @@
 <!doctype html>
 <html lang="de" dir="ltr">
 	<head>
+		<!-- charset utf-8 -->
 		<meta charset="utf-8">
+		<!-- needed for ios native like pwa support -->
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<!-- viewport-fit=cover fix for iphone landscape mode (removes white bars at the sides) -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+		<!-- title of the pwa -->
 		<meta name="apple-mobile-web-app-title" content="Thyroid">
+		<!-- display pwa in fullscreen -->
 		<meta name="apple-touch-fullscreen" content="yes">
+		<!-- use default status bar style -->
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<!-- no telephone detection for links -->
 		<meta name="format-detection" content="telephone=no">
+		<!-- define the theme color -->
 		<meta name"theme-color" content="#ef4e2a">
-		<title></title>
+		<title>THYROID</title>
+		<!-- use manifest file for setup instructions (needed fpr add to home screen) -->
 		<link rel="manifest" href="/manifest.json">
+		<!-- splash screens -->
 		<link href="/splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image">
 		<link href="/splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
 		<link href="/splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image">
+		<!-- shortcut and app icons -->
 		<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
 		<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 		<link rel="icon" type="image/gif" href="/img/favicon.gif">
@@ -37,6 +48,7 @@
 		<link rel="icon" type="image/png" href="/img/favicon-160x160.png" sizes="160x160">
 		<link rel="icon" type="image/png" href="/img/favicon-192x192.png" sizes="192x192">
 		<link rel="icon" type="image/png" href="/img/favicon-196x196.png" sizes="196x196">
+		<!-- load stylesheets based on display mode (dark, light) -->
 		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.min.css">
 		<link id="onsen-theme" rel="stylesheet" href="">
 		<link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap" rel="stylesheet">
@@ -62,8 +74,10 @@
 				document.querySelector('#app-theme').setAttribute('href', '/css/thyroid.css');
 			}
 		</script>
+		<!-- load javascript files -->
 		<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 		<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+		<!-- prevents app scrolling over the screen if tracked -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.js"></script>
 		<script src="/js/jquery.jqplot.min.js"></script>
 		<script src="/js/jqplot.dateAxisRenderer.js"></script>
@@ -71,7 +85,9 @@
 		<script src="/js/thyroid.js"></script>
 	</head>
 	<body>
+		<!-- navigator element -->
 		<ons-navigator id="myNavigator" page="home.html"></ons-navigator>
+		<!-- ############################## page home ############################## -->
 		<template id="home.html">
 			<ons-page id="home">
 				<ons-toolbar>
@@ -154,6 +170,8 @@
 				</ons-list>
 			</ons-page>
 		</template>
+		<!-- ############################## page home ############################## -->
+		<!-- ############################## page  ft3 ############################## -->
 		<template id="ft3.html">
 			<ons-page id="ft3">
 				<ons-toolbar>
@@ -275,6 +293,8 @@
 				</div>
 			</ons-page>
 		</template>
+		<!-- ############################## page  ft3 ############################## -->
+		<!-- ############################## page  ft4 ############################## -->
 		<template id="ft4.html">
 			<ons-page id="ft4">
 				<ons-toolbar>
@@ -396,6 +416,8 @@
 				</div>
 			</ons-page>
 		</template>
+		<!-- ############################## page  ft4 ############################## -->
+		<!-- ############################## page  tsh ############################## -->
 		<template id="tsh.html">
 			<ons-page id="tsh">
 				<ons-toolbar>
@@ -517,8 +539,8 @@
 				</div>
 			</ons-page>
 		</template>
-
-
+		<!-- ############################## page  tsh ############################## -->
+		<!-- ############################## page vitamind ########################## -->
 		<template id="vitamind.html">
 			<ons-page id="vitamind">
 				<ons-toolbar>
@@ -640,8 +662,8 @@
 				</div>
 			</ons-page>
 		</template>
-
-
+		<!-- ############################## page vitamind ########################## -->
+		<!-- ############################## page beschwerden ####################### -->
 		<template id="beschwerden.html">
 			<ons-page id="beschwerden">
 				<ons-toolbar>
@@ -650,6 +672,8 @@
 				</ons-toolbar>
 			</ons-page>
 		</template>
+		<!-- ############################## page beschwerden ####################### -->
+		<!-- ############################## page  medikation ####################### -->
 		<template id="medikation.html">
 			<ons-page id="medikation">
 				<ons-toolbar>
@@ -658,6 +682,8 @@
 				</ons-toolbar>
 			</ons-page>
 		</template>
+		<!-- ############################## page  medikation ####################### -->
+		<!-- ############################## page  statistik  ####################### -->
 		<template id="statistik.html">
 			<ons-page id="statistik">
 				<ons-toolbar>
@@ -666,5 +692,6 @@
 				</ons-toolbar>
 			</ons-page>
 		</template>
+		<!-- ############################## page  statistik  ####################### -->
 	</body>
 </html>

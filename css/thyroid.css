@@ -187,3 +187,7 @@ i.arrow-none {
 .toast {
 	top: 0px !important;
 }
+
+.list-header {
+	font-size: 11px;
+}

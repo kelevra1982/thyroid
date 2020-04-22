@@ -91,6 +91,13 @@ jQuery(document).ready(function($)
 				drawPlot('/api/tshget.php', 'tsh-tab1-content', 0.4, 4.0);
 			}
 		}
+		else if (document.querySelector('#myNavigator').topPage.id == 'vitamind' && condition == 'online')
+		{
+			if (document.querySelector('ons-tabbar').getActiveTabIndex() == 0)
+			{
+				drawPlot('/api/vitamindget.php', 'vitamind-tab1-content', 20, 30);
+			}
+		}
 	}
 
 	function drawPlot(apiTarget, contentTarget, upperLimit, lowerLimit)
@@ -262,6 +269,10 @@ jQuery(document).ready(function($)
 		{
 			drawPlot('/api/tshget.php', 'tsh-tab1-content', 0.4, 4.0);
 		}
+		else if (event.target.id == 'vitamind')
+		{
+			drawPlot('/api/vitamindget.php', 'vitamind-tab1-content', 20, 30);
+		}
 	}, false);
 
 	document.addEventListener('prechange', function(event)
@@ -298,6 +309,16 @@ jQuery(document).ready(function($)
 			$('#tsh-reload').hide();
 			resetDate('tsh-form-date');
 		}
+		else if (event.tabItem.id === 'vitamind-tab1-link')
+		{
+			$('#vitamind-reload').show();
+			drawPlot('/api/vitamindget.php', 'vitamind-tab1-content', 20, 30);
+		}
+		else if (event.tabItem.id === 'vitamind-tab2-link')
+		{
+			$('#vitamind-reload').hide();
+			resetDate('vitamind-form-date');
+		}
 	}, false);
 
 	$(document).on('click', '#ft3-reload',function()
@@ -315,6 +336,11 @@ jQuery(document).ready(function($)
 		drawPlot('/api/tshget.php', 'tsh-tab1-content', 0.4, 4.0);
 	});
 
+	$(document).on('click', '#vitamind-reload',function()
+	{
+		drawPlot('/api/vitamindget.php', 'vitamind-tab1-content', 20, 30);
+	});
+
 	$(document).on('click', '#ft3-form-save',function()
 	{
 		builtSaveHandler('ft3-form-value', '/api/ft3post.php', 'ft3-form-date');
@@ -329,6 +355,12 @@ jQuery(document).ready(function($)
 	{
 		builtSaveHandler('tsh-form-value', '/api/tshpost.php', 'tsh-form-date');
 	});
+
+	$(document).on('click', '#vitamind-form-save',function()
+	{
+		builtSaveHandler('vitamind-form-value', '/api/vitamindpost.php', 'vitamind-form-date');
+	});
+
 
 	$(document).on('focus', '#ft3-form-value', function()
 	{
@@ -375,6 +407,22 @@ jQuery(document).ready(function($)
 		if ($('#tsh-form-value').val() == '')
 		{
 			$('#tsh-form-value').val('0,0');
+		}
+	});
+
+	$(document).on('focus', '#vitamind-form-value', function()
+	{
+		if ($('#vitamind-form-value').val() == '0,0')
+		{
+			$('#vitamind-form-value').val('');
+		}
+	});
+
+	$(document).on('blur', '#vitamind-form-value', function()
+	{
+		if ($('#vitamind-form-value').val() == '')
+		{
+			$('#vitamind-form-value').val('0,0');
 		}
 	});
 });

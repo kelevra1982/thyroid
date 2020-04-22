@@ -517,11 +517,35 @@
 				</div>
 			</ons-page>
 		</template>
+
+
 		<template id="vitamind.html">
 			<ons-page id="vitamind">
 				<ons-toolbar>
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">Vitamin D</div>
+					<div class="right">
+						<ons-toolbar-button id="vitamind-reload" class="reload-button">
+							<img id="vitamind-reload-img" width="21" height="21" src="/img/reload.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+									if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+										document.querySelector('#vitamind-reload-img').setAttribute('src', '/img/dark-reload.png');
+									}
+									else
+									{
+										document.querySelector('#vitamind-reload-img').setAttribute('href', '/img/reload.png');
+									}
+								}
+								else
+								{
+									document.querySelector('#vitamind-reload-img').setAttribute('href', '/img/reload.png');
+								}
+							</script>
+						</ons-toolbar-button>
+					</div>
 				</ons-toolbar>
 				<ons-tabbar position="auto">
 					<ons-tab page="vitamind-tab1.html" id="vitamind-tab1-link">
@@ -547,14 +571,77 @@
 		</template>
 		<template id="vitamind-tab1.html">
 			<ons-page id="vitamind-tab1">
-				<p>Verlauf</p>
+				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+				<ons-card>
+					<img src="/img/header.png" alt="" style="width: 100%">
+					<div class="title">
+						Verlauf
+					</div>
+					<div class="content">
+						<div id="vitamind-tab1-content" class="tab-content"></div>
+					</div>
+				</ons-card>
 			</ons-page>
 		</template>
 		<template id="vitamind-tab2.html">
 			<ons-page id="vitamind-tab2">
-				<p>Wert angeben</p>
+				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+				<div id="vitamind-tab2-content" class="tab-content">
+					<ons-card>
+						<img src="/img/header.png" alt="" style="width: 100%">
+						<div class="title empty">&nbsp;</div>
+						<div class="content">
+							<ons-list>
+								<ons-list-header>Bitte tragen Sie hier neue Vitamin D Werte ein.</ons-list-header>
+								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+									<div class="left">
+										<img class="list-item__thumbnail" src="/img/vitamind.png">
+									</div>
+									<div class="center">
+										<span class="list-item__title">
+											<label for="vitamind-form-value">Vitamin D Wert</label>
+										</span>
+										<span class="list-item__subtitle">
+											<ons-input
+												input-id="vitamind-form-value"
+												inputmode="decimal"
+												type="text"
+												pattern="[-+]?[0-9]*[.,]?[0-9]+"
+												step="0.01"
+												value="0,0"
+												style="width: 100%;">
+											</ons-input>
+										</span>
+									</div>
+								</ons-list-item>
+								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+									<div class="left">
+										<img class="list-item__thumbnail" src="/img/date_vitamind.png">
+									</div>
+									<div class="center">
+										<span class="list-item__title">
+											<label for="ft4-form-date">Datum</label>
+										</span>
+										<span class="list-item__subtitle">
+											<ons-input
+												input-id="vitamind-form-date"
+												inputmode="date"
+												type="date"
+												value=""
+												style="width: 100%;">
+											</ons-input>
+										</span>
+									</div>
+								</ons-list-item>
+							</ons-list>
+							<ons-button id="vitamind-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+						</div>
+					</ons-card>
+				</div>
 			</ons-page>
 		</template>
+
+
 		<template id="beschwerden.html">
 			<ons-page id="beschwerden">
 				<ons-toolbar>

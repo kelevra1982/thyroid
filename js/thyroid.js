@@ -432,4 +432,20 @@ jQuery(document).ready(function($)
 			$('#vitamind-form-value').val('0,0');
 		}
 	});
+
+	$(document).on('click', '#shareButton', function()
+	{
+
+		  if (navigator.share) {
+		    navigator.share({
+		      title: 'Thyroid',
+		      url: 'https://www.my-thyroid.de/index.html'
+		    }).then(() => {
+		      console.log('Thanks for sharing!');
+		    })
+		    .catch(console.error);
+		  } else {
+		    // fallback
+		  }
+	});
 });

@@ -234,6 +234,13 @@ jQuery(document).ready(function($)
 			value = value + ',0';
 		}
 
+		if (value == '0,0')
+		{
+			ons.notification.toast('<p style="text-align:center;margin:0;">Der Wert darf nicht 0 sein.</p>', { timeout: 2000, animation: 'fall' });
+			$('.spinner').hide();
+			return false;
+		}
+
 		$.post(apiTarget, { value : value, date : $('#' + formDateValue).val() }, function(data)
 		{
 			if (data == 'false')

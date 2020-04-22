@@ -439,6 +439,7 @@ jQuery(document).ready(function($)
 		  if (navigator.share) {
 		    navigator.share({
 		      title: 'Thyroid',
+			  text: 'Thyroid App für Nussini',
 		      url: 'https://www.my-thyroid.de/index.html'
 		    }).then(() => {
 		      console.log('Thanks for sharing!');

@@ -203,3 +203,9 @@ i.arrow-none {
 .list-header {
 	font-size: 11px;
 }
+
+.share-button {
+	position: relative;
+	top: 3px;
+	left: 0;
+}

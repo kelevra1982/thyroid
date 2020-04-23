@@ -203,6 +203,7 @@ jQuery(document).ready(function($)
 									]
 			});
 
+
 			$(window).on('resize', function(event)
 			{
 				plot.destroy();
@@ -262,6 +263,17 @@ jQuery(document).ready(function($)
 		});
 	}
 
+	function builtShareHandler(target, label)
+	{
+		html2canvas(document.getElementById(target)).then(function(canvas)
+		{
+			var anchor = document.createElement('a');
+			anchor.setAttribute('href', canvas.toDataURL('image/png'));
+			anchor.setAttribute('download', label + '-' + new Date().toJSON().slice(0, 10).replace(/-/g, '-') + '.png');
+			anchor.click();
+		});
+	}
+
 	document.addEventListener('init', function(event)
 	{
 		if (event.target.id === 'ft3')
@@ -289,11 +301,13 @@ jQuery(document).ready(function($)
 		if (event.tabItem.id === 'ft3-tab1-link')
 		{
 			$('#ft3-reload').show();
+			$('#ft3-share').show();
 			drawPlot('/api/ft3get.php', 'ft3-tab1-content', 4.1, 2.3, 'ng/l');
 		}
 		else if (event.tabItem.id === 'ft3-tab2-link')
 		{
 			$('#ft3-reload').hide();
+			$('#ft3-share').hide();
 			resetDate('ft3-form-date');
 		}
 		else if (event.tabItem.id === 'ft4-tab1-link')
@@ -433,20 +447,8 @@ jQuery(document).ready(function($)
 		}
 	});
 
-	$(document).on('click', '#shareButton', function()
+	$(document).on('click', '#ft3-share', function()
 	{
-
-		  if (navigator.share) {
-		    navigator.share({
-		      title: 'Thyroid',
-			  text: 'Thyroid App für Nussini',
-		      url: 'https://www.my-thyroid.de/index.html'
-		    }).then(() => {
-		      console.log('Thanks for sharing!');
-		    })
-		    .catch(console.error);
-		  } else {
-		    // fallback
-		  }
+		builtShareHandler('ft3-tab1-content', 'Thyroid-FT3-Werte');
 	});
 });

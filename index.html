@@ -82,6 +82,7 @@
 		<script src="/js/jquery.jqplot.min.js"></script>
 		<script src="/js/jqplot.dateAxisRenderer.js"></script>
 		<script src="/js/jqplot.highlighter.js"></script>
+		<script src="/js/html2canvas.js"></script>
 		<script src="/js/thyroid.js"></script>
 	</head>
 	<body>
@@ -91,7 +92,7 @@
 		<template id="home.html">
 			<ons-page id="home">
 				<ons-toolbar>
-					<div class="center">Thyroid<button id="shareButton">share</button></div>
+					<div class="center">Thyroid</div>
 				</ons-toolbar>
 				<img src="/img/header.png" alt="" style="width: 100%">
 				<ons-list>
@@ -178,6 +179,26 @@
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">FT3</div>
 					<div class="right">
+						<ons-toolbar-button id="ft3-share" class="share-button">
+							<img id="ft3-share-img" width="21" height="21" src="/img/share.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+						    			document.querySelector('#ft3-share-img').setAttribute('src', '/img/share_dark.png');
+						  			}
+									else
+									{
+						    			document.querySelector('#ft3-share-img').setAttribute('href', '/img/share.png');
+						  			}
+								}
+								else
+								{
+						  			document.querySelector('#ft3-share-img').setAttribute('href', '/img/share.png');
+								}
+							</script>
+						</ons-toolbar-button>
 						<ons-toolbar-button id="ft3-reload" class="reload-button">
 							<img id="ft3-reload-img" width="21" height="21" src="/img/reload.png" alt="">
 							<script>

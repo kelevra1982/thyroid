@@ -313,31 +313,37 @@ jQuery(document).ready(function($)
 		else if (event.tabItem.id === 'ft4-tab1-link')
 		{
 			$('#ft4-reload').show();
+			$('#ft4-share').show();
 			drawPlot('/api/ft4get.php', 'ft4-tab1-content', 1.29, 0.62, 'ng/l');
 		}
 		else if (event.tabItem.id === 'ft4-tab2-link')
 		{
 			$('#ft4-reload').hide();
+			$('#ft4-share').hide();
 			resetDate('ft4-form-date');
 		}
 		else if (event.tabItem.id === 'tsh-tab1-link')
 		{
 			$('#tsh-reload').show();
+			$('#tsh-share').show();
 			drawPlot('/api/tshget.php', 'tsh-tab1-content', 0.4, 4.0, 'mU/l');
 		}
 		else if (event.tabItem.id === 'tsh-tab2-link')
 		{
 			$('#tsh-reload').hide();
+			$('#tsh-share').hide();
 			resetDate('tsh-form-date');
 		}
 		else if (event.tabItem.id === 'vitamind-tab1-link')
 		{
 			$('#vitamind-reload').show();
+			$('#vitamind-share').show();
 			drawPlot('/api/vitamindget.php', 'vitamind-tab1-content', 30, 20, 'ng/ml');
 		}
 		else if (event.tabItem.id === 'vitamind-tab2-link')
 		{
 			$('#vitamind-reload').hide();
+			$('#vitamind-share').hide();
 			resetDate('vitamind-form-date');
 		}
 	}, false);
@@ -450,5 +456,20 @@ jQuery(document).ready(function($)
 	$(document).on('click', '#ft3-share', function()
 	{
 		builtShareHandler('ft3-tab1-content', 'Thyroid-FT3-Werte');
+	});
+
+	$(document).on('click', '#ft4-share', function()
+	{
+		builtShareHandler('ft4-tab1-content', 'Thyroid-FT4-Werte');
+	});
+
+	$(document).on('click', '#tsh-share', function()
+	{
+		builtShareHandler('tsh-tab1-content', 'Thyroid-TSH-Werte');
+	});
+
+	$(document).on('click', '#vitamind-share', function()
+	{
+		builtShareHandler('vitamind-tab1-content', 'Thyroid-Vitamin-D-Werte');
 	});
 });

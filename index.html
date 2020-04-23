@@ -322,6 +322,26 @@
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">FT4</div>
 					<div class="right">
+						<ons-toolbar-button id="ft4-share" class="share-button">
+							<img id="ft4-share-img" width="21" height="21" src="/img/share.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+						    			document.querySelector('#ft4-share-img').setAttribute('src', '/img/share_dark.png');
+						  			}
+									else
+									{
+						    			document.querySelector('#ft4-share-img').setAttribute('href', '/img/share.png');
+						  			}
+								}
+								else
+								{
+						  			document.querySelector('#ft4-share-img').setAttribute('href', '/img/share.png');
+								}
+							</script>
+						</ons-toolbar-button>
 						<ons-toolbar-button id="ft4-reload" class="reload-button">
 							<img id="ft4-reload-img" width="21" height="21" src="/img/reload.png" alt="">
 							<script>
@@ -445,6 +465,26 @@
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">TSH</div>
 					<div class="right">
+						<ons-toolbar-button id="tsh-share" class="share-button">
+							<img id="tsh-share-img" width="21" height="21" src="/img/share.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+						    			document.querySelector('#tsh-share-img').setAttribute('src', '/img/share_dark.png');
+						  			}
+									else
+									{
+						    			document.querySelector('#tsh-share-img').setAttribute('href', '/img/share.png');
+						  			}
+								}
+								else
+								{
+						  			document.querySelector('#tsh-share-img').setAttribute('href', '/img/share.png');
+								}
+							</script>
+						</ons-toolbar-button>
 						<ons-toolbar-button id="tsh-reload" class="reload-button">
 							<img id="tsh-reload-img" width="21" height="21" src="/img/reload.png" alt="">
 							<script>
@@ -568,6 +608,26 @@
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">Vitamin D</div>
 					<div class="right">
+						<ons-toolbar-button id="vitamind-share" class="share-button">
+							<img id="vitamind-share-img" width="21" height="21" src="/img/share.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+						    			document.querySelector('#vitamind-share-img').setAttribute('src', '/img/share_dark.png');
+						  			}
+									else
+									{
+						    			document.querySelector('#vitamind-share-img').setAttribute('href', '/img/share.png');
+						  			}
+								}
+								else
+								{
+						  			document.querySelector('#vitamind-share-img').setAttribute('href', '/img/share.png');
+								}
+							</script>
+						</ons-toolbar-button>
 						<ons-toolbar-button id="vitamind-reload" class="reload-button">
 							<img id="vitamind-reload-img" width="21" height="21" src="/img/reload.png" alt="">
 							<script>

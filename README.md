@@ -1,2 +1,2 @@
-# thyroid
-Hashimoto App
+# Thyroid
+## Hashimoto App

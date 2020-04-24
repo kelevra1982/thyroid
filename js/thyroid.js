@@ -130,6 +130,30 @@ jQuery(document).ready(function($)
 			var lineupper 	=	[];
 			var lineunder 	=	[];
 			var table		=	'<p class="value-divider">Darstellung als Tabelle.</p><ons-row vertical-align="center" style="margin-top:1rem;border:1px solid #4a4a4a;"><ons-col style="text-align:center;position:relative;left:-1rem;">Datum</ons-col><ons-col>&nbsp;</ons-col><ons-col style="position:relative;left:-1rem;">Wert in ' + unit + '</ons-col></ons-row>';
+			var firstDate	=	data[0].date.split('-');
+			var lastDate	=	data[data.length - 1].date.split('-');
+
+			$.each(firstDate, function(index, value)
+			{
+				firstDate[index] = value.replace(/^0+/, '');
+			});
+
+			$.each(lastDate, function(index, value)
+			{
+				lastDate[index] = value.replace(/^0+/, '');
+			});
+
+			firstDate		=	new Date(firstDate[0] + '/' + firstDate[1] + '/' + firstDate[2]);
+			firstDate		=	new Date(firstDate.setMonth(firstDate.getMonth() - 1)).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' }).split('.');
+			firstDate		=	firstDate[2] + '-' + firstDate[1] + '-' + firstDate[0];
+
+			lastDate		=	new Date(lastDate[0] + '/' + lastDate[1] + '/' + lastDate[2]);
+			lastDate		=	new Date(lastDate.setMonth(lastDate.getMonth() + 1)).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit' }).split('.');
+			lastDate		=	lastDate[2] + '-' + lastDate[1] + '-' + lastDate[0];
+
+			lineupper.push([firstDate, upperLimit]);
+			lineunder.push([firstDate, lowerLimit]);
+
 
 			$.each(data, function(index, value)
 			{
@@ -146,68 +170,94 @@ jQuery(document).ready(function($)
 				}
 			});
 
+			lineupper.push([lastDate, upperLimit]);
+			lineunder.push([lastDate, lowerLimit]);
+
 			var plot = $.jqplot('chart', [lineupper, lineunder, line],
 			{
 				title			:	'',
+				seriesDefaults	:	{
+          								rendererOptions	:
+										{
+              								smooth		:	true,
+          								}
+      								},
 				axes			:	{
 										xaxis		:	{
 															renderer	:	$.jqplot.DateAxisRenderer,
 															tickOptions	:	{
 																				formatString	:	'%d.%m.%Y',
+																				showGridline	:	true,
+																				textColor		:	'#1f1f21',
 																			},
+															min			:	firstDate,
+				    										max			:	lastDate,
 														},
 										yaxis		:	{
 				          									tickOptions	:	{
 				            													formatString	:	'%.2f ' + unit,
+																				showGridline	:	true,
+																				textColor		:	'#1f1f21',
 				            												}
 				        								}
 									},
 				highlighter		:	{
         								show				: 	true,
         								sizeAdjust			: 	7.5,
-										tooltipLocation		: 'n',
-										tooltipAxes			: 'both'
+										tooltipLocation		:	'n',
+										tooltipAxes			:	'both',
       								},
 				fillBetween		:	{
 										series1				:	0,
 										series2				:	1,
 										color				:	'rgba(58, 219, 118, 0.7)',
 										baseSeries			:	0,
-										fill				:	true
+										fill				:	true,
 									},
 				series			:	[
 										{
-											lineWidth		:	1,
-											color			:	'#3adb76',
+											lineWidth		:	0,
+											color			:	'rgba(58, 219, 118, 0.7)',
 											markerOptions	:	{
 																	size	:	0,
-																	style	:	'filledSquare'
+																	style	:	'filledSquare',
 																}
 										},
 										{
-											lineWidth		:	1,
-											color			:	'#3adb76',
+											lineWidth		:	0,
+											color			:	'rgba(58, 219, 118, 0.7)',
 											markerOptions	:	{
 																	size	:	0,
-																	style	:	'filledSquare'
+																	style	:	'filledSquare',
 																}
 										},
 										{
-											lineWidth		:	1,
-											color			:	'#a4a4a4',
+											lineWidth		:	2,
+											color			:	'rgba(254, 254, 254, 1)',
+											showLine		:	true,
+											linePattern		:	'dotted',
 											markerOptions	:	{
-																	size	:	5,
-																	style	:	'filledSquare'
+																	size	:	10,
+																	style	:	'x',
 																}
 										}
-									]
+									],
+				grid			:	{
+										background			:	'rgba(204, 75, 55, 0.8)',
+					        			borderColor			:	'rgba(204, 75, 55, 0.8)',
+										gridLineColor		:	'rgba(254, 254, 254, 0.3)',
+					        			borderWidth			:	0.0,
+					        			shadow				:	false,
+									},
 			});
 
+			$('.jqplot-series-shadowCanvas').css('width', $('.jqplot-series-shadowCanvas').width() + 1);
 
 			$(window).on('resize', function(event)
 			{
 				plot.destroy();
 				plot.replot();
+				$('.jqplot-series-shadowCanvas').css('width', $('.jqplot-series-shadowCanvas').width() + 1);
 			});
 
 			$('#table').html(table);

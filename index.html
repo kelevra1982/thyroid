@@ -87,7 +87,43 @@
 	</head>
 	<body>
 		<!-- navigator element -->
-		<ons-navigator id="myNavigator" page="home.html"></ons-navigator>
+		<ons-navigator id="myNavigator" page="home.html">
+			<ons-page>
+				<ons-splitter>
+					<ons-splitter-side id="app-menu" side="left" width="220px" collapse>
+						<ons-page>
+							<ons-list>
+								<ons-list-item>
+	          						<img width="60" height="60" alt="" src="/img/apple-touch-icon-60x60.png"><div class="toolbar__title">Thyroid</div>
+        						</ons-list-item>
+								<ons-list-item>
+									<p>
+										<code>Version</code>
+										<br>
+										0.1
+									</p>
+								</ons-list-item>
+								<ons-list-item>
+									<p>
+										<code>letztes Update</code>
+										<br>
+										24.04.2020 16:08
+									</p>
+								</ons-list-item>
+								<ons-list-item>
+									<p>
+										<code>Entwickler kontaktieren</code>
+										<br>
+										<a style="text-decoration:none;color:#1f1f21;" href="mailto:gunther.lehmann@gmx.net?subject=Supportanfrage%20Thyroid%20App">&#x1f4e7; E-Mail</a>
+									</p>
+								</ons-list-item>
+							</ons-list>
+						</ons-page>
+					</ons-splitter-side>
+					<ons-splitter-content page="home.html"></ons-splitter-content>
+				</ons-splitter>
+			</ons-page>
+		</ons-navigator>
 		<!-- ############################## page home ############################## -->
 		<template id="home.html">
 			<ons-page id="home">
@@ -129,7 +165,6 @@
 							<span class="list-item__subtitle">Freies Trijodthyronin FT3</span>
 						</div>
 					</ons-list-item>
-
 					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('ft4.html');">
 						<div class="left">
 							<img class="list-item__thumbnail" src="/img/ft4.png">
@@ -139,7 +174,6 @@
 							<span class="list-item__subtitle">Freies Trijodthyronin FT4</span>
 						</div>
 					</ons-list-item>
-
 					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('tsh.html');">
 						<div class="left">
 							<img class="list-item__thumbnail" src="/img/tsh.png">

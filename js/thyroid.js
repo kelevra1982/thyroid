@@ -525,6 +525,6 @@ jQuery(document).ready(function($)
 
 	$(document).on('click', '#app-menu', function()
 	{
-		ons.notification.alert('Menü');
+		document.getElementById('app-menu').open();
 	});
 });

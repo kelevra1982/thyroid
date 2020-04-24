@@ -197,3 +197,7 @@ i.arrow-none {
 	top: 3px;
 	left: 0;
 }
+
+#app-menu .page__content {
+	padding-top: 0;
+}

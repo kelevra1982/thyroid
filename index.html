@@ -92,7 +92,30 @@
 		<template id="home.html">
 			<ons-page id="home">
 				<ons-toolbar>
+					<div class="left">
+						<ons-toolbar-button id="app-menu" class="share-button">
+							<img id="app-menu-img" width="21" height="21" src="/img/menu.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+						    			document.querySelector('#app-menu-img').setAttribute('src', '/img/menu_dark.png');
+						  			}
+									else
+									{
+						    			document.querySelector('#app-menu-img').setAttribute('href', '/img/menu.png');
+						  			}
+								}
+								else
+								{
+						  			document.querySelector('#app-menu-img').setAttribute('href', '/img/menu.png');
+								}
+							</script>
+						</ons-toolbar-button>
+					</div>
 					<div class="center">Thyroid</div>
+					<div class="right"></div>
 				</ons-toolbar>
 				<img src="/img/header.png" alt="" style="width: 100%">
 				<ons-list>

@@ -522,4 +522,9 @@ jQuery(document).ready(function($)
 	{
 		builtShareHandler('vitamind-tab1-content', 'Thyroid-Vitamin-D-Werte');
 	});
+
+	$(document).on('click', '#app-menu', function()
+	{
+		ons.notification.alert('Menü');
+	});
 });

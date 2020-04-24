@@ -49,7 +49,8 @@ self.addEventListener('install', function(e)
 			'/img/time_grey.png',
 			'/img/reload.png',
 			'/img/dark-reload.png',
-			'/img/apple-touch-icon-60x60.png'
+			'/img/apple-touch-icon-60x60.png',
+			'/img/email.png'
 		]);
 	}));
 });
@@ -59,4 +60,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 24.04.2020 16:08
+// last Update: 24.04.2020 16:29

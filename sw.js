@@ -52,7 +52,10 @@ self.addEventListener('install', function(e)
 			'/img/reload.png',
 			'/img/dark-reload.png',
 			'/img/apple-touch-icon-60x60.png',
-			'/img/email.png'
+			'/img/email.png',
+			'/img/statistic_blue.png',
+			'/img/statistic_grey.png',
+			'/img/statistic_dark.png'
 		]);
 	}));
 });

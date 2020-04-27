@@ -218,3 +218,15 @@ i.arrow-none {
 .list-item.my-checkbox {
 	padding: 0 0 0 22px;
 }
+
+.tabicon.statistic {
+	background-image: url('../img/statistic_grey.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.tabbar__item.active .tabicon.statistic {
+	background-image: url('../img/statistic_dark.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}

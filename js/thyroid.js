@@ -342,6 +342,10 @@ jQuery(document).ready(function($)
 		{
 			drawPlot('/api/vitamindget.php', 'vitamind-tab1-content', 30, 20, 'ng/ml');
 		}
+		else if (event.target.id == 'beschwerden')
+		{
+
+		}
 	}, false);
 
 	document.addEventListener('prechange', function(event)
@@ -395,6 +399,17 @@ jQuery(document).ready(function($)
 			$('#vitamind-reload').hide();
 			$('#vitamind-share').hide();
 			resetDate('vitamind-form-date');
+		}
+		else if (event.tabItem.id === 'beschwerden-tab1-link')
+		{
+			$('#beschwerden-reload').show();
+			$('#beschwerden-share').show();
+		}
+		else if (event.tabItem.id === 'beschwerden-tab2-link')
+		{
+			$('#beschwerden-reload').hide();
+			$('#beschwerden-share').hide();
+			resetDate('beschwerden-form-date');
 		}
 	}, false);
 

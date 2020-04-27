@@ -201,3 +201,7 @@ i.arrow-none {
 #app-menu .page__content {
 	padding-top: 0;
 }
+
+.list-item.my-checkbox {
+	padding: 0 0 0 22px;
+}

@@ -50,10 +50,10 @@
 		<link rel="icon" type="image/png" href="/img/favicon-196x196.png" sizes="196x196">
 		<!-- load stylesheets based on display mode (dark, light) -->
 		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.min.css">
-		<link id="onsen-theme" rel="stylesheet" href="">
+		<link id="onsen-theme" rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 		<link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="/css/jquery.jqplot.min.css">
-		<link id="app-theme" rel="stylesheet" href="">
+		<link id="app-theme" rel="stylesheet" href="/css/thyroid.css">
 		<script>
 			if (window.matchMedia)
 			{
@@ -107,7 +107,7 @@
 									<p>
 										<code>letztes Update</code>
 										<br>
-										27.04.2020 10:43
+										27.04.2020 13:41
 									</p>
 								</ons-list-item>
 								<ons-list-item>
@@ -808,7 +808,153 @@
 				<ons-toolbar>
 					<div class="left"><ons-back-button>zurück</ons-back-button></div>
 					<div class="center">Beschwerden</div>
+					<div class="right">
+						<ons-toolbar-button id="beschwerden-share" class="share-button">
+							<img id="beschwerden-share-img" width="21" height="21" src="/img/share.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+						    			document.querySelector('#beschwerden-share-img').setAttribute('src', '/img/share_dark.png');
+						  			}
+									else
+									{
+						    			document.querySelector('#beschwerden-share-img').setAttribute('href', '/img/share.png');
+						  			}
+								}
+								else
+								{
+						  			document.querySelector('#beschwerden-share-img').setAttribute('href', '/img/share.png');
+								}
+							</script>
+						</ons-toolbar-button>
+						<ons-toolbar-button id="beschwerden-reload" class="reload-button">
+							<img id="beschwerden-reload-img" width="21" height="21" src="/img/reload.png" alt="">
+							<script>
+								if (window.matchMedia)
+								{
+									if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+									{
+										document.querySelector('#beschwerden-reload-img').setAttribute('src', '/img/dark-reload.png');
+									}
+									else
+									{
+										document.querySelector('#beschwerden-reload-img').setAttribute('href', '/img/reload.png');
+									}
+								}
+								else
+								{
+									document.querySelector('#beschwerden-reload-img').setAttribute('href', '/img/reload.png');
+								}
+							</script>
+						</ons-toolbar-button>
+					</div>
 				</ons-toolbar>
+				<ons-tabbar position="auto">
+					<ons-tab page="beschwerden-tab1.html" id="beschwerden-tab1-link">
+						<input type="radio" style="display: none;">
+						<button class="tabbar__button">
+							<div class="tabbar__icon">
+								<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
+							</div>
+							<div class="tabbar__label">Übersicht</div>
+						</button>
+					</ons-tab>
+					<ons-tab page="beschwerden-tab2.html" id="beschwerden-tab2-link">
+						<input type="radio" style="display: none;">
+						<button class="tabbar__button">
+							<div class="tabbar__icon">
+								<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
+							</div>
+							<div class="tabbar__label">Symptom angeben</div>
+						</button>
+					</ons-tab>
+				</ons-tabbar>
+			</ons-page>
+		</template>
+		<template id="beschwerden-tab1.html">
+			<ons-page id="beschwerden-tab1">
+				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+				<ons-card>
+					<img src="/img/header.png" alt="" style="width: 100%">
+					<div class="title">
+						Übersicht
+					</div>
+					<div class="content">
+						<div id="beschwerden-tab1-content" class="tab-content"></div>
+					</div>
+				</ons-card>
+			</ons-page>
+		</template>
+		<template id="beschwerden-tab2.html">
+			<ons-page id="beschwerden-tab2">
+				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+				<div id="beschwerden-tab2-content" class="tab-content">
+					<ons-card>
+						<img src="/img/header.png" alt="" style="width: 100%">
+						<div class="title empty">&nbsp;</div>
+						<div class="content">
+							<ons-list>
+								<ons-list-header>Bitte geben Sie hier Ihr Symptom an.</ons-list-header>
+								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+									<div class="left">
+										<img class="list-item__thumbnail" src="/img/beschwerden.png">
+									</div>
+									<div class="center">
+										Symptome
+									</div>
+								</ons-list-item>
+
+								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
+									<label class="left">
+										<ons-checkbox input-id="symptom-1"></ons-checkbox>
+									</label>
+									<label for="symptom-1" class="center">Schlafstörungen</label>
+								</ons-list-item>
+								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
+									<label class="left">
+										<ons-checkbox input-id="symptom-2"></ons-checkbox>
+									</label>
+									<label for="symptom-2" class="center">Schwitzen</label>
+								</ons-list-item>
+								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
+									<label class="left">
+										<ons-checkbox input-id="symptom-3"></ons-checkbox>
+									</label>
+									<label for="symptom-3" class="center">Zittern</label>
+								</ons-list-item>
+								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
+									<label class="left">
+										<ons-checkbox input-id="symptom-4"></ons-checkbox>
+									</label>
+									<label for="symptom-4" class="center">schnell zu warm</label>
+								</ons-list-item>
+
+								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+									<div class="left">
+										<img class="list-item__thumbnail" src="/img/date_beschwerden.png">
+									</div>
+									<div class="center">
+										<span class="list-item__title">
+											<label for="ft4-form-date">Datum</label>
+										</span>
+										<span class="list-item__subtitle">
+											<ons-input
+												input-id="beschwerden-form-date"
+												inputmode="date"
+												type="date"
+												value=""
+												style="width: 100%;">
+											</ons-input>
+										</span>
+									</div>
+								</ons-list-item>
+							</ons-list>
+							<ons-button id="beschwerden-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+						</div>
+					</ons-card>
+				</div>
 			</ons-page>
 		</template>
 		<!-- ############################## page beschwerden ####################### -->

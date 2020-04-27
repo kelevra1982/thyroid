@@ -36,6 +36,7 @@ self.addEventListener('install', function(e)
 			'/img/date_ft4.png',
 			'/img/date_tsh.png',
 			'/img/date_vitamind.png',
+			'/img/date_beschwerden.png',
 			'/img/share.png',
 			'/img/phone.png',
 			'/img/share_dark.png',
@@ -61,4 +62,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 27.04.2020 10:43
+// last Update: 27.04.2020 13:41

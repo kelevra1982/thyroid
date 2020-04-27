@@ -37,6 +37,7 @@ self.addEventListener('install', function(e)
 			'/img/date_tsh.png',
 			'/img/date_vitamind.png',
 			'/img/share.png',
+			'/img/phone.png',
 			'/img/share_dark.png',
 			'/splashscreens/iphonex_splash.png',
 			'/splashscreens/iphonexr_splash.png',
@@ -60,4 +61,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 24.04.2020 16:29
+// last Update: 27.04.2020 10:43

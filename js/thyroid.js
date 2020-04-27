@@ -407,9 +407,63 @@ jQuery(document).ready(function($)
 		}
 		else if (event.tabItem.id === 'beschwerden-tab2-link')
 		{
+			$('#beschwerden-reload').show();
+			$('#beschwerden-share').show();
+		}
+		else if (event.tabItem.id === 'beschwerden-tab3-link')
+		{
 			$('#beschwerden-reload').hide();
 			$('#beschwerden-share').hide();
 			resetDate('beschwerden-form-date');
+
+			$.getJSON('/api/beschwerdengettab2.php', {date:$('#beschwerden-form-date').val()}, function(data)
+			{
+				if (data.length == 0)
+				{
+
+				}
+				else
+				{
+					if (data[0].symptom1 == '1')
+					{
+						$('#symptom1').prop('checked', true);
+					}
+					else
+					{
+						$('#symptom1').prop('checked', false);
+					}
+
+					if (data[0].symptom2 == '1')
+					{
+						$('#symptom2').prop('checked', true);
+					}
+					else
+					{
+						$('#symptom2').prop('checked', false);
+					}
+
+					if (data[0].symptom3 == '1')
+					{
+						$('#symptom3').prop('checked', true);
+					}
+					else
+					{
+						$('#symptom3').prop('checked', false);
+					}
+
+					if (data[0].symptom4 == '1')
+					{
+						$('#symptom4').prop('checked', true);
+					}
+					else
+					{
+						$('#symptom4').prop('checked', false);
+					}
+				}
+			}).fail(function(err)
+			{
+				console.log(err);
+			});
 		}
 	}, false);
 
@@ -453,6 +507,61 @@ jQuery(document).ready(function($)
 		builtSaveHandler('vitamind-form-value', '/api/vitamindpost.php', 'vitamind-form-date');
 	});
 
+	$(document).on('click', '#beschwerden-form-save',function()
+	{
+		let data = {};
+
+		data.date = $('#beschwerden-form-date').val();
+
+		if ($('#symptom1').is(':checked'))
+		{
+			data.symptom1 = 1;
+		}
+		else
+		{
+			data.symptom1 = 0;
+		}
+
+		if ($('#symptom2').is(':checked'))
+		{
+			data.symptom2 = 1;
+		}
+		else
+		{
+			data.symptom2 = 0;
+		}
+
+		if ($('#symptom3').is(':checked'))
+		{
+			data.symptom3 = 1;
+		}
+		else
+		{
+			data.symptom3 = 0;
+		}
+
+		if ($('#symptom4').is(':checked'))
+		{
+			data.symptom4 = 1;
+		}
+		else
+		{
+			data.symptom4 = 0;
+		}
+
+
+
+		$.post('/api/beschwerdenpost.php', data, function(data)
+		{
+			console.log(data);
+		}).fail(function(err)
+		{
+			console.log(err);
+		});
+
+
+
+	});
 
 	$(document).on('focus', '#ft3-form-value', function()
 	{

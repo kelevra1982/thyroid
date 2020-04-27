@@ -107,7 +107,7 @@
 									<p>
 										<code>letztes Update</code>
 										<br>
-										27.04.2020 13:41
+										27.04.2020 15:11
 									</p>
 								</ons-list-item>
 								<ons-list-item>
@@ -858,16 +858,25 @@
 							<div class="tabbar__icon">
 								<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
 							</div>
-							<div class="tabbar__label">Übersicht</div>
+							<div class="tabbar__label">Tagesübersicht</div>
 						</button>
 					</ons-tab>
 					<ons-tab page="beschwerden-tab2.html" id="beschwerden-tab2-link">
 						<input type="radio" style="display: none;">
 						<button class="tabbar__button">
 							<div class="tabbar__icon">
+								<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
+							</div>
+							<div class="tabbar__label">Verlauf</div>
+						</button>
+					</ons-tab>
+					<ons-tab page="beschwerden-tab3.html" id="beschwerden-tab3-link">
+						<input type="radio" style="display: none;">
+						<button class="tabbar__button">
+							<div class="tabbar__icon">
 								<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
 							</div>
-							<div class="tabbar__label">Symptom angeben</div>
+							<div class="tabbar__label">Symptome angeben</div>
 						</button>
 					</ons-tab>
 				</ons-tabbar>
@@ -879,7 +888,7 @@
 				<ons-card>
 					<img src="/img/header.png" alt="" style="width: 100%">
 					<div class="title">
-						Übersicht
+						Tagesübersicht
 					</div>
 					<div class="content">
 						<div id="beschwerden-tab1-content" class="tab-content"></div>
@@ -890,7 +899,21 @@
 		<template id="beschwerden-tab2.html">
 			<ons-page id="beschwerden-tab2">
 				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<div id="beschwerden-tab2-content" class="tab-content">
+				<ons-card>
+					<img src="/img/header.png" alt="" style="width: 100%">
+					<div class="title">
+						Verlauf
+					</div>
+					<div class="content">
+						<div id="beschwerden-tab2-content" class="tab-content"></div>
+					</div>
+				</ons-card>
+			</ons-page>
+		</template>
+		<template id="beschwerden-tab3.html">
+			<ons-page id="beschwerden-tab3">
+				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+				<div id="beschwerden-tab3-content" class="tab-content">
 					<ons-card>
 						<img src="/img/header.png" alt="" style="width: 100%">
 						<div class="title empty">&nbsp;</div>
@@ -908,27 +931,27 @@
 
 								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
 									<label class="left">
-										<ons-checkbox input-id="symptom-1"></ons-checkbox>
+										<ons-checkbox input-id="symptom1"></ons-checkbox>
 									</label>
-									<label for="symptom-1" class="center">Schlafstörungen</label>
+									<label for="symptom1" class="center">Schlafstörungen</label>
 								</ons-list-item>
 								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
 									<label class="left">
-										<ons-checkbox input-id="symptom-2"></ons-checkbox>
+										<ons-checkbox input-id="symptom2"></ons-checkbox>
 									</label>
-									<label for="symptom-2" class="center">Schwitzen</label>
+									<label for="symptom2" class="center">Schwitzen</label>
 								</ons-list-item>
 								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
 									<label class="left">
-										<ons-checkbox input-id="symptom-3"></ons-checkbox>
+										<ons-checkbox input-id="symptom3"></ons-checkbox>
 									</label>
-									<label for="symptom-3" class="center">Zittern</label>
+									<label for="symptom3" class="center">Zittern</label>
 								</ons-list-item>
 								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
 									<label class="left">
-										<ons-checkbox input-id="symptom-4"></ons-checkbox>
+										<ons-checkbox input-id="symptom4"></ons-checkbox>
 									</label>
-									<label for="symptom-4" class="center">schnell zu warm</label>
+									<label for="symptom4" class="center">schnell zu warm</label>
 								</ons-list-item>
 
 								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">

@@ -324,6 +324,30 @@ jQuery(document).ready(function($)
 		});
 	}
 
+	function handleCheckBox(data, target)
+	{
+		if (data == '1')
+		{
+			$('#' + target).prop('checked', true);
+		}
+		else
+		{
+			$('#' + target).prop('checked', false);
+		}
+	}
+
+	function isCheckboxChecked(target)
+	{
+		if ($('#' + target).is(':checked'))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
 	document.addEventListener('init', function(event)
 	{
 		if (event.target.id === 'ft3')
@@ -418,47 +442,12 @@ jQuery(document).ready(function($)
 
 			$.getJSON('/api/beschwerdengettab2.php', {date:$('#beschwerden-form-date').val()}, function(data)
 			{
-				if (data.length == 0)
+				if (data.length != 0)
 				{
-
-				}
-				else
-				{
-					if (data[0].symptom1 == '1')
-					{
-						$('#symptom1').prop('checked', true);
-					}
-					else
-					{
-						$('#symptom1').prop('checked', false);
-					}
-
-					if (data[0].symptom2 == '1')
-					{
-						$('#symptom2').prop('checked', true);
-					}
-					else
-					{
-						$('#symptom2').prop('checked', false);
-					}
-
-					if (data[0].symptom3 == '1')
-					{
-						$('#symptom3').prop('checked', true);
-					}
-					else
-					{
-						$('#symptom3').prop('checked', false);
-					}
-
-					if (data[0].symptom4 == '1')
-					{
-						$('#symptom4').prop('checked', true);
-					}
-					else
-					{
-						$('#symptom4').prop('checked', false);
-					}
+					handleCheckBox(data[0].symptom1, 'symptom1');
+					handleCheckBox(data[0].symptom2, 'symptom2');
+					handleCheckBox(data[0].symptom3, 'symptom3');
+					handleCheckBox(data[0].symptom4, 'symptom4');
 				}
 			}).fail(function(err)
 			{
@@ -509,47 +498,12 @@ jQuery(document).ready(function($)
 
 	$(document).on('click', '#beschwerden-form-save',function()
 	{
-		let data = {};
-
-		data.date = $('#beschwerden-form-date').val();
-
-		if ($('#symptom1').is(':checked'))
-		{
-			data.symptom1 = 1;
-		}
-		else
-		{
-			data.symptom1 = 0;
-		}
-
-		if ($('#symptom2').is(':checked'))
-		{
-			data.symptom2 = 1;
-		}
-		else
-		{
-			data.symptom2 = 0;
-		}
-
-		if ($('#symptom3').is(':checked'))
-		{
-			data.symptom3 = 1;
-		}
-		else
-		{
-			data.symptom3 = 0;
-		}
-
-		if ($('#symptom4').is(':checked'))
-		{
-			data.symptom4 = 1;
-		}
-		else
-		{
-			data.symptom4 = 0;
-		}
-
-
+		let data		=	{};
+		data.date		=	$('#beschwerden-form-date').val();
+		data.symptom1	=	isCheckboxChecked('symptom1');
+		data.symptom2	=	isCheckboxChecked('symptom2');
+		data.symptom3	=	isCheckboxChecked('symptom3');
+		data.symptom4	= 	isCheckboxChecked('symptom4');
 
 		$.post('/api/beschwerdenpost.php', data, function(data)
 		{
@@ -558,9 +512,6 @@ jQuery(document).ready(function($)
 		{
 			console.log(err);
 		});
-
-
-
 	});
 
 	$(document).on('focus', '#ft3-form-value', function()

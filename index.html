@@ -77,6 +77,7 @@
 		<!-- load javascript files -->
 		<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 		<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+		<script src="/js/waitForImages.js"></script>
 		<!-- prevents app scrolling over the screen if tracked -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.js"></script>
 		<script src="/js/jquery.jqplot.min.js"></script>
@@ -86,920 +87,925 @@
 		<script src="/js/thyroid.js"></script>
 	</head>
 	<body>
-		<!-- navigator element -->
-		<ons-navigator id="myNavigator" page="home.html">
-			<ons-page>
-				<ons-splitter>
-					<ons-splitter-side id="app-menu" side="left" width="220px" collapse>
-						<ons-page>
-							<ons-list>
-								<ons-list-item>
-	          						<img width="60" height="60" alt="" src="/img/apple-touch-icon-60x60.png"><div class="toolbar__title">Thyroid</div>
-        						</ons-list-item>
-								<ons-list-item>
-									<p>
-										<code>Version</code>
-										<br>
-										0.1
-									</p>
-								</ons-list-item>
-								<ons-list-item>
-									<p>
-										<code>letztes Update</code>
-										<br>
-										28.04.2020 14:15
-									</p>
-								</ons-list-item>
-								<ons-list-item>
-									<p>
-										<code>Kontakt</code>
-										<br>
-										<a style="text-decoration:none;color:#1f1f21;" href="tel:+4917620298167"><img width="40" height="40" src="/img/phone.png" alt="anrufen"></a>
-										<a style="text-decoration:none;color:#1f1f21;" href="mailto:gunther.lehmann@gmx.net?subject=Supportanfrage%20Thyroid%20App"><img width="40" height="40" src="/img/email.png" alt="E-Mail schreiben"></a>
-									</p>
-								</ons-list-item>
-							</ons-list>
-						</ons-page>
-					</ons-splitter-side>
-					<ons-splitter-content page="home.html"></ons-splitter-content>
-				</ons-splitter>
-			</ons-page>
-		</ons-navigator>
-		<!-- ############################## page home ############################## -->
-		<template id="home.html">
-			<ons-page id="home">
-				<ons-toolbar>
-					<div class="left">
-						<ons-toolbar-button id="app-menu" class="share-button">
-							<img id="app-menu-img" width="21" height="21" src="/img/menu.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+		<div id="spinner">
+			<ons-progress-circular indeterminate></ons-progress-circular>
+		</div>
+		<div id="app">
+			<!-- navigator element -->
+			<ons-navigator id="myNavigator" page="home.html">
+				<ons-page>
+					<ons-splitter>
+						<ons-splitter-side id="app-menu" side="left" width="220px" collapse>
+							<ons-page>
+								<ons-list>
+									<ons-list-item>
+		          						<img width="60" height="60" alt="" src="/img/apple-touch-icon-60x60.png"><div class="toolbar__title">Thyroid</div>
+	        						</ons-list-item>
+									<ons-list-item>
+										<p>
+											<code>Version</code>
+											<br>
+											0.1
+										</p>
+									</ons-list-item>
+									<ons-list-item>
+										<p>
+											<code>letztes Update</code>
+											<br>
+											30.04.2020 13:21
+										</p>
+									</ons-list-item>
+									<ons-list-item>
+										<p>
+											<code>Kontakt</code>
+											<br>
+											<a style="text-decoration:none;color:#1f1f21;" href="tel:+4917620298167"><img width="40" height="40" src="/img/phone.png" alt="anrufen"></a>
+											<a style="text-decoration:none;color:#1f1f21;" href="mailto:gunther.lehmann@gmx.net?subject=Supportanfrage%20Thyroid%20App"><img width="40" height="40" src="/img/email.png" alt="E-Mail schreiben"></a>
+										</p>
+									</ons-list-item>
+								</ons-list>
+							</ons-page>
+						</ons-splitter-side>
+						<ons-splitter-content page="home.html"></ons-splitter-content>
+					</ons-splitter>
+				</ons-page>
+			</ons-navigator>
+			<!-- ############################## page home ############################## -->
+			<template id="home.html">
+				<ons-page id="home">
+					<ons-toolbar>
+						<div class="left">
+							<ons-toolbar-button id="app-menu" class="share-button">
+								<img id="app-menu-img" width="21" height="21" src="/img/menu.png" alt="">
+								<script>
+									if (window.matchMedia)
 									{
-						    			document.querySelector('#app-menu-img').setAttribute('src', '/img/menu_dark.png');
-						  			}
+							  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+							    			document.querySelector('#app-menu-img').setAttribute('src', '/img/menu_dark.png');
+							  			}
+										else
+										{
+							    			document.querySelector('#app-menu-img').setAttribute('href', '/img/menu.png');
+							  			}
+									}
 									else
 									{
-						    			document.querySelector('#app-menu-img').setAttribute('href', '/img/menu.png');
-						  			}
-								}
-								else
-								{
-						  			document.querySelector('#app-menu-img').setAttribute('href', '/img/menu.png');
-								}
-							</script>
-						</ons-toolbar-button>
-					</div>
-					<div class="center">Thyroid</div>
-					<div class="right"></div>
-				</ons-toolbar>
-				<img src="/img/header.png" alt="" style="width: 100%">
-				<ons-list>
-					<ons-list-header>Blutwerte</ons-list-header>
-					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('ft3.html');">
-						<div class="left">
-							<img class="list-item__thumbnail" src="/img/ft3.png">
+							  			document.querySelector('#app-menu-img').setAttribute('href', '/img/menu.png');
+									}
+								</script>
+							</ons-toolbar-button>
 						</div>
-						<div class="center">
-							<span class="list-item__title">FT3</span>
-							<span class="list-item__subtitle">Freies Trijodthyronin FT3</span>
-						</div>
-					</ons-list-item>
-					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('ft4.html');">
-						<div class="left">
-							<img class="list-item__thumbnail" src="/img/ft4.png">
-						</div>
-						<div class="center">
-							<span class="list-item__title">FT4</span>
-							<span class="list-item__subtitle">Freies Trijodthyronin FT4</span>
-						</div>
-					</ons-list-item>
-					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('tsh.html');">
-						<div class="left">
-							<img class="list-item__thumbnail" src="/img/tsh.png">
-						</div>
-						<div class="center">
-							<span class="list-item__title">TSH</span>
-							<span class="list-item__subtitle">Thyreoidea stimulierendes Hormon</span>
-						</div>
-					</ons-list-item>
-				</ons-list>
-				<ons-list>
-					<ons-list-header>Vitamine</ons-list-header>
-					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('vitamind.html');">
-						<div class="left">
-							<img class="list-item__thumbnail" src="/img/vitamind.png">
-						</div>
-						<div class="center">
-							<span class="list-item__title">Vitamin D</span>
-							<span class="list-item__subtitle">fettlösliches Secosteroid</span>
-						</div>
-					</ons-list-item>
-				</ons-list>
-				<ons-list>
-					<ons-list-header>Sonstiges</ons-list-header>
-					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('beschwerden.html');">
-						<div class="left">
-							<img class="list-item__thumbnail" src="/img/beschwerden.png">
-						</div>
-						<div class="center">
-							<span class="list-item__title">Beschwerden</span>
-							<span class="list-item__subtitle">subjektives Wohlbefinden</span>
-						</div>
-					</ons-list-item>
-					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('medikation.html');">
-						<div class="left">
-							<img class="list-item__thumbnail" src="/img/medikation.png">
-						</div>
-						<div class="center">
-							<span class="list-item__title">Medikation</span>
-							<span class="list-item__subtitle">Arzneimittel und Darreichungsform</span>
-						</div>
-					</ons-list-item>
-					<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('statistik.html');">
-						<div class="left">
-							<img class="list-item__thumbnail" src="/img/statistik.png">
-						</div>
-						<div class="center">
-							<span class="list-item__title">Statistik</span>
-							<span class="list-item__subtitle">quantitative Informationen</span>
-						</div>
-					</ons-list-item>
-				</ons-list>
-			</ons-page>
-		</template>
-		<!-- ############################## page home ############################## -->
-		<!-- ############################## page  ft3 ############################## -->
-		<template id="ft3.html">
-			<ons-page id="ft3">
-				<ons-toolbar>
-					<div class="left"><ons-back-button>zurück</ons-back-button></div>
-					<div class="center">FT3</div>
-					<div class="right">
-						<ons-toolbar-button id="ft3-share" class="share-button">
-							<img id="ft3-share-img" width="21" height="21" src="/img/share.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
-									{
-						    			document.querySelector('#ft3-share-img').setAttribute('src', '/img/share_dark.png');
-						  			}
-									else
-									{
-						    			document.querySelector('#ft3-share-img').setAttribute('href', '/img/share.png');
-						  			}
-								}
-								else
-								{
-						  			document.querySelector('#ft3-share-img').setAttribute('href', '/img/share.png');
-								}
-							</script>
-						</ons-toolbar-button>
-						<ons-toolbar-button id="ft3-reload" class="reload-button">
-							<img id="ft3-reload-img" width="21" height="21" src="/img/reload.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
-									{
-						    			document.querySelector('#ft3-reload-img').setAttribute('src', '/img/dark-reload.png');
-						  			}
-									else
-									{
-						    			document.querySelector('#ft3-reload-img').setAttribute('href', '/img/reload.png');
-						  			}
-								}
-								else
-								{
-						  			document.querySelector('#ft3-reload-img').setAttribute('href', '/img/reload.png');
-								}
-							</script>
-						</ons-toolbar-button>
-					</div>
-				</ons-toolbar>
-				<ons-tabbar position="auto">
-					<ons-tab page="ft3-tab1.html" id="ft3-tab1-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
-							</div>
-							<div class="tabbar__label">Verlauf</div>
-						</button>
-					</ons-tab>
-					<ons-tab page="ft3-tab2.html" id="ft3-tab2-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
-							</div>
-							<div class="tabbar__label">Wert angeben</div>
-						</button>
-					</ons-tab>
-				</ons-tabbar>
-			</ons-page>
-		</template>
-		<template id="ft3-tab1.html">
-			<ons-page id="ft3-tab1">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<ons-card>
+						<div class="center">Thyroid</div>
+						<div class="right"></div>
+					</ons-toolbar>
 					<img src="/img/header.png" alt="" style="width: 100%">
-					<div class="title">
-						Verlauf
-					</div>
-					<div class="content">
-						<div id="ft3-tab1-content" class="tab-content"></div>
-					</div>
-				</ons-card>
-			</ons-page>
-		</template>
-		<template id="ft3-tab2.html">
-			<ons-page id="ft3-tab2">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<div id="ft3-tab2-content" class="tab-content">
+					<ons-list>
+						<ons-list-header>Blutwerte</ons-list-header>
+						<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('ft3.html');">
+							<div class="left">
+								<img class="list-item__thumbnail" src="/img/ft3.png">
+							</div>
+							<div class="center">
+								<span class="list-item__title">FT3</span>
+								<span class="list-item__subtitle">Freies Trijodthyronin FT3</span>
+							</div>
+						</ons-list-item>
+						<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('ft4.html');">
+							<div class="left">
+								<img class="list-item__thumbnail" src="/img/ft4.png">
+							</div>
+							<div class="center">
+								<span class="list-item__title">FT4</span>
+								<span class="list-item__subtitle">Freies Trijodthyronin FT4</span>
+							</div>
+						</ons-list-item>
+						<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('tsh.html');">
+							<div class="left">
+								<img class="list-item__thumbnail" src="/img/tsh.png">
+							</div>
+							<div class="center">
+								<span class="list-item__title">TSH</span>
+								<span class="list-item__subtitle">Thyreoidea stimulierendes Hormon</span>
+							</div>
+						</ons-list-item>
+					</ons-list>
+					<ons-list>
+						<ons-list-header>Vitamine</ons-list-header>
+						<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('vitamind.html');">
+							<div class="left">
+								<img class="list-item__thumbnail" src="/img/vitamind.png">
+							</div>
+							<div class="center">
+								<span class="list-item__title">Vitamin D</span>
+								<span class="list-item__subtitle">fettlösliches Secosteroid</span>
+							</div>
+						</ons-list-item>
+					</ons-list>
+					<ons-list>
+						<ons-list-header>Sonstiges</ons-list-header>
+						<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('beschwerden.html');">
+							<div class="left">
+								<img class="list-item__thumbnail" src="/img/beschwerden.png">
+							</div>
+							<div class="center">
+								<span class="list-item__title">Beschwerden</span>
+								<span class="list-item__subtitle">subjektives Wohlbefinden</span>
+							</div>
+						</ons-list-item>
+						<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('medikation.html');">
+							<div class="left">
+								<img class="list-item__thumbnail" src="/img/medikation.png">
+							</div>
+							<div class="center">
+								<span class="list-item__title">Medikation</span>
+								<span class="list-item__subtitle">Arzneimittel und Darreichungsform</span>
+							</div>
+						</ons-list-item>
+						<ons-list-item modifier="longdivider chevron" tappable onclick="loadPage('statistik.html');">
+							<div class="left">
+								<img class="list-item__thumbnail" src="/img/statistik.png">
+							</div>
+							<div class="center">
+								<span class="list-item__title">Statistik</span>
+								<span class="list-item__subtitle">quantitative Informationen</span>
+							</div>
+						</ons-list-item>
+					</ons-list>
+				</ons-page>
+			</template>
+			<!-- ############################## page home ############################## -->
+			<!-- ############################## page  ft3 ############################## -->
+			<template id="ft3.html">
+				<ons-page id="ft3">
+					<ons-toolbar>
+						<div class="left"><ons-back-button>zurück</ons-back-button></div>
+						<div class="center">FT3</div>
+						<div class="right">
+							<ons-toolbar-button id="ft3-share" class="share-button">
+								<img id="ft3-share-img" width="21" height="21" src="/img/share.png" alt="">
+								<script>
+									if (window.matchMedia)
+									{
+							  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+							    			document.querySelector('#ft3-share-img').setAttribute('src', '/img/share_dark.png');
+							  			}
+										else
+										{
+							    			document.querySelector('#ft3-share-img').setAttribute('href', '/img/share.png');
+							  			}
+									}
+									else
+									{
+							  			document.querySelector('#ft3-share-img').setAttribute('href', '/img/share.png');
+									}
+								</script>
+							</ons-toolbar-button>
+							<ons-toolbar-button id="ft3-reload" class="reload-button">
+								<img id="ft3-reload-img" width="21" height="21" src="/img/reload.png" alt="">
+								<script>
+									if (window.matchMedia)
+									{
+							  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+							    			document.querySelector('#ft3-reload-img').setAttribute('src', '/img/dark-reload.png');
+							  			}
+										else
+										{
+							    			document.querySelector('#ft3-reload-img').setAttribute('href', '/img/reload.png');
+							  			}
+									}
+									else
+									{
+							  			document.querySelector('#ft3-reload-img').setAttribute('href', '/img/reload.png');
+									}
+								</script>
+							</ons-toolbar-button>
+						</div>
+					</ons-toolbar>
+					<ons-tabbar position="auto">
+						<ons-tab page="ft3-tab1.html" id="ft3-tab1-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
+								</div>
+								<div class="tabbar__label">Verlauf</div>
+							</button>
+						</ons-tab>
+						<ons-tab page="ft3-tab2.html" id="ft3-tab2-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
+								</div>
+								<div class="tabbar__label">Wert angeben</div>
+							</button>
+						</ons-tab>
+					</ons-tabbar>
+				</ons-page>
+			</template>
+			<template id="ft3-tab1.html">
+				<ons-page id="ft3-tab1">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
 					<ons-card>
 						<img src="/img/header.png" alt="" style="width: 100%">
-						<div class="title empty">&nbsp;</div>
+						<div class="title">
+							Verlauf
+						</div>
 						<div class="content">
-							<ons-list>
-								<ons-list-header>Bitte tragen Sie hier neue FT3 Werte ein.</ons-list-header>
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/ft3.png">
-									</div>
-									<div class="center">
-										<span class="list-item__title">
-											<label for="ft3-form-value">FT3 Wert</label>
-										</span>
-										<span class="list-item__subtitle">
-											<ons-input
-												input-id="ft3-form-value"
-												inputmode="decimal"
-												type="text"
-												pattern="[-+]?[0-9]*[.,]?[0-9]+"
-												step="0.01"
-												value="0,0"
-												style="width: 100%;">
-											</ons-input>
-										</span>
-									</div>
-								</ons-list-item>
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/date.png">
-									</div>
-									<div class="center">
-										<span class="list-item__title">
-											<label for="ft3-form-date">Datum</label>
-										</span>
-										<span class="list-item__subtitle">
-											<ons-input
-												input-id="ft3-form-date"
-												inputmode="date"
-												type="date"
-												value=""
-												style="width: 100%;">
-											</ons-input>
-										</span>
-									</div>
-								</ons-list-item>
-							</ons-list>
-							<ons-button id="ft3-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							<div id="ft3-tab1-content" class="tab-content"></div>
 						</div>
 					</ons-card>
-				</div>
-			</ons-page>
-		</template>
-		<!-- ############################## page  ft3 ############################## -->
-		<!-- ############################## page  ft4 ############################## -->
-		<template id="ft4.html">
-			<ons-page id="ft4">
-				<ons-toolbar>
-					<div class="left"><ons-back-button>zurück</ons-back-button></div>
-					<div class="center">FT4</div>
-					<div class="right">
-						<ons-toolbar-button id="ft4-share" class="share-button">
-							<img id="ft4-share-img" width="21" height="21" src="/img/share.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+				</ons-page>
+			</template>
+			<template id="ft3-tab2.html">
+				<ons-page id="ft3-tab2">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+					<div id="ft3-tab2-content" class="tab-content">
+						<ons-card>
+							<img src="/img/header.png" alt="" style="width: 100%">
+							<div class="title empty">&nbsp;</div>
+							<div class="content">
+								<ons-list>
+									<ons-list-header>Bitte tragen Sie hier neue FT3 Werte ein.</ons-list-header>
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/ft3.png">
+										</div>
+										<div class="center">
+											<span class="list-item__title">
+												<label for="ft3-form-value">FT3 Wert</label>
+											</span>
+											<span class="list-item__subtitle">
+												<ons-input
+													input-id="ft3-form-value"
+													inputmode="decimal"
+													type="text"
+													pattern="[-+]?[0-9]*[.,]?[0-9]+"
+													step="0.01"
+													value="0,0"
+													style="width: 100%;">
+												</ons-input>
+											</span>
+										</div>
+									</ons-list-item>
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/date.png">
+										</div>
+										<div class="center">
+											<span class="list-item__title">
+												<label for="ft3-form-date">Datum</label>
+											</span>
+											<span class="list-item__subtitle">
+												<ons-input
+													input-id="ft3-form-date"
+													inputmode="date"
+													type="date"
+													value=""
+													style="width: 100%;">
+												</ons-input>
+											</span>
+										</div>
+									</ons-list-item>
+								</ons-list>
+								<ons-button id="ft3-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							</div>
+						</ons-card>
+					</div>
+				</ons-page>
+			</template>
+			<!-- ############################## page  ft3 ############################## -->
+			<!-- ############################## page  ft4 ############################## -->
+			<template id="ft4.html">
+				<ons-page id="ft4">
+					<ons-toolbar>
+						<div class="left"><ons-back-button>zurück</ons-back-button></div>
+						<div class="center">FT4</div>
+						<div class="right">
+							<ons-toolbar-button id="ft4-share" class="share-button">
+								<img id="ft4-share-img" width="21" height="21" src="/img/share.png" alt="">
+								<script>
+									if (window.matchMedia)
 									{
-						    			document.querySelector('#ft4-share-img').setAttribute('src', '/img/share_dark.png');
-						  			}
+							  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+							    			document.querySelector('#ft4-share-img').setAttribute('src', '/img/share_dark.png');
+							  			}
+										else
+										{
+							    			document.querySelector('#ft4-share-img').setAttribute('href', '/img/share.png');
+							  			}
+									}
 									else
 									{
-						    			document.querySelector('#ft4-share-img').setAttribute('href', '/img/share.png');
-						  			}
-								}
-								else
-								{
-						  			document.querySelector('#ft4-share-img').setAttribute('href', '/img/share.png');
-								}
-							</script>
-						</ons-toolbar-button>
-						<ons-toolbar-button id="ft4-reload" class="reload-button">
-							<img id="ft4-reload-img" width="21" height="21" src="/img/reload.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+							  			document.querySelector('#ft4-share-img').setAttribute('href', '/img/share.png');
+									}
+								</script>
+							</ons-toolbar-button>
+							<ons-toolbar-button id="ft4-reload" class="reload-button">
+								<img id="ft4-reload-img" width="21" height="21" src="/img/reload.png" alt="">
+								<script>
+									if (window.matchMedia)
 									{
-						    			document.querySelector('#ft4-reload-img').setAttribute('src', '/img/dark-reload.png');
-						  			}
+							  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+							    			document.querySelector('#ft4-reload-img').setAttribute('src', '/img/dark-reload.png');
+							  			}
+										else
+										{
+							    			document.querySelector('#ft4-reload-img').setAttribute('href', '/img/reload.png');
+							  			}
+									}
 									else
 									{
-						    			document.querySelector('#ft4-reload-img').setAttribute('href', '/img/reload.png');
-						  			}
-								}
-								else
-								{
-						  			document.querySelector('#ft4-reload-img').setAttribute('href', '/img/reload.png');
-								}
-							</script>
-						</ons-toolbar-button>
-					</div>
-				</ons-toolbar>
-				<ons-tabbar position="auto">
-					<ons-tab page="ft4-tab1.html" id="ft4-tab1-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
-							</div>
-							<div class="tabbar__label">Verlauf</div>
-						</button>
-					</ons-tab>
-					<ons-tab page="ft4-tab2.html" id="ft4-tab2-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
-							</div>
-							<div class="tabbar__label">Wert angeben</div>
-						</button>
-					</ons-tab>
-				</ons-tabbar>
-			</ons-page>
-		</template>
-		<template id="ft4-tab1.html">
-			<ons-page id="ft4-tab1">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<ons-card>
-					<img src="/img/header.png" alt="" style="width: 100%">
-					<div class="title">
-						Verlauf
-					</div>
-					<div class="content">
-						<div id="ft4-tab1-content" class="tab-content"></div>
-					</div>
-				</ons-card>
-			</ons-page>
-		</template>
-		<template id="ft4-tab2.html">
-			<ons-page id="ft4-tab2">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<div id="ft4-tab2-content" class="tab-content">
+							  			document.querySelector('#ft4-reload-img').setAttribute('href', '/img/reload.png');
+									}
+								</script>
+							</ons-toolbar-button>
+						</div>
+					</ons-toolbar>
+					<ons-tabbar position="auto">
+						<ons-tab page="ft4-tab1.html" id="ft4-tab1-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
+								</div>
+								<div class="tabbar__label">Verlauf</div>
+							</button>
+						</ons-tab>
+						<ons-tab page="ft4-tab2.html" id="ft4-tab2-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
+								</div>
+								<div class="tabbar__label">Wert angeben</div>
+							</button>
+						</ons-tab>
+					</ons-tabbar>
+				</ons-page>
+			</template>
+			<template id="ft4-tab1.html">
+				<ons-page id="ft4-tab1">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
 					<ons-card>
 						<img src="/img/header.png" alt="" style="width: 100%">
-						<div class="title empty">&nbsp;</div>
+						<div class="title">
+							Verlauf
+						</div>
 						<div class="content">
-							<ons-list>
-								<ons-list-header>Bitte tragen Sie hier neue FT4 Werte ein.</ons-list-header>
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/ft4.png">
-									</div>
-									<div class="center">
-										<span class="list-item__title">
-											<label for="ft4-form-value">FT4 Wert</label>
-										</span>
-										<span class="list-item__subtitle">
-											<ons-input
-												input-id="ft4-form-value"
-												inputmode="decimal"
-												type="text"
-												pattern="[-+]?[0-9]*[.,]?[0-9]+"
-												step="0.01"
-												value="0,0"
-												style="width: 100%;">
-											</ons-input>
-										</span>
-									</div>
-								</ons-list-item>
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/date_ft4.png">
-									</div>
-									<div class="center">
-										<span class="list-item__title">
-											<label for="ft4-form-date">Datum</label>
-										</span>
-										<span class="list-item__subtitle">
-											<ons-input
-												input-id="ft4-form-date"
-												inputmode="date"
-												type="date"
-												value=""
-												style="width: 100%;">
-											</ons-input>
-										</span>
-									</div>
-								</ons-list-item>
-							</ons-list>
-							<ons-button id="ft4-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							<div id="ft4-tab1-content" class="tab-content"></div>
 						</div>
 					</ons-card>
-				</div>
-			</ons-page>
-		</template>
-		<!-- ############################## page  ft4 ############################## -->
-		<!-- ############################## page  tsh ############################## -->
-		<template id="tsh.html">
-			<ons-page id="tsh">
-				<ons-toolbar>
-					<div class="left"><ons-back-button>zurück</ons-back-button></div>
-					<div class="center">TSH</div>
-					<div class="right">
-						<ons-toolbar-button id="tsh-share" class="share-button">
-							<img id="tsh-share-img" width="21" height="21" src="/img/share.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+				</ons-page>
+			</template>
+			<template id="ft4-tab2.html">
+				<ons-page id="ft4-tab2">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+					<div id="ft4-tab2-content" class="tab-content">
+						<ons-card>
+							<img src="/img/header.png" alt="" style="width: 100%">
+							<div class="title empty">&nbsp;</div>
+							<div class="content">
+								<ons-list>
+									<ons-list-header>Bitte tragen Sie hier neue FT4 Werte ein.</ons-list-header>
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/ft4.png">
+										</div>
+										<div class="center">
+											<span class="list-item__title">
+												<label for="ft4-form-value">FT4 Wert</label>
+											</span>
+											<span class="list-item__subtitle">
+												<ons-input
+													input-id="ft4-form-value"
+													inputmode="decimal"
+													type="text"
+													pattern="[-+]?[0-9]*[.,]?[0-9]+"
+													step="0.01"
+													value="0,0"
+													style="width: 100%;">
+												</ons-input>
+											</span>
+										</div>
+									</ons-list-item>
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/date_ft4.png">
+										</div>
+										<div class="center">
+											<span class="list-item__title">
+												<label for="ft4-form-date">Datum</label>
+											</span>
+											<span class="list-item__subtitle">
+												<ons-input
+													input-id="ft4-form-date"
+													inputmode="date"
+													type="date"
+													value=""
+													style="width: 100%;">
+												</ons-input>
+											</span>
+										</div>
+									</ons-list-item>
+								</ons-list>
+								<ons-button id="ft4-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							</div>
+						</ons-card>
+					</div>
+				</ons-page>
+			</template>
+			<!-- ############################## page  ft4 ############################## -->
+			<!-- ############################## page  tsh ############################## -->
+			<template id="tsh.html">
+				<ons-page id="tsh">
+					<ons-toolbar>
+						<div class="left"><ons-back-button>zurück</ons-back-button></div>
+						<div class="center">TSH</div>
+						<div class="right">
+							<ons-toolbar-button id="tsh-share" class="share-button">
+								<img id="tsh-share-img" width="21" height="21" src="/img/share.png" alt="">
+								<script>
+									if (window.matchMedia)
 									{
-						    			document.querySelector('#tsh-share-img').setAttribute('src', '/img/share_dark.png');
-						  			}
+							  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+							    			document.querySelector('#tsh-share-img').setAttribute('src', '/img/share_dark.png');
+							  			}
+										else
+										{
+							    			document.querySelector('#tsh-share-img').setAttribute('href', '/img/share.png');
+							  			}
+									}
 									else
 									{
-						    			document.querySelector('#tsh-share-img').setAttribute('href', '/img/share.png');
-						  			}
-								}
-								else
-								{
-						  			document.querySelector('#tsh-share-img').setAttribute('href', '/img/share.png');
-								}
-							</script>
-						</ons-toolbar-button>
-						<ons-toolbar-button id="tsh-reload" class="reload-button">
-							<img id="tsh-reload-img" width="21" height="21" src="/img/reload.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-									if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+							  			document.querySelector('#tsh-share-img').setAttribute('href', '/img/share.png');
+									}
+								</script>
+							</ons-toolbar-button>
+							<ons-toolbar-button id="tsh-reload" class="reload-button">
+								<img id="tsh-reload-img" width="21" height="21" src="/img/reload.png" alt="">
+								<script>
+									if (window.matchMedia)
 									{
-										document.querySelector('#tsh-reload-img').setAttribute('src', '/img/dark-reload.png');
+										if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+											document.querySelector('#tsh-reload-img').setAttribute('src', '/img/dark-reload.png');
+										}
+										else
+										{
+											document.querySelector('#tsh-reload-img').setAttribute('href', '/img/reload.png');
+										}
 									}
 									else
 									{
 										document.querySelector('#tsh-reload-img').setAttribute('href', '/img/reload.png');
 									}
-								}
-								else
-								{
-									document.querySelector('#tsh-reload-img').setAttribute('href', '/img/reload.png');
-								}
-							</script>
-						</ons-toolbar-button>
-					</div>
-				</ons-toolbar>
-				<ons-tabbar position="auto">
-					<ons-tab page="tsh-tab1.html" id="tsh-tab1-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
-							</div>
-							<div class="tabbar__label">Verlauf</div>
-						</button>
-					</ons-tab>
-					<ons-tab page="tsh-tab2.html" id="tsh-tab2-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
-							</div>
-							<div class="tabbar__label">Wert angeben</div>
-						</button>
-					</ons-tab>
-				</ons-tabbar>
-			</ons-page>
-		</template>
-		<template id="tsh-tab1.html">
-			<ons-page id="tsh-tab1">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<ons-card>
-					<img src="/img/header.png" alt="" style="width: 100%">
-					<div class="title">
-						Verlauf
-					</div>
-					<div class="content">
-						<div id="tsh-tab1-content" class="tab-content"></div>
-					</div>
-				</ons-card>
-			</ons-page>
-		</template>
-		<template id="tsh-tab2.html">
-			<ons-page id="tsh-tab2">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<div id="tsh-tab2-content" class="tab-content">
+								</script>
+							</ons-toolbar-button>
+						</div>
+					</ons-toolbar>
+					<ons-tabbar position="auto">
+						<ons-tab page="tsh-tab1.html" id="tsh-tab1-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
+								</div>
+								<div class="tabbar__label">Verlauf</div>
+							</button>
+						</ons-tab>
+						<ons-tab page="tsh-tab2.html" id="tsh-tab2-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
+								</div>
+								<div class="tabbar__label">Wert angeben</div>
+							</button>
+						</ons-tab>
+					</ons-tabbar>
+				</ons-page>
+			</template>
+			<template id="tsh-tab1.html">
+				<ons-page id="tsh-tab1">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
 					<ons-card>
 						<img src="/img/header.png" alt="" style="width: 100%">
-						<div class="title empty">&nbsp;</div>
+						<div class="title">
+							Verlauf
+						</div>
 						<div class="content">
-							<ons-list>
-								<ons-list-header>Bitte tragen Sie hier neue TSH Werte ein.</ons-list-header>
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/tsh.png">
-									</div>
-									<div class="center">
-										<span class="list-item__title">
-											<label for="tsh-form-value">TSH Wert</label>
-										</span>
-										<span class="list-item__subtitle">
-											<ons-input
-												input-id="tsh-form-value"
-												inputmode="decimal"
-												type="text"
-												pattern="[-+]?[0-9]*[.,]?[0-9]+"
-												step="0.01"
-												value="0,0"
-												style="width: 100%;">
-											</ons-input>
-										</span>
-									</div>
-								</ons-list-item>
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/date_tsh.png">
-									</div>
-									<div class="center">
-										<span class="list-item__title">
-											<label for="ft4-form-date">Datum</label>
-										</span>
-										<span class="list-item__subtitle">
-											<ons-input
-												input-id="tsh-form-date"
-												inputmode="date"
-												type="date"
-												value=""
-												style="width: 100%;">
-											</ons-input>
-										</span>
-									</div>
-								</ons-list-item>
-							</ons-list>
-							<ons-button id="tsh-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							<div id="tsh-tab1-content" class="tab-content"></div>
 						</div>
 					</ons-card>
-				</div>
-			</ons-page>
-		</template>
-		<!-- ############################## page  tsh ############################## -->
-		<!-- ############################## page vitamind ########################## -->
-		<template id="vitamind.html">
-			<ons-page id="vitamind">
-				<ons-toolbar>
-					<div class="left"><ons-back-button>zurück</ons-back-button></div>
-					<div class="center">Vitamin D</div>
-					<div class="right">
-						<ons-toolbar-button id="vitamind-share" class="share-button">
-							<img id="vitamind-share-img" width="21" height="21" src="/img/share.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+				</ons-page>
+			</template>
+			<template id="tsh-tab2.html">
+				<ons-page id="tsh-tab2">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+					<div id="tsh-tab2-content" class="tab-content">
+						<ons-card>
+							<img src="/img/header.png" alt="" style="width: 100%">
+							<div class="title empty">&nbsp;</div>
+							<div class="content">
+								<ons-list>
+									<ons-list-header>Bitte tragen Sie hier neue TSH Werte ein.</ons-list-header>
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/tsh.png">
+										</div>
+										<div class="center">
+											<span class="list-item__title">
+												<label for="tsh-form-value">TSH Wert</label>
+											</span>
+											<span class="list-item__subtitle">
+												<ons-input
+													input-id="tsh-form-value"
+													inputmode="decimal"
+													type="text"
+													pattern="[-+]?[0-9]*[.,]?[0-9]+"
+													step="0.01"
+													value="0,0"
+													style="width: 100%;">
+												</ons-input>
+											</span>
+										</div>
+									</ons-list-item>
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/date_tsh.png">
+										</div>
+										<div class="center">
+											<span class="list-item__title">
+												<label for="ft4-form-date">Datum</label>
+											</span>
+											<span class="list-item__subtitle">
+												<ons-input
+													input-id="tsh-form-date"
+													inputmode="date"
+													type="date"
+													value=""
+													style="width: 100%;">
+												</ons-input>
+											</span>
+										</div>
+									</ons-list-item>
+								</ons-list>
+								<ons-button id="tsh-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							</div>
+						</ons-card>
+					</div>
+				</ons-page>
+			</template>
+			<!-- ############################## page  tsh ############################## -->
+			<!-- ############################## page vitamind ########################## -->
+			<template id="vitamind.html">
+				<ons-page id="vitamind">
+					<ons-toolbar>
+						<div class="left"><ons-back-button>zurück</ons-back-button></div>
+						<div class="center">Vitamin D</div>
+						<div class="right">
+							<ons-toolbar-button id="vitamind-share" class="share-button">
+								<img id="vitamind-share-img" width="21" height="21" src="/img/share.png" alt="">
+								<script>
+									if (window.matchMedia)
 									{
-						    			document.querySelector('#vitamind-share-img').setAttribute('src', '/img/share_dark.png');
-						  			}
+							  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+							    			document.querySelector('#vitamind-share-img').setAttribute('src', '/img/share_dark.png');
+							  			}
+										else
+										{
+							    			document.querySelector('#vitamind-share-img').setAttribute('href', '/img/share.png');
+							  			}
+									}
 									else
 									{
-						    			document.querySelector('#vitamind-share-img').setAttribute('href', '/img/share.png');
-						  			}
-								}
-								else
-								{
-						  			document.querySelector('#vitamind-share-img').setAttribute('href', '/img/share.png');
-								}
-							</script>
-						</ons-toolbar-button>
-						<ons-toolbar-button id="vitamind-reload" class="reload-button">
-							<img id="vitamind-reload-img" width="21" height="21" src="/img/reload.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-									if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+							  			document.querySelector('#vitamind-share-img').setAttribute('href', '/img/share.png');
+									}
+								</script>
+							</ons-toolbar-button>
+							<ons-toolbar-button id="vitamind-reload" class="reload-button">
+								<img id="vitamind-reload-img" width="21" height="21" src="/img/reload.png" alt="">
+								<script>
+									if (window.matchMedia)
 									{
-										document.querySelector('#vitamind-reload-img').setAttribute('src', '/img/dark-reload.png');
+										if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+											document.querySelector('#vitamind-reload-img').setAttribute('src', '/img/dark-reload.png');
+										}
+										else
+										{
+											document.querySelector('#vitamind-reload-img').setAttribute('href', '/img/reload.png');
+										}
 									}
 									else
 									{
 										document.querySelector('#vitamind-reload-img').setAttribute('href', '/img/reload.png');
 									}
-								}
-								else
-								{
-									document.querySelector('#vitamind-reload-img').setAttribute('href', '/img/reload.png');
-								}
-							</script>
-						</ons-toolbar-button>
-					</div>
-				</ons-toolbar>
-				<ons-tabbar position="auto">
-					<ons-tab page="vitamind-tab1.html" id="vitamind-tab1-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
-							</div>
-							<div class="tabbar__label">Verlauf</div>
-						</button>
-					</ons-tab>
-					<ons-tab page="vitamind-tab2.html" id="vitamind-tab2-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
-							</div>
-							<div class="tabbar__label">Wert angeben</div>
-						</button>
-					</ons-tab>
-				</ons-tabbar>
-			</ons-page>
-		</template>
-		<template id="vitamind-tab1.html">
-			<ons-page id="vitamind-tab1">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<ons-card>
-					<img src="/img/header.png" alt="" style="width: 100%">
-					<div class="title">
-						Verlauf
-					</div>
-					<div class="content">
-						<div id="vitamind-tab1-content" class="tab-content"></div>
-					</div>
-				</ons-card>
-			</ons-page>
-		</template>
-		<template id="vitamind-tab2.html">
-			<ons-page id="vitamind-tab2">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<div id="vitamind-tab2-content" class="tab-content">
+								</script>
+							</ons-toolbar-button>
+						</div>
+					</ons-toolbar>
+					<ons-tabbar position="auto">
+						<ons-tab page="vitamind-tab1.html" id="vitamind-tab1-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
+								</div>
+								<div class="tabbar__label">Verlauf</div>
+							</button>
+						</ons-tab>
+						<ons-tab page="vitamind-tab2.html" id="vitamind-tab2-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
+								</div>
+								<div class="tabbar__label">Wert angeben</div>
+							</button>
+						</ons-tab>
+					</ons-tabbar>
+				</ons-page>
+			</template>
+			<template id="vitamind-tab1.html">
+				<ons-page id="vitamind-tab1">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
 					<ons-card>
 						<img src="/img/header.png" alt="" style="width: 100%">
-						<div class="title empty">&nbsp;</div>
+						<div class="title">
+							Verlauf
+						</div>
 						<div class="content">
-							<ons-list>
-								<ons-list-header>Bitte tragen Sie hier neue Vitamin D Werte ein.</ons-list-header>
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/vitamind.png">
-									</div>
-									<div class="center">
-										<span class="list-item__title">
-											<label for="vitamind-form-value">Vitamin D Wert</label>
-										</span>
-										<span class="list-item__subtitle">
-											<ons-input
-												input-id="vitamind-form-value"
-												inputmode="decimal"
-												type="text"
-												pattern="[-+]?[0-9]*[.,]?[0-9]+"
-												step="0.01"
-												value="0,0"
-												style="width: 100%;">
-											</ons-input>
-										</span>
-									</div>
-								</ons-list-item>
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/date_vitamind.png">
-									</div>
-									<div class="center">
-										<span class="list-item__title">
-											<label for="ft4-form-date">Datum</label>
-										</span>
-										<span class="list-item__subtitle">
-											<ons-input
-												input-id="vitamind-form-date"
-												inputmode="date"
-												type="date"
-												value=""
-												style="width: 100%;">
-											</ons-input>
-										</span>
-									</div>
-								</ons-list-item>
-							</ons-list>
-							<ons-button id="vitamind-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							<div id="vitamind-tab1-content" class="tab-content"></div>
 						</div>
 					</ons-card>
-				</div>
-			</ons-page>
-		</template>
-		<!-- ############################## page vitamind ########################## -->
-		<!-- ############################## page beschwerden ####################### -->
-		<template id="beschwerden.html">
-			<ons-page id="beschwerden">
-				<ons-toolbar>
-					<div class="left"><ons-back-button>zurück</ons-back-button></div>
-					<div class="center">Beschwerden</div>
-					<div class="right">
-						<ons-toolbar-button id="beschwerden-share" class="share-button">
-							<img id="beschwerden-share-img" width="21" height="21" src="/img/share.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-						  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+				</ons-page>
+			</template>
+			<template id="vitamind-tab2.html">
+				<ons-page id="vitamind-tab2">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+					<div id="vitamind-tab2-content" class="tab-content">
+						<ons-card>
+							<img src="/img/header.png" alt="" style="width: 100%">
+							<div class="title empty">&nbsp;</div>
+							<div class="content">
+								<ons-list>
+									<ons-list-header>Bitte tragen Sie hier neue Vitamin D Werte ein.</ons-list-header>
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/vitamind.png">
+										</div>
+										<div class="center">
+											<span class="list-item__title">
+												<label for="vitamind-form-value">Vitamin D Wert</label>
+											</span>
+											<span class="list-item__subtitle">
+												<ons-input
+													input-id="vitamind-form-value"
+													inputmode="decimal"
+													type="text"
+													pattern="[-+]?[0-9]*[.,]?[0-9]+"
+													step="0.01"
+													value="0,0"
+													style="width: 100%;">
+												</ons-input>
+											</span>
+										</div>
+									</ons-list-item>
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/date_vitamind.png">
+										</div>
+										<div class="center">
+											<span class="list-item__title">
+												<label for="ft4-form-date">Datum</label>
+											</span>
+											<span class="list-item__subtitle">
+												<ons-input
+													input-id="vitamind-form-date"
+													inputmode="date"
+													type="date"
+													value=""
+													style="width: 100%;">
+												</ons-input>
+											</span>
+										</div>
+									</ons-list-item>
+								</ons-list>
+								<ons-button id="vitamind-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							</div>
+						</ons-card>
+					</div>
+				</ons-page>
+			</template>
+			<!-- ############################## page vitamind ########################## -->
+			<!-- ############################## page beschwerden ####################### -->
+			<template id="beschwerden.html">
+				<ons-page id="beschwerden">
+					<ons-toolbar>
+						<div class="left"><ons-back-button>zurück</ons-back-button></div>
+						<div class="center">Beschwerden</div>
+						<div class="right">
+							<ons-toolbar-button id="beschwerden-share" class="share-button">
+								<img id="beschwerden-share-img" width="21" height="21" src="/img/share.png" alt="">
+								<script>
+									if (window.matchMedia)
 									{
-						    			document.querySelector('#beschwerden-share-img').setAttribute('src', '/img/share_dark.png');
-						  			}
+							  			if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+							    			document.querySelector('#beschwerden-share-img').setAttribute('src', '/img/share_dark.png');
+							  			}
+										else
+										{
+							    			document.querySelector('#beschwerden-share-img').setAttribute('href', '/img/share.png');
+							  			}
+									}
 									else
 									{
-						    			document.querySelector('#beschwerden-share-img').setAttribute('href', '/img/share.png');
-						  			}
-								}
-								else
-								{
-						  			document.querySelector('#beschwerden-share-img').setAttribute('href', '/img/share.png');
-								}
-							</script>
-						</ons-toolbar-button>
-						<ons-toolbar-button id="beschwerden-reload" class="reload-button">
-							<img id="beschwerden-reload-img" width="21" height="21" src="/img/reload.png" alt="">
-							<script>
-								if (window.matchMedia)
-								{
-									if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+							  			document.querySelector('#beschwerden-share-img').setAttribute('href', '/img/share.png');
+									}
+								</script>
+							</ons-toolbar-button>
+							<ons-toolbar-button id="beschwerden-reload" class="reload-button">
+								<img id="beschwerden-reload-img" width="21" height="21" src="/img/reload.png" alt="">
+								<script>
+									if (window.matchMedia)
 									{
-										document.querySelector('#beschwerden-reload-img').setAttribute('src', '/img/dark-reload.png');
+										if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+										{
+											document.querySelector('#beschwerden-reload-img').setAttribute('src', '/img/dark-reload.png');
+										}
+										else
+										{
+											document.querySelector('#beschwerden-reload-img').setAttribute('href', '/img/reload.png');
+										}
 									}
 									else
 									{
 										document.querySelector('#beschwerden-reload-img').setAttribute('href', '/img/reload.png');
 									}
-								}
-								else
-								{
-									document.querySelector('#beschwerden-reload-img').setAttribute('href', '/img/reload.png');
-								}
-							</script>
-						</ons-toolbar-button>
-					</div>
-				</ons-toolbar>
-				<ons-tabbar position="auto">
-					<ons-tab page="beschwerden-tab1.html" id="beschwerden-tab1-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon statistic"></ons-icon>
-							</div>
-							<div class="tabbar__label">Tagesübersicht</div>
-						</button>
-					</ons-tab>
-					<ons-tab page="beschwerden-tab2.html" id="beschwerden-tab2-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
-							</div>
-							<div class="tabbar__label">Verlauf</div>
-						</button>
-					</ons-tab>
-					<ons-tab page="beschwerden-tab3.html" id="beschwerden-tab3-link">
-						<input type="radio" style="display: none;">
-						<button class="tabbar__button">
-							<div class="tabbar__icon">
-								<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
-							</div>
-							<div class="tabbar__label">Symptome angeben</div>
-						</button>
-					</ons-tab>
-				</ons-tabbar>
-			</ons-page>
-		</template>
-		<template id="beschwerden-tab1.html">
-			<ons-page id="beschwerden-tab1">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<ons-card>
-					<img src="/img/header.png" alt="" style="width: 100%">
-					<div class="title">
-						Tagesübersicht
-					</div>
-					<div class="content">
-						<div id="beschwerden-tab1-content" class="tab-content"></div>
-					</div>
-				</ons-card>
-			</ons-page>
-		</template>
-		<template id="beschwerden-tab2.html">
-			<ons-page id="beschwerden-tab2">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<ons-card>
-					<img src="/img/header.png" alt="" style="width: 100%">
-					<div class="title">
-						Verlauf
-					</div>
-					<div class="content">
-						<div id="beschwerden-tab2-content" class="tab-content"></div>
-					</div>
-				</ons-card>
-			</ons-page>
-		</template>
-		<template id="beschwerden-tab3.html">
-			<ons-page id="beschwerden-tab3">
-				<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
-				<div id="beschwerden-tab3-content" class="tab-content">
+								</script>
+							</ons-toolbar-button>
+						</div>
+					</ons-toolbar>
+					<ons-tabbar position="auto">
+						<ons-tab page="beschwerden-tab1.html" id="beschwerden-tab1-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon statistic"></ons-icon>
+								</div>
+								<div class="tabbar__label">Tagesübersicht</div>
+							</button>
+						</ons-tab>
+						<ons-tab page="beschwerden-tab2.html" id="beschwerden-tab2-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon history"></ons-icon>
+								</div>
+								<div class="tabbar__label">Verlauf</div>
+							</button>
+						</ons-tab>
+						<ons-tab page="beschwerden-tab3.html" id="beschwerden-tab3-link">
+							<input type="radio" style="display: none;">
+							<button class="tabbar__button">
+								<div class="tabbar__icon">
+									<ons-icon icon="my-icon" class="tabicon newvalue"></ons-icon>
+								</div>
+								<div class="tabbar__label">Symptome angeben</div>
+							</button>
+						</ons-tab>
+					</ons-tabbar>
+				</ons-page>
+			</template>
+			<template id="beschwerden-tab1.html">
+				<ons-page id="beschwerden-tab1">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
 					<ons-card>
 						<img src="/img/header.png" alt="" style="width: 100%">
-						<div class="title empty">&nbsp;</div>
+						<div class="title">
+							Tagesübersicht
+						</div>
 						<div class="content">
-							<ons-list>
-								<ons-list-header>Bitte geben Sie hier Ihre Symptome an.</ons-list-header>
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/beschwerden.png">
-									</div>
-									<div class="center">
-										Symptome
-									</div>
-								</ons-list-item>
-
-								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
-									<label class="left">
-										<ons-checkbox input-id="symptom1"></ons-checkbox>
-									</label>
-									<label for="symptom1" class="center">Schlafstörungen</label>
-								</ons-list-item>
-								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
-									<label class="left">
-										<ons-checkbox input-id="symptom2"></ons-checkbox>
-									</label>
-									<label for="symptom2" class="center">Schwitzen</label>
-								</ons-list-item>
-								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
-									<label class="left">
-										<ons-checkbox input-id="symptom3"></ons-checkbox>
-									</label>
-									<label for="symptom3" class="center">Zittern</label>
-								</ons-list-item>
-								<ons-list-item modifier="longdivider" tappable class="my-checkbox">
-									<label class="left">
-										<ons-checkbox input-id="symptom4"></ons-checkbox>
-									</label>
-									<label for="symptom4" class="center">schnell zu warm</label>
-								</ons-list-item>
-
-								<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
-									<div class="left">
-										<img class="list-item__thumbnail" src="/img/date_beschwerden.png">
-									</div>
-									<div class="center">
-										<span class="list-item__title">
-											<label for="ft4-form-date">Datum</label>
-										</span>
-										<span class="list-item__subtitle">
-											<ons-input
-												input-id="beschwerden-form-date"
-												inputmode="date"
-												type="date"
-												value=""
-												style="width: 100%;">
-											</ons-input>
-										</span>
-									</div>
-								</ons-list-item>
-							</ons-list>
-							<ons-button id="beschwerden-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							<div id="beschwerden-tab1-content" class="tab-content"></div>
 						</div>
 					</ons-card>
-				</div>
-			</ons-page>
-		</template>
-		<!-- ############################## page beschwerden ####################### -->
-		<!-- ############################## page  medikation ####################### -->
-		<template id="medikation.html">
-			<ons-page id="medikation">
-				<ons-toolbar>
-					<div class="left"><ons-back-button>zurück</ons-back-button></div>
-					<div class="center">Medikation</div>
-				</ons-toolbar>
-			</ons-page>
-		</template>
-		<!-- ############################## page  medikation ####################### -->
-		<!-- ############################## page  statistik  ####################### -->
-		<template id="statistik.html">
-			<ons-page id="statistik">
-				<ons-toolbar>
-					<div class="left"><ons-back-button>zurück</ons-back-button></div>
-					<div class="center">Statistik</div>
-				</ons-toolbar>
-			</ons-page>
-		</template>
-		<!-- ############################## page  statistik  ####################### -->
+				</ons-page>
+			</template>
+			<template id="beschwerden-tab2.html">
+				<ons-page id="beschwerden-tab2">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+					<ons-card>
+						<img src="/img/header.png" alt="" style="width: 100%">
+						<div class="title">
+							Verlauf
+						</div>
+						<div class="content">
+							<div id="beschwerden-tab2-content" class="tab-content"></div>
+						</div>
+					</ons-card>
+				</ons-page>
+			</template>
+			<template id="beschwerden-tab3.html">
+				<ons-page id="beschwerden-tab3">
+					<ons-progress-circular indeterminate class="spinner"></ons-progress-circular>
+					<div id="beschwerden-tab3-content" class="tab-content">
+						<ons-card>
+							<img src="/img/header.png" alt="" style="width: 100%">
+							<div class="title empty">&nbsp;</div>
+							<div class="content">
+								<ons-list>
+									<ons-list-header>Bitte geben Sie hier Ihre Symptome an.</ons-list-header>
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/beschwerden.png">
+										</div>
+										<div class="center">
+											Symptome
+										</div>
+									</ons-list-item>
+
+									<ons-list-item modifier="longdivider" tappable class="my-checkbox">
+										<label class="left">
+											<ons-checkbox input-id="symptom1"></ons-checkbox>
+										</label>
+										<label for="symptom1" class="center">Schlafstörungen</label>
+									</ons-list-item>
+									<ons-list-item modifier="longdivider" tappable class="my-checkbox">
+										<label class="left">
+											<ons-checkbox input-id="symptom2"></ons-checkbox>
+										</label>
+										<label for="symptom2" class="center">Schwitzen</label>
+									</ons-list-item>
+									<ons-list-item modifier="longdivider" tappable class="my-checkbox">
+										<label class="left">
+											<ons-checkbox input-id="symptom3"></ons-checkbox>
+										</label>
+										<label for="symptom3" class="center">Zittern</label>
+									</ons-list-item>
+									<ons-list-item modifier="longdivider" tappable class="my-checkbox">
+										<label class="left">
+											<ons-checkbox input-id="symptom4"></ons-checkbox>
+										</label>
+										<label for="symptom4" class="center">schnell zu warm</label>
+									</ons-list-item>
+
+									<ons-list-item modifier="longdivider" style="margin-top: 3rem;">
+										<div class="left">
+											<img class="list-item__thumbnail" src="/img/date_beschwerden.png">
+										</div>
+										<div class="center">
+											<span class="list-item__title">
+												<label for="ft4-form-date">Datum</label>
+											</span>
+											<span class="list-item__subtitle">
+												<ons-input
+													input-id="beschwerden-form-date"
+													inputmode="date"
+													type="date"
+													value=""
+													style="width: 100%;">
+												</ons-input>
+											</span>
+										</div>
+									</ons-list-item>
+								</ons-list>
+								<ons-button id="beschwerden-form-save" modifier="large" style="margin-top: 4rem;">Speichern</ons-button>
+							</div>
+						</ons-card>
+					</div>
+				</ons-page>
+			</template>
+			<!-- ############################## page beschwerden ####################### -->
+			<!-- ############################## page  medikation ####################### -->
+			<template id="medikation.html">
+				<ons-page id="medikation">
+					<ons-toolbar>
+						<div class="left"><ons-back-button>zurück</ons-back-button></div>
+						<div class="center">Medikation</div>
+					</ons-toolbar>
+				</ons-page>
+			</template>
+			<!-- ############################## page  medikation ####################### -->
+			<!-- ############################## page  statistik  ####################### -->
+			<template id="statistik.html">
+				<ons-page id="statistik">
+					<ons-toolbar>
+						<div class="left"><ons-back-button>zurück</ons-back-button></div>
+						<div class="center">Statistik</div>
+					</ons-toolbar>
+				</ons-page>
+			</template>
+			<!-- ############################## page  statistik  ####################### -->
+		</div>
 	</body>
 </html>

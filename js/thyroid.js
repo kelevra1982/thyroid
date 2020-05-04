@@ -64,6 +64,12 @@ jQuery(document).ready(function($)
 	window.addEventListener('online',  updateOnlineStatus);
 	window.addEventListener('offline', updateOnlineStatus);
 
+	$('#app').waitForImages(function()
+	{
+		$('#spinner').remove();
+		$('#app').animate({ opacity: 1 }, 350);
+	});
+
 	function updateOnlineStatus(event)
 	{
 		var condition = navigator.onLine ? 'online' : 'offline';
@@ -368,7 +374,37 @@ jQuery(document).ready(function($)
 		}
 		else if (event.target.id == 'beschwerden')
 		{
+			$('.spinner').show();
 
+			$.getJSON('/api/beschwerdenget.php', {date:new Date().toJSON().slice(0, 10).replace(/-/g, '-')}, function(data)
+			{
+				if (data.length != 0)
+				{
+					$('#beschwerden-tab1-content').empty();
+
+					if (data[0].symptom1 == '1')
+					{
+						$('#beschwerden-tab1-content').append('<p>Schlafstörungen</p>');
+					}
+					if (data[0].symptom2 == '1')
+					{
+						$('#beschwerden-tab1-content').append('<p>Schwitzen</p>');
+					}
+					if (data[0].symptom3 == '1')
+					{
+						$('#beschwerden-tab1-content').append('<p>Zittern</p>');
+					}
+					if (data[0].symptom4 == '1')
+					{
+						$('#beschwerden-tab1-content').append('<p>schnell zu warm</p>');
+					}
+
+					$('.spinner').hide();
+				}
+			}).fail(function(err)
+			{	$('.spinner').hide();
+				console.log(err);
+			});
 		}
 	}, false);
 
@@ -426,8 +462,39 @@ jQuery(document).ready(function($)
 		}
 		else if (event.tabItem.id === 'beschwerden-tab1-link')
 		{
+			$('.spinner').show();
 			$('#beschwerden-reload').show();
 			$('#beschwerden-share').show();
+
+			$.getJSON('/api/beschwerdenget.php', {date:new Date().toJSON().slice(0, 10).replace(/-/g, '-')}, function(data)
+			{
+				if (data.length != 0)
+				{
+					$('#beschwerden-tab1-content').empty();
+
+					if (data[0].symptom1 == '1')
+					{
+						$('#beschwerden-tab1-content').append('<p>Schlafstörungen</p>');
+					}
+					if (data[0].symptom2 == '1')
+					{
+						$('#beschwerden-tab1-content').append('<p>Schwitzen</p>');
+					}
+					if (data[0].symptom3 == '1')
+					{
+						$('#beschwerden-tab1-content').append('<p>Zittern</p>');
+					}
+					if (data[0].symptom4 == '1')
+					{
+						$('#beschwerden-tab1-content').append('<p>schnell zu warm</p>');
+					}
+
+					$('.spinner').hide();
+				}
+			}).fail(function(err)
+			{	$('.spinner').hide();
+				console.log(err);
+			});
 		}
 		else if (event.tabItem.id === 'beschwerden-tab2-link')
 		{
@@ -440,7 +507,7 @@ jQuery(document).ready(function($)
 			$('#beschwerden-share').hide();
 			resetDate('beschwerden-form-date');
 
-			$.getJSON('/api/beschwerdengettab2.php', {date:$('#beschwerden-form-date').val()}, function(data)
+			$.getJSON('/api/beschwerdenget.php', {date:$('#beschwerden-form-date').val()}, function(data)
 			{
 				if (data.length != 0)
 				{

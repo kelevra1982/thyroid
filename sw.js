@@ -16,6 +16,7 @@ self.addEventListener('install', function(e)
 			'/css/dark-thyroid.css',
 			'https://unpkg.com/onsenui/js/onsenui.min.js',
 			'https://unpkg.com/jquery/dist/jquery.min.js',
+			'/js/waitForImages.js',
 			'https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.js',
 			'/js/jquery.jqplot.min.js',
 			'/js/jqplot.dateAxisRenderer.js',
@@ -65,4 +66,4 @@ self.addEventListener('fetch', function(e)
 	e.respondWith(caches.match(e.request).then(response => response || fetch(e.request)));
 });
 
-// last Update: 28.04.2020 14:15
+// last Update: 30.04.2020 13:21
